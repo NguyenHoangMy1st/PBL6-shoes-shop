@@ -150,9 +150,11 @@ export default function OrdersTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <button onClick={handleSaveClick} className="custom-btn-ok">
-                Lưu
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
+                <button onClick={handleSaveClick} className="custom-btn-ok">
+                    Lưu
+                </button>
+            </div>
         </div>
     );
 }

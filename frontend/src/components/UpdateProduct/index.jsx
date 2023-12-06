@@ -71,6 +71,10 @@ const UpdateProduct = ({ onClose, product }) => {
         }
     };
 
+    const handleCancel = () => {
+        onClose();
+        window.location.reload();
+    };
     useEffect(() => {
         console.log('UpdateProduct is mounted');
         // Truyền thông tin sản phẩm được chọn vào các trạng thái khi component được mount
@@ -88,12 +92,12 @@ const UpdateProduct = ({ onClose, product }) => {
     return (
         <>
             <section>
-                <div className="add-product container-layout">
+                <div className="add-product">
                     <div className="add-content">
-                        <h1 className="add-title">Cập Nhật Sản Phẩm</h1>
+                        <h1 className="add-title">Product Updates</h1>
                     </div>
                     <div className="add-name">
-                        <label className="add-label">Tên sản phẩm:</label>
+                        <label className="add-label">Product's name :</label>
                         <input
                             type="text"
                             className="add-name-input"
@@ -104,7 +108,7 @@ const UpdateProduct = ({ onClose, product }) => {
                         />
                     </div>
                     <div className="add-description">
-                        <label className="add-label">Mô tả sản phẩm:</label>
+                        <label className="add-label">Description:</label>
                         <textarea
                             className="add-description-text"
                             rows="4"
@@ -113,7 +117,7 @@ const UpdateProduct = ({ onClose, product }) => {
                         ></textarea>
                     </div>
                     <div className="add-price">
-                        <label className="add-label">Giá:</label>
+                        <label className="add-label">Price:</label>
                         <input
                             type="number"
                             className="add-price-input"
@@ -141,13 +145,16 @@ const UpdateProduct = ({ onClose, product }) => {
                     </div>
                     <div className="add-type">
                         <div className="add-brand" style={{ display: 'flex', alignItems: 'center' }}>
-                            <label className="add-label">Nhãn hiệu:</label>
+                            <label className="add-label">Brand:</label>
                             <span style={{ fontSize: '20px' }}>{product?.brand?.name}</span>
                         </div>
                     </div>
                     <div className="add-product-btn">
                         <button onClick={handleSubmit} className="add-product-btn-submit">
-                            Đồng ý
+                            SUBMIT
+                        </button>
+                        <button onClick={handleCancel} className="add-product-btn-cancel">
+                            CANCEL
                         </button>
                     </div>
                 </div>

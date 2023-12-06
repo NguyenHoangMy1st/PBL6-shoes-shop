@@ -12,15 +12,21 @@
 }
 
 .custom-header-order {
-    font-size: 18px !important;
-    font-weight: 700 !important;
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
     font-family: Poppins, sans-serif !important;
+    color: var(--white) !important;
 }
 
 .custom-cell {
 }
 .custom-cell-order {
-    font-size: 18px !important;
+    font-size: 1.2rem !important;
+
+    font-weight: 300 !important;
+    color: var(--main-text) !important;
+    text-align: center !important;
+    vertical-align: middle !important;
     font-family: Poppins, sans-serif !important;
 }
 .custom-cell-order .custom-cell-order-title {
@@ -32,6 +38,11 @@
     color: aliceblue;
     padding: 7px;
     border-radius: 13px;
+    font-size: 1.2rem !important;
+
+    font-weight: 300 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
 }
 
 .custom-button,
@@ -46,4 +57,5 @@
     color: aliceblue;
     padding: 10px 20px;
     border-radius: 13px;
+    justify-content: center;
 }

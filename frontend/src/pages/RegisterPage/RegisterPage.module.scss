@@ -105,7 +105,18 @@
     color: #fff;
     font-weight: 500;
 }
-
+.login-register {
+    margin: 20px 0;
+}
+.login-register p {
+}
+.login-link {
+    margin-left: 5px;
+    background: linear-gradient(to right, #c72092ce, #6c14d0b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
 @media (max-width: 480px) {
     .wrapper-register {
         width: 300px;

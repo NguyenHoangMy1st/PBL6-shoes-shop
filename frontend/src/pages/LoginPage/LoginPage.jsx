@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '~/states/Auth/Action';
 
 const cx = classNames.bind(styles);
+const getTokenFromLocalStorage = () => {
+    return localStorage.getItem('token');
+};
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -15,9 +18,15 @@ export default function LoginPage() {
     const dispatch = useDispatch();
     const { auth } = useSelector((store) => store);
     const navigate = useNavigate();
-
     useEffect(() => {
         console.log(rememberMe);
+        const storedToken = getTokenFromLocalStorage();
+        if (storedToken) {
+            // Token exists, you can perform any additional actions if needed
+            console.log('Token exists:', storedToken);
+            // You can use the token as needed, for example, include it in your HTTP headers for API requests
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+        }
     }, [rememberMe]);
 
     const handleSignin = async () => {
@@ -27,12 +36,19 @@ export default function LoginPage() {
                 password,
             };
 
-            dispatch(login(formData));
+            await dispatch(login(formData));
 
+            localStorage.setItem('user', JSON.stringify(formData));
             if (auth?.user?.role === 'admin') {
-                navigate('/admin');
+                toast.success('Đang vào trang admin');
+                setTimeout(() => {
+                    navigate('/admin');
+                }, 2000);
             } else if (auth?.user?.role === 'user') {
-                navigate('/');
+                toast.success('Đang vào trang chủ');
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
             }
         } catch (error) {
             // toast.error(error?.message);
@@ -43,7 +59,7 @@ export default function LoginPage() {
             <ToastContainer />
             <div className={cx('wrapper')}>
                 <div className={cx('form-box login')}>
-                    <h1>Welcome Back!</h1>
+                    <h1 className={cx('form-box-title')}>Welcome Back!</h1>
                     <form id="login-form">
                         <div className={cx('input-box')}>
                             <input

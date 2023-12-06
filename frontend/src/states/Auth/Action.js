@@ -48,6 +48,7 @@ export const login = (reqData) => async (dispatch) => {
         // console.log(' ============', user);
         if (user.jwt) {
             localStorage.setItem('jwt', user.jwt);
+            localStorage.setItem('token', user.jwt);
         }
         dispatch(loginSuccess(user));
     } catch (error) {
