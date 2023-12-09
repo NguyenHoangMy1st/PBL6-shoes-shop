@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
         // --------------------dashboard admin--------------------
 
-        @Query("SELECT DAYOFWEEK(o.createAt) as day, SUM(o.totalDiscountedPrice) as revenue " +
+        @Query("SELECT DAYOFWEEK(o.createAt) as `day`, SUM(o.totalDiscountedPrice) as revenue " +
                         "FROM Order o " +
                         "WHERE o.orderStatus = 'CONFIRMED' " +
                         "GROUP BY day")
