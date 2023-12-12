@@ -4,20 +4,19 @@ import TrendingItem from '../../components/TrendingItem';
 import './style.scss';
 import ProductFeaturedCard from '../../components/ProductFeaturedCard';
 import BrandList from '../../components/BrandList';
-import ProductGridList from '../../components/ProductGridList';
 import ProductBoxList from '../../components/ProductBoxList';
 import { ToastContainer } from 'react-toastify';
 import { useCart } from '../../contexts/CartContext';
+import ProductGridList from '~/components/ProductGridList';
 
 export default function HomePage() {
     const { cartItems } = useCart();
     return (
         <>
             <Header cartItems={cartItems} />
-            <TrendingItem />
+            <ProductFeaturedCard />
             <BrandList />
             <ProductBoxList />
-            <ProductFeaturedCard />
             <ToastContainer />
             <ProductGridList />
             <Footer />

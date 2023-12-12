@@ -13,6 +13,7 @@ import {
     FIND_PRODUCT_REQUEST,
     FIND_PRODUCT_SUCCESS,
 } from './ActionType';
+import { toast } from 'react-toastify';
 const token = localStorage.getItem('jwt');
 export const findProducts = (reqData) => async (dispatch) => {
     dispatch({ type: FIND_PRODUCT_REQUEST });
@@ -69,6 +70,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
             },
         });
         console.log('delete product: ', data);
+        toast.success("Xóa sản phẩm thành công");
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: productId });
     } catch (error) {
         dispatch({ type: DELETE_PRODUCT_FAILURE, payload: error.message });

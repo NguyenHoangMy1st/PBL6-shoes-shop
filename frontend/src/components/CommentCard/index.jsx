@@ -1,31 +1,39 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apiCreateReview from '../API/apiReview';
 import Raiting from '../API/Raiting';
 import './style.scss';
+import apiReviewDetail from '../API/apiReviewDetail';
 
-export default function CommentCard(productId) {
+export default function CommentCard({ productId }) {
     const [value, setValue] = useState(0);
     const [reviewText, setReviewText] = useState('');
+    const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
+    const [reviews, setReviews] = useState([]);
+    const totalRating5 = reviews.filter((review) => review.rating === 5).length;
+    const totalRating4 = reviews.filter((review) => review.rating === 4).length;
+    const totalRating3 = reviews.filter((review) => review.rating === 3).length;
+    const totalRating2 = reviews.filter((review) => review.rating === 2).length;
+    const totalRating1 = reviews.filter((review) => review.rating === 1).length;
+    let id = useParams();
     const postCreateRaiting = async () => {
         if (!reviewText.trim()) {
             // If reviewText is empty or only contains whitespace
-            toast.error('Vui lòng nhập đánh giá của bạn trước khi gửi.');
+            toast.warning('Vui lòng nhập đánh giá của bạn trước khi gửi.');
             return; // Stop the function execution
         }
-
         const formData = {
-            productId: productId?.productId,
+            productId: productId,
             review: reviewText,
             rating: value,
         };
 
         try {
             const response = await apiCreateReview.postCreateReview(formData);
-            console.log('response:', response.data);
+            console.log('response:', response);
 
             if (response) {
                 toast.success('Thêm đánh giá thành công');
@@ -36,6 +44,39 @@ export default function CommentCard(productId) {
         } catch (error) {
             console.error('Error submitting review:', error);
         }
+    };
+
+    useEffect(() => {
+        const fetchReviewDetail = async () => {
+            try {
+                setIsLoading(true); // Bắt đầu loading
+                const response2 = await apiReviewDetail.getReviewDetail(id);
+                setReviews(response2?.data);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchReviewDetail();
+    }, [id]);
+
+    const calculateAverageRating = () => {
+        if (reviews.length === 0) {
+            return 0;
+        }
+
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const numberOfReviews = reviews.filter((review) => review.rating > 0).length;
+
+        if (numberOfReviews === 0) {
+            return 0;
+        }
+
+        const averageRating = totalRating / numberOfReviews;
+
+        return averageRating.toFixed(2);
     };
     return (
         <section>
@@ -48,7 +89,7 @@ export default function CommentCard(productId) {
                         <div className="total-Rating">
                             <div className="rating-header">
                                 <div className="ratingHeader-number">
-                                    <span>5</span>
+                                    <span>{calculateAverageRating()}</span>
                                 </div>
                                 <div className="ratingHeader-star icon-star">
                                     <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
@@ -57,82 +98,67 @@ export default function CommentCard(productId) {
                                     <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                     <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                 </div>
-                                <div className="ratingHeader-reviews">2 Reviews</div>
+                                <div className="ratingHeader-reviews">{reviews.length} Reviews</div>
                             </div>
                             <div className="rating-main">
                                 <div className="rating-five rating-items">
+                                    <div className="quantity-area">
+                                        <span>{totalRating5}</span>
+                                    </div>
                                     <div className="stars-area">
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    </div>
-                                    <div className="wrapper-proportional-area">
-                                        <div className="proportional-area"></div>
-                                    </div>
-                                    <div className="quantity-area">
-                                        <span>2</span>
                                     </div>
                                 </div>
                                 <div className="rating-four rating-items">
+                                    <div className="quantity-area">
+                                        <span>{totalRating4}</span>
+                                    </div>
                                     <div className="stars-area">
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
-                                    </div>
-                                    <div className="wrapper-proportional-area">
-                                        <div className="proportional-area"></div>
-                                    </div>
-                                    <div className="quantity-area">
-                                        <span>0</span>
                                     </div>
                                 </div>
                                 <div className="rating-three rating-items">
+                                    <div className="quantity-area">
+                                        <span>{totalRating3}</span>
+                                    </div>
                                     <div className="stars-area">
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
-                                    </div>
-                                    <div className="wrapper-proportional-area">
-                                        <div className="proportional-area"></div>
-                                    </div>
-                                    <div className="quantity-area">
-                                        <span>0</span>
                                     </div>
                                 </div>
                                 <div className="rating-two rating-items">
+                                    <div className="quantity-area">
+                                        <span>{totalRating2}</span>
+                                    </div>
                                     <div className="stars-area">
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
-                                    </div>
-                                    <div className="wrapper-proportional-area">
-                                        <div className="proportional-area"></div>
-                                    </div>
-                                    <div className="quantity-area">
-                                        <span>0</span>
                                     </div>
                                 </div>
                                 <div className="rating-one rating-items">
+                                    <div className="quantity-area">
+                                        <span>{totalRating1}</span>
+                                    </div>
                                     <div className="stars-area">
                                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
                                         <i className="fa fa-star-o icon-star"></i>
-                                    </div>
-                                    <div className="wrapper-proportional-area">
-                                        <div className="proportional-area"></div>
-                                    </div>
-                                    <div className="quantity-area">
-                                        <span>0</span>
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +194,7 @@ export default function CommentCard(productId) {
                                         onChange={(e) => setReviewText(e.target.value)}
                                         required
                                         className="resize-none"
+                                        style={{ border: '1px solid', borderRadius: '10px' }}
                                     ></textarea>
                                 </p>
                                 <button className="form-submit" onClick={postCreateRaiting}>

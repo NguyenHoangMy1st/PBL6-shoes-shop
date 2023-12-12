@@ -16,6 +16,8 @@ export default function CommentedShow() {
 
     const [product, setProduct] = useState();
     const [reviews, setReviews] = useState([]);
+
+    // console.log(`Số lượng đánh giá có rating ${targetRating}: ${amountRating}`);
     const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
     let id = useParams();
     useEffect(() => {
@@ -29,16 +31,15 @@ export default function CommentedShow() {
         };
         fetchproductDetail();
     }, []);
-
     useEffect(() => {
         const fetchReviewDetail = async () => {
             try {
                 setIsLoading(true); // Bắt đầu loading
                 const response2 = await apiReviewDetail.getReviewDetail(id);
-
                 setReviews(response2?.data);
+                console.log(response2.data);
             } catch (error) {
-                // console.error("Error fetching product detail:", error);
+                console.error('Error fetching product detail:', error);
                 // toast.error("Error fetching product detail");
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
@@ -84,15 +85,13 @@ export default function CommentedShow() {
                                                 {review?.user?.firstName} {review?.user?.lastName}
                                             </strong>
                                             <div className="likes">
-                                                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                                                {[...Array(review?.rating)].map((_, index) => (
+                                                    <i key={index} className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                                                ))}
                                             </div>
                                         </div>
                                         <div className="comment-date">
-                                            <span>October 6, 2023</span>
+                                            <span>{new Date(review.createAt).toLocaleString()}</span>
                                         </div>
                                     </div>
                                 </div>

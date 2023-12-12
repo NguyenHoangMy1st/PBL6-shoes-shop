@@ -4,19 +4,18 @@ import { toast, ToastContainer } from 'react-toastify';
 import Button from '~/pages/Button';
 import apiProfile from '../API/apiProfile';
 import './style.scss';
+import apiUpdateProfile from '../API/apiUpdateProfile';
+import apiChangePass from '../API/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
-    const [fullName, setfullName] = useState('');
     const [streetAddress, setstreetAddress] = useState('');
     const [defaultAddress, setDefaultAddress] = useState(null);
-    console.log(defaultAddress);
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const response = await apiProfile.getProfile();
                 setProfiles(response.data);
-                setfullName(response.data.firstName + ' ' + response.data.lastName);
                 // Check if addresses is an array and not empty
                 if (Array.isArray(response.data.addresses) && response.data.addresses.length > 0) {
                     // Set the first address as the default address
@@ -31,13 +30,16 @@ export default function ProfileCard() {
     }, []);
 
     const image =
-        'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
+        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t39.30808-6/328039816_914151769604724_1668073028896674479_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=maXa2WXfoYcAX-oaO4T&_nc_ht=scontent.fsgn2-10.fna&oh=00_AfD5fFLg63VB9q0uJccL8LAPi9EHJyJCiG9A9NOR0UJvhw&oe=6578758B';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);
+    const [editedfirstname, setEditFisrtname] = useState('');
+    const [editedlastname, setEditLastname] = useState('');
+    const [editedMobile, setEditedMobile] = useState('');
 
     // change pass
-    const [username, setUsername] = useState('');
+    const [oldpassword, setOldpassword] = useState('');
     const [newpassword, setNewpassword] = useState('');
     const [passwordconfim, setPasswordconfim] = useState('');
 
@@ -65,28 +67,51 @@ export default function ProfileCard() {
     };
 
     const handleEdit = () => {
+        setEditedMobile(profiles.mobile);
+        setEditFisrtname(profiles.firstName);
+        setEditLastname(profiles.lastName);
         setIsEditing(!isEditing);
     };
-    const handleSave = () => {
-        setIsEditing(!isEditing);
-        toast.success('Thay đổi thông tin cá nhân thành công');
-    };
-    const handleChangePassword = () => {
+    const handleChangePassword = async () => {
         if (newpassword === passwordconfim) {
-            // Thực hiện các bước thay đổi mật khẩu ở đây
-            toast.success('Thay đổi mật khẩu thành công');
-            setTimeout(() => {
-                setUsername('');
-                setNewpassword('');
-                setPasswordconfim('');
-            }, 2000);
+            try {
+                const formdata = {
+                    oldPassword: oldpassword,
+                    newPassword: newpassword,
+                };
+                const response = await apiChangePass.postChangepass(formdata);
+                if (response.status === 200) {
+                    toast.success('Thay đổi mật khẩu thành công');
+                } else {
+                    toast.error('Đã có lỗi xảy ra khi thay đổi mật khẩu');
+                }
+            } catch (error) {
+                toast.error('Error changing password:', error);
+            }
         } else {
-            // Hiển thị thông báo hoặc xử lý khi mật khẩu không khớp
-            toast.error('Sai tài khoản hoặc mật khẩu');
+            toast.error('Mật khẩu không khớp');
+        }
+    };
+    const handleUpdateProfile = async () => {
+        try {
+            const formdata = {
+                firstName: editedfirstname,
+                lastName: editedlastname,
+                mobile: editedMobile,
+            };
+            console.log(formdata);
+            const response = await apiUpdateProfile.putUpdateprofile(formdata);
+            if (response.status === 200) {
+                toast.success('Cập nhật thông tin cá nhân thành công');
+            } else {
+                toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
+            }
+        } catch (error) {
+            toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
         }
     };
     const handleCancel = () => {
-        setUsername('');
+        setOldpassword('');
         setNewpassword('');
         setPasswordconfim('');
     };
@@ -99,7 +124,7 @@ export default function ProfileCard() {
                     <div className="profile-info">
                         <img src={image} alt="" className="profile-img"></img>
                         <div className="profile-accout">
-                            <span>{fullName}</span>
+                            <span>{`${profiles.lastName} ${profiles.firstName}`}</span>
                         </div>
                     </div>
                     <div className="profile-detail">
@@ -116,23 +141,23 @@ export default function ProfileCard() {
                         </div>
                         <div className={showPersonal ? 'profile-show-personal' : 'hidden'}>
                             <div className="profile-name">
-                                <label className="profile-show-label">Họ và tên</label>
+                                <label className="profile-show-label">First Name</label>
                                 <input
                                     type="text"
-                                    defaultValue={fullName}
-                                    // onChange={handleName}
+                                    value={isEditing ? editedfirstname : profiles.firstName}
                                     className="profile-show-input"
+                                    onChange={(event) => setEditFisrtname(event.target.value)}
                                 ></input>
                             </div>
-                            {/* <div className="profile-age">
-                <label className="profile-show-label">Tuổi</label>
-                <input
-                  type="number"
-                  value={age}
-                  // onChange={handleAge}
-                  className="profile-show-input"
-                ></input>
-              </div> */}
+                            <div className="profile-name">
+                                <label className="profile-show-label">Last Name</label>
+                                <input
+                                    type="text"
+                                    value={isEditing ? editedlastname : profiles.lastName}
+                                    className="profile-show-input"
+                                    onChange={(event) => setEditLastname(event.target.value)}
+                                ></input>
+                            </div>
                             <div className="profile-address">
                                 <label className="profile-show-label">Địa chỉ</label>
                                 {defaultAddress ? (
@@ -148,29 +173,32 @@ export default function ProfileCard() {
                             </div>
                             <div className="profile-email">
                                 <label className="profile-show-label">Email</label>
+                                {}
                                 <input
                                     type="email"
-                                    defaultValue={profiles.email}
-                                    // onChange={handleEmail}
+                                    value={profiles.email}
                                     className="profile-show-input"
-                                ></input>
+                                    readOnly
+                                    style={{ background: '#d2d2d2' }}
+                                />
                             </div>
                             <div className="profile-phone">
                                 <label className="profile-show-label">Số điện thoại</label>
+                                {}
                                 <input
                                     type="text"
-                                    defaultValue={profiles.mobile}
-                                    // onChange={handlePhonenumber}
+                                    value={isEditing ? editedMobile : profiles.mobile}
+                                    onChange={(event) => setEditedMobile(event.target.value)}
                                     className="profile-show-input"
-                                ></input>
+                                    readOnly={!isEditing}
+                                />
                             </div>
-                            <div className="profile-sex">
+                            {/* <div className="profile-sex">
                                 <label className="profile-show-label">Giới tính</label>
                                 <input
                                     type="radio"
                                     defaultValue={profiles.gender}
                                     checked={profiles.gender === 'male'}
-                                    // onChange={handleGenderChange}
                                 />
                                 <label>Nam</label>
 
@@ -178,23 +206,13 @@ export default function ProfileCard() {
                                     type="radio"
                                     defaultValue={profiles.gender}
                                     checked={profiles.gender === 'female'}
-                                    // onChange={handleGenderChange}
                                 />
                                 <label>Nữ</label>
-                            </div>
-                            {/* <div className="profile-date">
-                <label className="profile-show-label">Ngày Sinh</label>
-                <input
-                  type="date"
-                  value={birthDate}
-                  // onChange={handleDateChange}
-                />
-              </div> */}
+                            </div> */}
 
                             <div className="profile-btn-update">
-                                {/* Use the isEditing state to conditionally render "Chỉnh sửa" or "Lưu" button */}
                                 {isEditing ? (
-                                    <Button text="Lưu" onClick={handleSave} />
+                                    <Button text="Lưu" onClick={handleUpdateProfile} />
                                 ) : (
                                     <Button text="Chỉnh sửa" onClick={handleEdit} />
                                 )}
@@ -202,12 +220,12 @@ export default function ProfileCard() {
                         </div>
                         <div className={showChangePassword ? 'profile-show-changepassword' : 'hidden'}>
                             <div className="profile-username">
-                                <label className="profile-show-label">Username</label>
+                                <label className="profile-show-label">Oldpassword</label>
                                 <input
-                                    type="text"
+                                    type="password"
                                     className="profile-show-input"
-                                    value={username}
-                                    onChange={(event) => setUsername(event.target.value)}
+                                    value={oldpassword}
+                                    onChange={(event) => setOldpassword(event.target.value)}
                                 ></input>
                             </div>
                             <div className="profile-password">

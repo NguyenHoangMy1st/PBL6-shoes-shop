@@ -8,7 +8,6 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import './style.scss';
 import apiProductGrid from '../API/apiProductGrid';
-import apiGuestProduct from '../API/apiGuestProduct';
 
 const breakpointsSwiper = {
     320: {
@@ -32,16 +31,18 @@ const breakpointsSwiper = {
 export default function BrandList() {
     const [brands, setBrands] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [pageNumber, setPageNumber] = useState('0');
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await apiProductGrid.getAllProduct();
-                const uniqueBrands = filterUniqueBrands(response.data.content);
+                const response = await apiProductGrid.getAllProduct(pageNumber);
+                const uniqueBrands = filterUniqueBrands(response?.data?.content);
 
                 setBrands(uniqueBrands);
                 setIsLoading(false);
             } catch (error) {
                 setIsLoading(false);
+                console.log(error);
             }
         };
 

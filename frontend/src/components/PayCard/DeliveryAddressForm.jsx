@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import apiCreateOrder from '../API/apiCreateOrder.js';
 import { useNavigate } from 'react-router-dom';
-import AddressList from '../AddressList';
 import Button from '~/pages/Button';
 
 export default function DeliveryAddressForm() {
@@ -55,7 +54,7 @@ export default function DeliveryAddressForm() {
             <Grid container spacing={4} className="delivery-main">
                 <Grid xs={12} lg={5} className="delivery">
                     <div className="delivery-btn">
-                        <AddressList />
+                        <AddressCard />
                     </div>
                 </Grid>
                 <Grid xs={12} lg={7}>

@@ -12,6 +12,7 @@ import Button from '~/pages/Button';
 export default function CartList() {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    console.log(products);
     // console.log(products);
     const fetchCarts = async () => {
         try {
@@ -19,6 +20,8 @@ export default function CartList() {
             setProducts(response.data);
         } catch (error) {
             // toast.error(error?.message);
+
+            console.log(error);
         }
     };
 
@@ -36,12 +39,13 @@ export default function CartList() {
         try {
             const response = await apiUpdateCartItems.putUpdateCartItems(productId, formData);
             if (response) {
-                toast.success('Bạn tăng số lượng sản phẩm lên 1');
+                console.log('Bạn tăng số lượng sản phẩm lên 1');
             } else {
                 // toast.error('Update quantity failed');
             }
         } catch (error) {
             // toast.error(error.message);
+            console.log(error);
         }
     };
 

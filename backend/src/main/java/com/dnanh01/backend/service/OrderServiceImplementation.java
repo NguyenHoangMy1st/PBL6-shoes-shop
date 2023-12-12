@@ -58,66 +58,58 @@ public class OrderServiceImplementation implements OrderService {
 	@Override
 	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
 
-		// Check if an order already exists for the user
 		List<Order> existingOrders = orderRepository.findByUser(user);
 
 		if (!existingOrders.isEmpty()) {
-			// Handle the case where orders already exist
-			// You might need to iterate through the list or choose a specific order based
-			// on your logic
-			// For example, you can choose the first order in the list:
-			// existingOrders.get(0)
 			return updateOrder(existingOrders.get(0), reqShippingAddress);
 		}
-		// Continue with the order creation logic if no existing order is found
+
 		Address existingAddress = findExistingAddress(user, reqShippingAddress);
 		Address address;
 
 		if (existingAddress != null) {
-			// Use the existing address if available
 			address = existingAddress;
 		} else {
-			// Create a new address if no existing address is found
 			address = createNewAddress(user, reqShippingAddress);
 		}
 
-		// Continue with the rest of the order creation logic
 		Cart cart = cartService.findUserCart(user.getId());
-		List<OrderItem> orderItems = new ArrayList<>();
+
+		List<OrderItem> temporaryOrderItems = new ArrayList<>(); // Use a temporary list
 
 		for (CartItem item : cart.getCartItems()) {
 			OrderItem orderItem = new OrderItem();
-			orderItem.setProduct(item.getProduct());
-			orderItem.setSize(item.getSize());
-			orderItem.setQuantity(item.getQuantity());
-			orderItem.setPrice(item.getPrice());
+			orderItem.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
 			orderItem.setDiscountedPrice(item.getDiscountedPrice());
+			orderItem.setPrice(item.getPrice());
+			orderItem.setQuantity(item.getQuantity());
+			orderItem.setSize(item.getSize());
 			orderItem.setUserId(item.getUserId());
+			orderItem.setProduct(item.getProduct());
 
 			OrderItem createdOrderItem = orderItemRepository.save(orderItem);
-			orderItems.add(createdOrderItem);
+			temporaryOrderItems.add(createdOrderItem);
 		}
 
 		Order createdOrder = new Order();
-		createdOrder.setUser(user);
-		createdOrder.setOrderItems(orderItems);
-		createdOrder.setTotalPrice(cart.getTotalPrice());
-		createdOrder.setTotalDiscountedPrice(cart.getTotalDiscountedPrice());
-		createdOrder.setDiscount(cart.getDiscount());
-		createdOrder.setTotalItem(cart.getTotalItem());
-
-		createdOrder.setShippingAddress(address);
 		createdOrder.setCreateAt(LocalDateTime.now());
-		createdOrder.setOrderDate(LocalDateTime.now());
 		createdOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		createdOrder.setDiscount(cart.getDiscount());
+		createdOrder.setOrderDate(LocalDateTime.now());
 		createdOrder.setOrderStatus("PENDING");
+		createdOrder.setTotalDiscountedPrice(cart.getTotalDiscountedPrice());
+		createdOrder.setTotalItem(cart.getTotalItem());
+		createdOrder.setTotalPrice(cart.getTotalPrice());
+		createdOrder.setShippingAddress(address);
+		createdOrder.setUser(user);
+
+		createdOrder.setOrderItems(temporaryOrderItems); // Set the list after iteration
 
 		Order savedOrder = orderRepository.save(createdOrder);
 
-		for (OrderItem item : orderItems) {
-			item.setOrder(savedOrder);
-			orderItemRepository.save(item);
-		}
+		// Update the OrderItem references
+		temporaryOrderItems.forEach(item -> item.setOrder(savedOrder));
+		orderItemRepository.saveAll(temporaryOrderItems);
 
 		return savedOrder;
 	}
@@ -259,5 +251,7 @@ public class OrderServiceImplementation implements OrderService {
 		Order order = findOrderById(orderId);
 		orderRepository.delete(order);
 	}
+
+	// --------------------dashboard admin--------------------
 
 }

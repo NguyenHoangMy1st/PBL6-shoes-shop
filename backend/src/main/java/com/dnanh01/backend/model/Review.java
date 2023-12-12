@@ -19,18 +19,18 @@ public class Review {
     private Long id;
 
     private String review;
-    
+
     private Long rating;
 
     public Long getRating() {
-		return rating;
-	}
+        return rating;
+    }
 
-	public void setRating(Long rating) {
-		this.rating = rating;
-	}
+    public void setRating(Long rating) {
+        this.rating = rating;
+    }
 
-	@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;

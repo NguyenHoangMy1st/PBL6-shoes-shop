@@ -8,15 +8,14 @@ import CartCardHistory from '../CartCardHistory';
 
 export default function CartHistory() {
     const [products, setProducts] = useState([]);
-    console.log(products);
     const handleBuyNow = async () => {
         try {
             const response = await apiBuyNow.postBuyNow();
             console.log(response.data);
             if (response) {
                 console.log('Đang chuyển sang trang thanh toán');
-                // const externalURL = response.data; // Đảm bảo response.data chứa URL đầy đủ
-                // window.location.href = externalURL;
+                const externalURL = response.data; // Đảm bảo response.data chứa URL đầy đủ
+                window.location.href = externalURL;
             } else {
                 console.error('Có lỗi khi thêm thanh toán ');
             }

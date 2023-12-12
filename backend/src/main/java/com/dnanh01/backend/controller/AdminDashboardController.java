@@ -7,5 +7,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/admin/dashboard")
 public class AdminDashboardController {
 
-    
 }
