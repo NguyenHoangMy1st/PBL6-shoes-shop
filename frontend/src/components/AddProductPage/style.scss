@@ -153,9 +153,23 @@
     &-product-btn {
         text-align: center;
         margin-bottom: 100px;
+        display: flex;
+        gap: 0 50px;
+        justify-content: center;
     }
     &-product-btn-submit {
         background: linear-gradient(90deg, #008eff, #fa5c5c);
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    &-product-btn-cancel {
+        background: linear-gradient(90deg, #6f6f6f, #6bff46);
         border: 0;
         color: #fff;
         cursor: pointer;
@@ -173,15 +187,4 @@
     .gray-background {
         background-color: #d2d2d2; /* Mã màu xám */
     }
-}
-.btn-add-product {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    color: white;
-    background: linear-gradient(to right, #008eff, #fa5c5c);
-    border: 0;
-    outline: none;
 }

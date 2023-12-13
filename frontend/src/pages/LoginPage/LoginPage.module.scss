@@ -35,10 +35,10 @@
         width: 100%;
         padding: 40px;
 
-        h1 {
+        &-title {
             font-size: 43px;
             font-family: var(--font-family);
-            font-weight: 300;
+            font-weight: 500;
             background: linear-gradient(to right, #c72092ce, #6c14d0b5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;

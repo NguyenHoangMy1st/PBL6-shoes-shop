@@ -108,8 +108,8 @@ export default function AddProductPage() {
                         toast.error('Có lỗi khi thêm sản phẩm');
                     }
                 } catch (error) {
-                    toast.error('Lỗi khi thực hiện yêu cầu API:', error);
-                    toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
+                    // toast.error('Lỗi khi thực hiện yêu cầu API:', error);
+                    // toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
                 }
             } else {
                 toast.error('Giá của sản phẩm bạn đã nhập sai');
@@ -126,11 +126,11 @@ export default function AddProductPage() {
                 <ToastContainer />
                 <div className="add-product container-layout">
                     <div className="add-content">
-                        <h1 className="add-title">Đăng Bán Sản Phẩm</h1>
-                        <p className="add-title-clone">Hãy đăng những thông tin sản phẩm bạn cần bán</p>
+                        <h1 className="add-title">Posting Products for Sale</h1>
+                        <p className="add-title-clone">Post information about the products you need to sell</p>
                     </div>
                     <div className="add-name">
-                        <label className="add-label">Tên sản phẩm:</label>
+                        <label className="add-label">Product's name:</label>
                         <input
                             type="text"
                             className="add-name-input"
@@ -139,7 +139,7 @@ export default function AddProductPage() {
                         />
                     </div>
                     <div className="add-description">
-                        <label className="add-label">Mô tả sản phẩm:</label>
+                        <label className="add-label">Product Description:</label>
                         <textarea
                             className="add-description-text"
                             rows="4"
@@ -186,7 +186,7 @@ export default function AddProductPage() {
 
                     <div className="add-type">
                         <div className="add-brand">
-                            <label className="add-label">Chọn nhãn hiệu:</label>
+                            <label className="add-label">Choose brand:</label>
                             <select
                                 id="add-brand-check"
                                 className="add-select"
@@ -203,7 +203,7 @@ export default function AddProductPage() {
                             </select>
                         </div>
                         <div className="add-size">
-                            <label className="add-label">Chọn Size và Số lượng:</label>
+                            <label className="add-label">Choose Size and Quantity:</label>
                             {arrSize.map((size) => (
                                 <div key={size.name} className="add-size-checkbox">
                                     <div className="add-size-name">
@@ -242,37 +242,37 @@ export default function AddProductPage() {
                             ))}
                         </div>
                         <div className="add-color">
-                            <label className="add-label">Chọn màu:</label>
+                            <label className="add-label">Choose color:</label>
                             <select
                                 id="add-color-check"
                                 className="add-select"
                                 value={selectedColor}
                                 onChange={(event) => setSelectedColor(event.target.value)}
                             >
-                                <option value="#FF0000">Đỏ</option>
-                                <option value="#00FF00">Xanh lá</option>
-                                <option value="#FFFF00">Vàng</option>
-                                <option value="#C0C0C0">Bạc</option>
-                                <option value="#00FFFF">Xanh Dương</option>
-                                <option value="#FFFFFF">Trắng</option>
-                                <option value="#000000">Đen</option>
-                                <option value="#808080">Xám</option>
+                                <option value="#FF0000">Red</option>
+                                <option value="#00FF00">Green</option>
+                                <option value="#FFFF00">Yellow</option>
+                                <option value="#C0C0C0">Slive</option>
+                                <option value="#00FFFF">Blue</option>
+                                <option value="#FFFFFF">White</option>
+                                <option value="#000000">Black</option>
+                                <option value="#808080">Grey</option>
                             </select>
                         </div>
                     </div>
                     <div className="add-image">
-                        <label className="add-label">Hình ảnh sản phẩm:</label>
+                        <label className="add-label">Product images:</label>
                         <input
                             type="text" // Sử dụng type "text" thay vì "file"
                             className="add-image-input"
                             value={imageProduct} // Giữ giá trị trong state hoặc biến tương ứng
                             onChange={(event) => setimageProduct(event.target.value)}
-                            placeholder="Nhập đường dẫn URL ảnh sản phẩm"
+                            placeholder="Enter the product image URL"
                         />
                     </div>
                     <div className="add-product-btn">
                         <button onClick={handleSubmit} className="add-product-btn-submit">
-                            Đồng ý
+                            Submit
                         </button>
                     </div>
                 </div>

@@ -42,6 +42,7 @@ const MonthlyOverview = () => {
     const sections = ['section1', 'section2', 'section3', 'section4'];
     return (
         <div className={`align-items-center d-flex flex-column h-100 justify-content-around w-100`}>
+            <h6 className={`${cx('title')}`}>Total 48.5% growth 😎 this month</h6>
             <div
                 className={`${cx('grid')} 
                 grid align-items-center d-flex flex-grow-1 grid h-100 justify-content-around p-3 w-100`}
