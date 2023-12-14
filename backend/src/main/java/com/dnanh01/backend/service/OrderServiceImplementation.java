@@ -57,36 +57,64 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
+		/**
+		 * một người dùng tại các thời điểm khác nhau có thể ở các địa chỉ
+		 * khác nhau:
+		 * .....ví dụ: ngày 01/01/2023 ở Đà Nẵng, ngày 10/02/2023 ở Quảng Nam
+		 * nhưng địa chỉ hiện tại thì chỉ có 1 -> chỉ có 1 địa chỉ giao hàng
+		 * -> giải quyết vấn đề là thêm trường current_time vào Address
+		 * 
+		 * các trường hợp có thể xảy ra:
+		 * 1, người dùng mới chưa mua đặt hàng lần nào nên chưa có địa chỉ
+		 * hiện tại sinh sống (và địa chỉ giao hàng)
+		 * -> 1.1 tạo Order mới và thêm mới địa chỉ giao hàng hiện tại
+		 * (reqShippingAddress)
+		 * -> 1.2 tạo mới địa chỉ trong Address
+		 * 
+		 * 2, người dùng đã đặt hàng lần trước (đã có địa chỉ hiện sinh
+		 * sống hay địa chỉ giao hàng)
+		 * ....2.1, người dùng đặt hàng với địa chỉ cũ đã đăng ký trước đó
+		 * -> 2.1.1 giữ nguyên địa chỉ hiện tại sinh sống trong Address
+		 * -> 2.1.2 tạo Order mới với địa chỉ giao hàng hiện tại
+		 * (reqShippingAddress)
+		 * ....2.2, người dùng đặt hàng với địa chỉ mới
+		 * -> 2.2.1 thêm địa chỉ hiện tại sinh sống mới vào Address(List)
+		 * -> 2.2.2 tạo Order mới với địa chỉ giao hàng hiện tại
+		 * (reqShippingAddress)
+		 * 
+		 */
+		Cart cart = cartService.findUserCart(user.getId());
+		List<OrderItem> temporaryOrderItems = new ArrayList<>();
 
 		List<Order> existingOrders = orderRepository.findByUser(user);
-
-		if (!existingOrders.isEmpty()) {
-			return updateOrder(existingOrders.get(0), reqShippingAddress);
-		}
-
-		Address existingAddress = findExistingAddress(user, reqShippingAddress);
-		Address address;
-
-		if (existingAddress != null) {
-			address = existingAddress;
+		if (existingOrders.isEmpty()) {
+			// 1.1 Create a new Order with the current shipping address
+			return createNewOrder(user, reqShippingAddress, cart, temporaryOrderItems);
 		} else {
-			address = createNewAddress(user, reqShippingAddress);
+			// Check if the shipping address matches any existing address
+			boolean isAddressMatching = user.getAddresses().stream()
+					.anyMatch(address -> addressMatches(reqShippingAddress, address));
+
+			if (isAddressMatching) {
+				// 2.1.1 Keep the existing shipping address
+				// 2.1.2 Create a new Order with the current shipping address
+				return createNewOrder(user, reqShippingAddress, cart, temporaryOrderItems);
+			} else {
+				// 2.2.1 Add the new shipping address to the user's addresses
+				Address newAddress = createNewAddress(user, reqShippingAddress);
+				user.getAddresses().add(newAddress);
+				userRepository.save(user);
+
+				// 2.2.2 Create a new Order with the new shipping address
+				return createNewOrder(user, reqShippingAddress, cart, temporaryOrderItems);
+			}
 		}
+	}
 
-		Cart cart = cartService.findUserCart(user.getId());
-
-		List<OrderItem> temporaryOrderItems = new ArrayList<>(); // Use a temporary list
-
+	private Order createNewOrder(User user, ShippingAddressRequest reqShippingAddress,
+			Cart cart, List<OrderItem> temporaryOrderItems) {
 		for (CartItem item : cart.getCartItems()) {
-			OrderItem orderItem = new OrderItem();
-			orderItem.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
-			orderItem.setDiscountedPrice(item.getDiscountedPrice());
-			orderItem.setPrice(item.getPrice());
-			orderItem.setQuantity(item.getQuantity());
-			orderItem.setSize(item.getSize());
-			orderItem.setUserId(item.getUserId());
-			orderItem.setProduct(item.getProduct());
-
+			OrderItem orderItem = createOrderItem(item);
 			OrderItem createdOrderItem = orderItemRepository.save(orderItem);
 			temporaryOrderItems.add(createdOrderItem);
 		}
@@ -100,10 +128,11 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.setTotalDiscountedPrice(cart.getTotalDiscountedPrice());
 		createdOrder.setTotalItem(cart.getTotalItem());
 		createdOrder.setTotalPrice(cart.getTotalPrice());
-		createdOrder.setShippingAddress(address);
+		createdOrder.setOrderItems(temporaryOrderItems);
 		createdOrder.setUser(user);
 
-		createdOrder.setOrderItems(temporaryOrderItems); // Set the list after iteration
+		Address shippingAddress = findOrCreateShippingAddress(user, reqShippingAddress);
+		createdOrder.setShippingAddress(shippingAddress);
 
 		Order savedOrder = orderRepository.save(createdOrder);
 
@@ -111,43 +140,47 @@ public class OrderServiceImplementation implements OrderService {
 		temporaryOrderItems.forEach(item -> item.setOrder(savedOrder));
 		orderItemRepository.saveAll(temporaryOrderItems);
 
+		orderRepository.save(savedOrder);
 		return savedOrder;
 	}
 
-	private Order updateOrder(Order existingOrder, ShippingAddressRequest reqShippingAddress) {
+	private OrderItem createOrderItem(CartItem cartItem) {
+		OrderItem orderItem = new OrderItem();
+		orderItem.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		orderItem.setDiscountedPrice(cartItem.getDiscountedPrice());
+		orderItem.setPrice(cartItem.getPrice());
+		orderItem.setQuantity(cartItem.getQuantity());
+		orderItem.setSize(cartItem.getSize());
+		orderItem.setUserId(cartItem.getUserId());
+		orderItem.setProduct(cartItem.getProduct());
+		return orderItem;
+	}
 
-		existingOrder.setShippingAddress(findExistingAddress(existingOrder.getUser(), reqShippingAddress));
-		existingOrder.setOrderDate(LocalDateTime.now());
-		existingOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
-		existingOrder.setOrderStatus("PENDING");
+	private Address findOrCreateShippingAddress(User user, ShippingAddressRequest reqShippingAddress) {
+		return user.getAddresses().stream()
+				.filter(address -> addressMatches(reqShippingAddress, address))
+				.findFirst()
+				.orElseGet(() -> createNewAddress(user, reqShippingAddress));
+	}
 
-		return orderRepository.save(existingOrder);
+	private boolean addressMatches(ShippingAddressRequest reqShippingAddress, Address address) {
+		return address.getStreetAddress().equals(reqShippingAddress.getStreetAddress())
+				&& address.getCity().equals(reqShippingAddress.getCity())
+				&& address.getState().equals(reqShippingAddress.getState())
+				&& address.getZipCode().equals(reqShippingAddress.getZipCode());
 	}
 
 	private Address createNewAddress(User user, ShippingAddressRequest reqShippingAddress) {
-		Address saveAddress = new Address();
-		saveAddress.setStreetAddress(reqShippingAddress.getStreetAddress());
-		saveAddress.setCity(reqShippingAddress.getCity());
-		saveAddress.setState(reqShippingAddress.getState());
-		saveAddress.setZipCode(reqShippingAddress.getZipCode());
-		saveAddress.setUser(user);
+		Address newAddress = new Address();
+		newAddress.setStreetAddress(reqShippingAddress.getStreetAddress());
+		newAddress.setCity(reqShippingAddress.getCity());
+		newAddress.setState(reqShippingAddress.getState());
+		newAddress.setZipCode(reqShippingAddress.getZipCode());
+		newAddress.setCreationTime(LocalDateTime.now()); // Thêm currentTime
 
-		Address address = addressRepository.save(saveAddress);
+		newAddress.setUser(user);
 
-		user.getAddresses().add(address);
-		userRepository.save(user);
-
-		return address;
-	}
-
-	private Address findExistingAddress(User user, ShippingAddressRequest reqShippingAddress) {
-		return user.getAddresses().stream()
-				.filter(address -> address.getStreetAddress().equals(reqShippingAddress.getStreetAddress())
-						&& address.getCity().equals(reqShippingAddress.getCity())
-						&& address.getState().equals(reqShippingAddress.getState())
-						&& address.getZipCode().equals(reqShippingAddress.getZipCode()))
-				.findFirst()
-				.orElse(null);
+		return addressRepository.save(newAddress);
 	}
 
 	@Override

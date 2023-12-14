@@ -17,7 +17,7 @@ public class CartItem {
 
     @JsonIgnore
     @ManyToOne
-    private Cart cart; // put one into many
+    private Cart cart;
 
     @ManyToOne
     private Product product;

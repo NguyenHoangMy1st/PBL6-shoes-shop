@@ -17,4 +17,5 @@ public class PaymentInFormation {
 
     @Column(name = "cvv")
     private String cvv;
+
 }

@@ -1,5 +1,7 @@
 package com.dnanh01.backend.request;
 
+import java.time.LocalDateTime;
+
 public class ShippingAddressRequest {
 
     private String streetAddress;
@@ -51,6 +53,12 @@ public class ShippingAddressRequest {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    @Override
+    public String toString() {
+        return "ShippingAddressRequest [streetAddress=" + streetAddress + ", city=" + city + ", state=" + state
+                + ", zipCode=" + zipCode + "]";
     }
 
 }

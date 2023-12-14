@@ -1,6 +1,5 @@
 package com.dnanh01.backend.model;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
