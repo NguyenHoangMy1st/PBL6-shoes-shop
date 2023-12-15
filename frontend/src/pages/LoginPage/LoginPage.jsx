@@ -39,10 +39,11 @@ export default function LoginPage() {
             await dispatch(login(formData));
 
             localStorage.setItem('user', JSON.stringify(formData));
+
             if (auth?.user?.role === 'admin') {
                 toast.success('Đang vào trang admin');
                 setTimeout(() => {
-                    navigate('/admin');
+                    navigate('/admin/dashboard');
                 }, 2000);
             } else if (auth?.user?.role === 'user') {
                 toast.success('Đang vào trang chủ');

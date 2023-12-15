@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import BrandCard from '../BrandCard';
-import logo from '../../images/logoNike.png';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';

@@ -1,9 +1,9 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
-import apiGetAllOrder from '~/states/API/apiGetAllOrder';
+import apiGetAllOrder from '~/api/admin/apiGetAllOrder';
 import './style.scss'; // Import your CSS file
 import _debounce from 'lodash/debounce';
-import apiOrder from '~/states/API/apiOrder';
+import apiOrder from '~/api/admin/apiOrder';
 import { toast } from 'react-toastify';
 // ... Import các thư viện và component khác ...
 

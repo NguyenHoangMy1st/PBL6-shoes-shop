@@ -1,7 +1,7 @@
 .cart {
     max-width: 100%;
     border-collapse: collapse;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
 }
 .cart-operation,
 .cart-operation .cart-operation-delete,

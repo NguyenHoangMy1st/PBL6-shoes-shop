@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
-import pay from '../../../images/payment.png';
+
+import images from '~/assets/images';
 
 export default function Footer() {
     return (
@@ -132,7 +133,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-bottom">
                         <div className="container">
-                            <img src={pay} alt="payment method" className="payment-img" />
+                            <img src={images.payment} alt="payment method" className="payment-img" />
                             <p className="copyright">
                                 Copyright © <Link href="#">Anon</Link> all rights reserved.
                             </p>

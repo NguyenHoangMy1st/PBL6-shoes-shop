@@ -104,7 +104,7 @@
     background: hsl(0deg 0% 87.4%);
     padding: 30px 0;
     font: inherit;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
 }

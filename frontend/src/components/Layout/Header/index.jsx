@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import './style-prefix.scss';
 
 import apiCart from '../../API/apiCart';
-import logo2 from '../../../images/logo.svg';
+
+import images from '~/assets/images';
 
 export default function Header({ cartItems = [] }) {
     const cartItemCount = cartItems?.length || 0;
@@ -42,7 +43,7 @@ export default function Header({ cartItems = [] }) {
             <div className="header-main">
                 <div className="container">
                     <Link to="/" className="header-logo">
-                        <img className="img-logo" src={logo2} alt="Anon's logo" width="120" height="50" />
+                        <img className="img-logo" src={images.logo} alt="Anon's logo" width="120" height="50" />
                     </Link>
                     <Link to="/profile" className="hello-auth">
                         Hello, Welcome Back {user?.email}!!!

@@ -97,7 +97,7 @@
 .header {
     max-width: 100%;
     font: inherit;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
     text-decoration: none;
@@ -146,7 +146,7 @@
 /* style.scss */
 
 .hello-auth {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     color: #333;
     text-decoration: none;
     font-size: 18px;
@@ -782,7 +782,7 @@
     }
 
     .desktop-menu-category-list {
-        font-family: 'Poppins', sans-serif;
+        font-family: var(--font-family);
         position: relative;
         display: -webkit-box;
         display: -webkit-flex;

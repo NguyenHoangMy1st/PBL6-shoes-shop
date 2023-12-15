@@ -9,16 +9,20 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "Anhs",
     "Autowire",
     "chartjs",
     "Configurer",
     "DAYOFWEEK",
     "dnanh",
+    "forgetpassword",
     "Lavel",
     "Persent",
+    "roures",
     "Servlet",
     "signin",
-    "Springdoc"
+    "Springdoc",
+    "toastify"
   ],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"

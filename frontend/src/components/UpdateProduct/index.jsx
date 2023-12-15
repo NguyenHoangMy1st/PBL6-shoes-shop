@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import apiProductDetail from '~/states/API/apiProductDetail';
-import apiUpdateProduct from '~/states/API/apiUpdateProduct';
+import apiProductDetail from '~/api/admin/apiProductDetail';
+import apiUpdateProduct from '~/api/admin/apiUpdateProduct';
 const UpdateProduct = ({ onClose, product }) => {
     console.log(product);
 

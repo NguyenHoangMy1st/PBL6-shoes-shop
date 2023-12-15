@@ -1,12 +1,12 @@
 .body-register {
     max-width: 100%;
     padding: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('../../assets/images/background5.png');
+    background: url('../../assets/images/contain/background.png');
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
