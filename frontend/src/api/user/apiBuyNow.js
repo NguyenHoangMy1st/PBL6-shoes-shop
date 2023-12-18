@@ -1,5 +1,5 @@
 // Trong apiBuyNow.js
-import axiosClient from './axiosClient';
+import axiosClient from '../../components/API/axiosClient';
 
 const apiBuyNow = {
     postBuyNow() {

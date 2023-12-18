@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AddressCard from '../AddressCard';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-import apiCreateOrder from '../API/apiCreateOrder.js';
+import apiCreateOrder from '../../api/user/apiCreateOrder.js';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/pages/Button';
 

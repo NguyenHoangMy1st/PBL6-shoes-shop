@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import WarehouseCard from '../WarehouseCard';
 import './style.scss';
 import { toast } from 'react-toastify';
-import apiProductGrid from '../API/apiProductGrid';
-import apiDelproduct from '../API/apiDeleleProduct';
+import apiProductGrid from '../../api/user/apiProductGrid';
+import apiDelproduct from '../../api/user/apiDeleleProduct';
 
 export default function WarehouseList() {
     const [products, setProducts] = useState([]);

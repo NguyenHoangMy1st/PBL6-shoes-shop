@@ -3,7 +3,7 @@ import BrandList from '../../components/BrandList';
 import ProductGridList from '../../components/ProductGridList';
 import { useCart } from '../../contexts/CartContext';
 import { useEffect, useState } from 'react';
-import apiProductGrid from '~/components/API/apiProductGrid';
+import apiProductGrid from '~/api/user/apiProductGrid';
 
 export default function ProductPage() {
     const { cartItems } = useCart();

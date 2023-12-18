@@ -22,7 +22,9 @@
     "Servlet",
     "signin",
     "Springdoc",
-    "toastify"
+    "subquery",
+    "toastify",
+    "vnpay"
   ],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"

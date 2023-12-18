@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
-import apiProductDetail from '../API/apiProductDetail';
+import apiProductDetail from '../../api/user/apiProductDetail';
 import './style.scss';
 import { toast } from 'react-toastify';
-import apiReviewDetail from '../API/apiReviewDetail';
+import apiReviewDetail from '../../api/user/apiReviewDetail';
 import { Keyboard, Mousewheel, Navigation } from 'swiper/modules';
 
 export default function CommentedShow() {

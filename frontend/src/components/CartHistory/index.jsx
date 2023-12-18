@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import apiCart from '../API/apiCart';
+import apiCart from '../../api/user/apiCart';
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/pages/Button';
-import apiBuyNow from '../API/apiBuyNow';
+import apiBuyNow from '../../api/user/apiBuyNow';
 import CartCardHistory from '../CartCardHistory';
 
 export default function CartHistory() {

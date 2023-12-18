@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import apiCreateReview from '../API/apiReview';
+import apiCreateReview from '../../api/user/apiReview';
 import Raiting from '../API/Raiting';
 import './style.scss';
-import apiReviewDetail from '../API/apiReviewDetail';
+import apiReviewDetail from '../../api/user/apiReviewDetail';
 
 export default function CommentCard({ productId }) {
     const [value, setValue] = useState(0);

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Button from '~/pages/Button';
-import apiProfile from '../API/apiProfile';
+import apiProfile from '../../api/user/apiProfile';
 import './style.scss';
 import apiUpdateProfile from '../API/apiUpdateProfile';
-import apiChangePass from '../API/apiChangePass';
+import apiChangePass from '../../api/user/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);

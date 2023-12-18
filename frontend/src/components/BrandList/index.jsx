@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import './style.scss';
-import apiProductGrid from '../API/apiProductGrid';
+import apiProductGrid from '../../api/user/apiProductGrid';
 
 const breakpointsSwiper = {
     320: {

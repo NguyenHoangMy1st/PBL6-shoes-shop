@@ -1,7 +1,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import './style.scss';
-import apiOrderUser from '../API/apiOrderUser';
+import apiOrderUser from '../../api/user/apiOrderUser';
 
 export default function OrderUser() {
     const [userOrders, setUserOrders] = useState([]);

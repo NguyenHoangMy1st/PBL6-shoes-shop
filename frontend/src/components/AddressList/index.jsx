@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Button from '~/pages/Button';
 import AddressCard from '../AddressCard';
-import apiProfile from '../API/apiProfile';
+import apiProfile from '../../api/user/apiProfile';
 
 export default function AddressList() {
     const [profiles, setProfiles] = useState([]);

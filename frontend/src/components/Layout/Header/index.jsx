@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
 
-import apiCart from '../../API/apiCart';
+import apiCart from '../../../api/user/apiCart';
 
 import images from '~/assets/images';
 

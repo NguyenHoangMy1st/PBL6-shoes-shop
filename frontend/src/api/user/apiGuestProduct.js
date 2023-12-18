@@ -1,5 +1,5 @@
-import axiosClient from './axiosClient';
-import axiosClientGuest from './axiosClientGuest';
+import axiosClient from '../../components/API/axiosClient';
+import axiosClientGuest from '../../components/API/axiosClientGuest';
 
 const apiGuestProduct = {
     getAllProduct() {

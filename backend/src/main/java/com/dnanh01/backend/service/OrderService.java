@@ -2,9 +2,11 @@ package com.dnanh01.backend.service;
 
 import java.util.List;
 
+import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.request.SelectedTimeRequest;
 import com.dnanh01.backend.request.ShippingAddressRequest;
 
 public interface OrderService {
@@ -28,5 +30,9 @@ public interface OrderService {
 	public List<Order> getAllOrders();
 
 	public void deleteOrder(Long orderId) throws OrderException;
+
+	// --------------------dashboard admin--------------------
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(SelectedTimeRequest selectedTimeRequest)
+			throws OrderException;
 
 }

@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ProductGridCard from '../ProductGridCard';
 import './style-prefix.scss';
 import { useSearchParams } from 'react-router-dom';
-import apiBrand from '../API/apiBrand';
-import apiFilterPrice from '../API/apiFilterPrice';
-import apiProductGrid from '../API/apiProductGrid';
+import apiBrand from '../../api/user/apiBrand';
+import apiFilterPrice from '../../api/user/apiFilterPrice';
+import apiProductGrid from '../../api/user/apiProductGrid';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 

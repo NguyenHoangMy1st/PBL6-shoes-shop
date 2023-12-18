@@ -1,5 +1,6 @@
 package com.dnanh01.backend.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Cart;
@@ -22,6 +24,7 @@ import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
+import com.dnanh01.backend.request.SelectedTimeRequest;
 import com.dnanh01.backend.request.ShippingAddressRequest;
 
 @Service
@@ -270,5 +273,27 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	// --------------------dashboard admin--------------------
+
+	@Override
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(SelectedTimeRequest req)
+			throws OrderException {
+		String selectedDay = req.getSelectedTime();
+
+		List<Object[]> statsForSelectedDay = orderRepository.getStatsForSelectedDayRevenueAndProfit(selectedDay);
+
+		if (statsForSelectedDay.isEmpty()) {
+			throw new OrderException("You cannot aggregate stats for the date: " + selectedDay);
+		}
+
+		List<RevenueOrProfitStatsDto> result = new ArrayList<>();
+		for (Object[] row : statsForSelectedDay) {
+			result.add(new RevenueOrProfitStatsDto(
+					(Long) row[0],
+					(BigDecimal) row[1],
+					(BigDecimal) row[2]));
+		}
+
+		return result;
+	}
 
 }

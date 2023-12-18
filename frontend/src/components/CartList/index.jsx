@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartCard from '../CartCard';
 import './style.scss';
-import apiCart from '../API/apiCart';
+import apiCart from '../../api/user/apiCart';
 import { toast, ToastContainer } from 'react-toastify';
-import apiRemoveCartItems from '../API/apiRemoveCartItems';
-import apiUpdateCartItems from '../API/apiUPdateCartItems';
+import apiRemoveCartItems from '../../api/user/apiRemoveCartItems';
+import apiUpdateCartItems from '../../api/user/apiUPdateCartItems';
 import { useDispatch } from 'react-redux';
 import Button from '~/pages/Button';
 

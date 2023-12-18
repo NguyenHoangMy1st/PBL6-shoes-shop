@@ -3,7 +3,7 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import apiProductDetail from '~/components/API/apiProductDetail';
+import apiProductDetail from '~/api/user/apiProductDetail';
 import apiAddItem from '~/api/user/apiAddItem';
 import CommentCard from '~/components/CommentCard';
 import CommentedShow from '~/components/CommentedShow';
