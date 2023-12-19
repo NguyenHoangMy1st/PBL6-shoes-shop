@@ -260,7 +260,7 @@
         "quantity": 100,
         "description": "The Under Armour HOVR is a stylish and comfortable shoe."
     },
-    //my
+    # my
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/bht6092sczla4c44jn7rz/Giay_Samba_trang_IG5744_04_standard.png?rlkey=i2cu6vdnfsi39cdfuau0olh1h&dl=0",
         "brand": {
