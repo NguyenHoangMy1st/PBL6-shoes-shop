@@ -523,5 +523,63 @@
         "quantity": 60,
         "description": "Nằm trong những mẫu giày đình đám có sự khác biệt rõ rệt và nhanh chóng trở nên được yêu thích bởi nhiều người nổi tiếng. Ấn tượng ban đầu của nhiều người đây là một mẫu giày có vẻ ngoài “quái dị”, to khổ và khá kén người đi.Tuy nhiên, chính sự khác biệt đó lại giúp nó trở thành mẫu giày hot trên thị trường. Đôi giày nhanh chóng trở thành xu hướng và được yêu thích bởi nhiều Fashionista và người ảnh hưởng khác. "
     },
-
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/gi2u2pbivtmbomxkgmcg3/giay-converse-all-star-vang3-570x570.jpg?rlkey=m9f4al27nuuddh5k188yeftv2&dl=0",
+        "brand": {
+            "name": "Converse",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
+        },,
+        "title": "GIÀY CONVERSE ALL STAR VÀNG SUNFLOWER",
+        "color": "#FFFF00",
+        "warehousePrice": 900000,
+        "price": 2000000,
+        "discountedPrice": 1000000,
+        "discountPersent": 50,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 20
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 25
+            }
+        ],
+        "quantity": 60,
+        "description": "Giày converse vàng sunflower đôi giày nhìn là thấy mùa hè với màu sắc đơn giản, đôi giày tạo nên thương hiệu đến từ Converse.Điểm khác biệt tạo nên điểm nhấn của một đôi converse sunflower chính là ở sự hài hòa giữa phong cách cổ điển và hơi hướng của sự hiện đại. Thiết kế nguyên bản của mẫu này vẫn dựa trên thiết của dòng chuck 70. Chất liệu làm thân giày đến từ chất liệu vải bạt nặng, dày mang lại cảm giác chắc chắn, chịu nhiệt tốt. "
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vgbrdf5x94l63wejqzghh/converse_1970s_tr-ng_c-_cao-570x570.jpg?rlkey=e7nee392jqzr48gm6fwqtc9z5&dl=0",
+        "brand": {
+            "name": "Converse",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
+        },,
+        "title": "CONVERSE 1970S TRẮNG CỔ CAO",
+        "color": "#FFFFFF",
+        "warehousePrice": 450000,
+        "price": 910000,
+        "discountedPrice": 592000,
+        "discountPersent": 35,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 18
+            },
+            {
+                "name": "M",
+                "quantity": 24
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 72,
+        "description": "Những đôi giày Converse chưa bao giờ là lỗi mốt. Đặc biệt là mẫu giày Converse 1970s trắng cổ cao. Mẫu giày thiết kế đơn giản nhưng tinh tế và hiện đại. Đây cũng là điểm cộng giúp sản phẩm dễ mix đồ và hợp với nhiều vóc dáng người đi. "
+    },
+    
 ]
