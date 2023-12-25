@@ -8,6 +8,8 @@ import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.request.SelectedTimeRequest;
 import com.dnanh01.backend.request.ShippingAddressRequest;
+import com.dnanh01.backend.response.BestSellingProductTodayResponse;
+import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 
 public interface OrderService {
 
@@ -32,7 +34,18 @@ public interface OrderService {
 	public void deleteOrder(Long orderId) throws OrderException;
 
 	// --------------------dashboard admin--------------------
-	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(SelectedTimeRequest selectedTimeRequest)
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(String selectedDay)
 			throws OrderException;
+
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedMonthRevenueAndProfit(
+			String selectedMonth) throws OrderException;
+
+	public StatisticsByDateOrMonthResponse getStatisticsByDate(String selectedDay)
+			throws OrderException;
+
+	public StatisticsByDateOrMonthResponse getStatisticsByMonth(String selectedMonth)
+			throws OrderException;
+
+	public BestSellingProductTodayResponse getSellingProductToday() throws OrderException;
 
 }

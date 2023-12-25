@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import './style.scss';
-import apiProductGrid from '../../api/user/apiProductGrid';
+import apiProductGrid from '~/api/user/apiProductGrid';
 
 const breakpointsSwiper = {
     320: {
@@ -30,7 +30,7 @@ const breakpointsSwiper = {
 export default function BrandList() {
     const [brands, setBrands] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [pageNumber, setPageNumber] = useState('0');
+    const [pageNumber] = useState('0');
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -46,7 +46,7 @@ export default function BrandList() {
         };
 
         fetchData();
-    }, []);
+    }, [pageNumber]);
 
     const filterUniqueBrands = (brands) => {
         const uniqueBrandNames = new Set();

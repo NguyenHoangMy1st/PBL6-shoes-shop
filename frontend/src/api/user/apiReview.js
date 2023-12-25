@@ -1,8 +1,8 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiCreateReview = {
     postCreateReview(data) {
-        const url = '/reviews/create';
+        const url = '/api/reviews/create';
         return axiosClient.post(url, data);
     },
 };

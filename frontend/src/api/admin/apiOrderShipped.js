@@ -1,8 +1,8 @@
-import axiosClient from '../../states/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiOrderShipped = {
     putOrderShipped(id) {
-        const url = `/admin/orders/${id}/shipped`;
+        const url = `/api/admin/orders/${id}/shipped`;
         return axiosClient.put(url);
     },
 };

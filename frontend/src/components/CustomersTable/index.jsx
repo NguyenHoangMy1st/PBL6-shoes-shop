@@ -3,17 +3,19 @@ import React, { useCallback, useEffect } from 'react';
 import apiGetAllOrder from '~/api/admin/apiGetAllOrder';
 
 export default function CustomersTable() {
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const fetchData = useCallback(async () => {
         try {
             const response = await apiGetAllOrder.getAllOrder();
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
     return (
         <div>
             <TableContainer component={Paper} variant="outlined" className="custom-table-container">

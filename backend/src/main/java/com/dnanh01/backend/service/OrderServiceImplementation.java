@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
+import com.dnanh01.backend.dto.SingleStatsDto;
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Cart;
@@ -26,6 +27,8 @@ import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
 import com.dnanh01.backend.request.SelectedTimeRequest;
 import com.dnanh01.backend.request.ShippingAddressRequest;
+import com.dnanh01.backend.response.BestSellingProductTodayResponse;
+import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 
 @Service
 public class OrderServiceImplementation implements OrderService {
@@ -34,7 +37,6 @@ public class OrderServiceImplementation implements OrderService {
 	private CartService cartService;
 	private AddressRepository addressRepository;
 	private UserRepository userRepository;
-	private OrderItemService orderItemService;
 	private OrderItemRepository orderItemRepository;
 	private ProductRepository productRepository;
 	private CartItemRepository cartItemRepository;
@@ -44,7 +46,6 @@ public class OrderServiceImplementation implements OrderService {
 			CartService cartService,
 			AddressRepository addressRepository,
 			UserRepository userRepository,
-			OrderItemService orderItemService,
 			OrderItemRepository orderItemRepository,
 			ProductRepository productRepository,
 			CartItemRepository cartItemRepository) {
@@ -52,7 +53,6 @@ public class OrderServiceImplementation implements OrderService {
 		this.cartService = cartService;
 		this.addressRepository = addressRepository;
 		this.userRepository = userRepository;
-		this.orderItemService = orderItemService;
 		this.orderItemRepository = orderItemRepository;
 		this.productRepository = productRepository;
 		this.cartItemRepository = cartItemRepository;
@@ -219,6 +219,7 @@ public class OrderServiceImplementation implements OrderService {
 			int quantity = item.getQuantity();
 			String sizeName = item.getSize();
 			Long productId = item.getProduct().getId();
+
 			Product product = productRepository.findById(productId)
 					.orElseThrow(() -> new OrderException("Product not found"));
 
@@ -228,23 +229,15 @@ public class OrderServiceImplementation implements OrderService {
 
 			optionalSize.ifPresent(size -> {
 				int updatedQuantity = size.getQuantity() - quantity;
-
-				// Đảm bảo số lượng không âm
 				if (updatedQuantity < 0) {
 					try {
 						throw new OrderException("Not enough quantity in size: ");
 					} catch (OrderException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-
 				size.setQuantity(updatedQuantity);
-
-				// Cập nhật tổng số lượng của sản phẩm
 				product.setQuantity(product.getQuantity() - quantity);
-
-				// Lưu cập nhật vào cơ sở dữ liệu
 				productRepository.save(product);
 			});
 		}
@@ -275,9 +268,8 @@ public class OrderServiceImplementation implements OrderService {
 	// --------------------dashboard admin--------------------
 
 	@Override
-	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(SelectedTimeRequest req)
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedDayRevenueAndProfit(String selectedDay)
 			throws OrderException {
-		String selectedDay = req.getSelectedTime();
 
 		List<Object[]> statsForSelectedDay = orderRepository.getStatsForSelectedDayRevenueAndProfit(selectedDay);
 
@@ -292,8 +284,124 @@ public class OrderServiceImplementation implements OrderService {
 					(BigDecimal) row[1],
 					(BigDecimal) row[2]));
 		}
+		return result;
+	}
+
+	@Override
+	public List<RevenueOrProfitStatsDto> getStatsForSelectedMonthRevenueAndProfit(String selectedMonth)
+			throws OrderException {
+		List<Object[]> statsForSelectedMonth = orderRepository.getStatsForSelectedMonthRevenueAndProfit(selectedMonth);
+		if (statsForSelectedMonth.isEmpty()) {
+			throw new OrderException("You cannot aggregate for the month: " + selectedMonth);
+		}
+		List<RevenueOrProfitStatsDto> result = new ArrayList<>();
+		for (Object[] row : statsForSelectedMonth) {
+			result.add(new RevenueOrProfitStatsDto(
+					(Long) row[0],
+					(BigDecimal) row[1],
+					(BigDecimal) row[2]));
+		}
+		return result;
+	}
+
+	@Override
+	public StatisticsByDateOrMonthResponse getStatisticsByDate(String selectedDay)
+			throws OrderException {
+		List<Object[]> revenueForSelectedDay = orderRepository.getRevenueBySelectedDate(selectedDay);
+		List<Object[]> profitForSelectedDay = orderRepository.getProfitBySelectedDate(selectedDay);
+		List<Object[]> pendingOrderForSelectedDay = orderRepository
+				.getPendingOrderedProductCountBySelectedDate(selectedDay);
+		List<Object[]> countedUserForSelectedDay = orderRepository.getUserCountBySelectedDate(selectedDay);
+
+		List<SingleStatsDto<BigDecimal>> tempRevenue = createStatsList(revenueForSelectedDay, "Revenue",
+				BigDecimal.ZERO, "#de9a38", "uptrend");
+		List<SingleStatsDto<BigDecimal>> tempProfit = createStatsList(profitForSelectedDay, "Profit", BigDecimal.ZERO,
+				"#33b5e5", "usd");
+		List<SingleStatsDto<BigDecimal>> tempPendingOrder = createStatsList(pendingOrderForSelectedDay, "Pending Order",
+				BigDecimal.ZERO, "#f7c500", "cell_phone_link");
+		List<SingleStatsDto<Long>> tempCountedUser = new ArrayList<>();
+		for (Object[] row : countedUserForSelectedDay) {
+			Long value = row.length > 0 && row[0] != null ? (Long) row[0] : 0;
+			tempCountedUser.add(new SingleStatsDto<>("User Counted", (Long) value, "#45CE30", "user"));
+		}
+		StatisticsByDateOrMonthResponse result = new StatisticsByDateOrMonthResponse(
+				getFirstElement(tempRevenue),
+				getFirstElement(tempProfit),
+				getFirstElement(tempPendingOrder),
+				tempCountedUser.get(0));
 
 		return result;
 	}
 
+	@Override
+	public StatisticsByDateOrMonthResponse getStatisticsByMonth(String selectedMonth)
+			throws OrderException {
+		List<Object[]> revenueForSelectedMonth = orderRepository.getRevenueBySelectedMonth(selectedMonth);
+		List<Object[]> profitForSelectedMonth = orderRepository.getProfitBySelectedMonth(selectedMonth);
+		List<Object[]> pendingOrderForSelectedMonth = orderRepository
+				.getPendingOrderedProductCountBySelectedMonth(selectedMonth);
+		List<Object[]> countedUserForSelectedMonth = orderRepository.getUserCountBySelectedMonth(selectedMonth);
+
+		List<SingleStatsDto<BigDecimal>> tempRevenue = createStatsList(revenueForSelectedMonth, "Revenue",
+				BigDecimal.ZERO, "#de9a38", "uptrend");
+		List<SingleStatsDto<BigDecimal>> tempProfit = createStatsList(profitForSelectedMonth, "Profit",
+				BigDecimal.ZERO, "#33b5e5", "usd");
+		List<SingleStatsDto<BigDecimal>> tempPendingOrder = createStatsList(pendingOrderForSelectedMonth,
+				"Pending Order",
+				BigDecimal.ZERO, "#f7c500", "cell_phone_link");
+		List<SingleStatsDto<Long>> tempCountedUser = new ArrayList<>();
+		for (Object[] row : countedUserForSelectedMonth) {
+			Long value = row.length > 0 && row[0] != null ? (Long) row[0] : 0;
+			tempCountedUser.add(new SingleStatsDto<>("User Counted", (Long) value, "#45CE30", "user"));
+		}
+		StatisticsByDateOrMonthResponse result = new StatisticsByDateOrMonthResponse(
+				getFirstElement(tempRevenue),
+				getFirstElement(tempProfit),
+				getFirstElement(tempPendingOrder),
+				tempCountedUser.get(0));
+
+		return result;
+	}
+
+	private <T> List<SingleStatsDto<T>> createStatsList(List<Object[]> data, String title, T defaultValue, String color,
+			String icon) {
+		List<SingleStatsDto<T>> statsList = new ArrayList<>();
+
+		if (data.isEmpty()) {
+			statsList.add(new SingleStatsDto<>(title, defaultValue, color, icon));
+		} else {
+			for (Object[] row : data) {
+				T value = row.length > 1 && row[1] != null ? (T) row[1] : defaultValue;
+				statsList.add(new SingleStatsDto<>(title, value, color, icon));
+			}
+		}
+
+		return statsList;
+	}
+
+	private <T> SingleStatsDto<T> getFirstElement(List<SingleStatsDto<T>> statsList) {
+		return statsList.isEmpty() ? null : statsList.get(0);
+	}
+
+	@Override
+	public BestSellingProductTodayResponse getSellingProductToday() throws OrderException {
+		List<Object[]> listBestSellingProduct = orderRepository.getBestSellingProductToday();
+
+		if (listBestSellingProduct.isEmpty()) {
+			throw new OrderException("Best-selling product of the day not found.");
+		}
+
+		Object[] firstRow = listBestSellingProduct.get(0);
+		return mapToBestSellingProductResponse(firstRow);
+	}
+
+	private BestSellingProductTodayResponse mapToBestSellingProductResponse(Object[] row) {
+		Long productId = (Long) row[0];
+		String title = (String) row[1];
+		String imageUrl = (String) row[2];
+		Integer discountedPrice = (Integer) row[3];
+		Long appearanceCount = (Long) row[4];
+
+		return new BestSellingProductTodayResponse(productId, title, imageUrl, discountedPrice, appearanceCount);
+	}
 }

@@ -1,9 +1,10 @@
 // Trong apiBuyNow.js
-import axiosClient from '../../components/API/axiosClient';
+
+import axiosClient from '../axiosClient';
 
 const apiBuyNow = {
     postBuyNow() {
-        const url = `/payment/submitOrder?orderInfo=thanh toan`;
+        const url = `/api/payment/submitOrder?orderInfo=thanh toan`;
         return axiosClient.post(url);
     },
 };

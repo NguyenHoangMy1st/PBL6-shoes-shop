@@ -1,10 +1,10 @@
-import axiosClient from '../../states/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiOrder = {
     putOrder(id, newStatus) {
         // Kiểm tra id và newStatus trước khi gửi yêu cầu
         if (id && newStatus) {
-            const url = `/admin/orders/${id}/${newStatus}`;
+            const url = `/api/admin/orders/${id}/${newStatus}`;
             return axiosClient.put(url);
         } else {
             // Xử lý lỗi hoặc trả về promise báo lỗi

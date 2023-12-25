@@ -1,8 +1,8 @@
-import axiosClient from '../../states/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiGetAllOrder = {
     getAllOrder() {
-        const url = '/admin/orders/';
+        const url = '/api/admin/orders/';
         return axiosClient.get(url);
     },
 };

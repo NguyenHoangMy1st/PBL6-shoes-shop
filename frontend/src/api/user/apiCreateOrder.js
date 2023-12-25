@@ -1,9 +1,9 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiCreateOrder = {
     postCreateOrder(data) {
         console.log(data);
-        const url = '/orders/';
+        const url = '/api/orders/';
         return axiosClient.post(url, data);
     },
 };

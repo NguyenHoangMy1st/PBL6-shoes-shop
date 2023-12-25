@@ -1,17 +1,15 @@
 import { Popconfirm } from 'antd';
 import chroma from 'chroma-js';
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './style.scss';
+import { toast } from 'react-toastify';
 export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuantity, onDelete }) {
     const [quantityDefault, setQuantityDefault] = useState(product?.quantity);
     const [newQuantity, setNewQuantity] = useState(product.quantity);
-    // console.log(quantityNew);
-    // console.log(quantityDefault);
     const hexColorCode = product?.product.color;
     const color = chroma(hexColorCode).css();
-
+    const sizeObject = product.product.sizes.find((size) => size.name === product.size);
     const handleDecreaseQuantity = () => {
         if (quantityDefault === 1) {
             setQuantityDefault(1);
@@ -24,10 +22,14 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
     };
 
     const handleIncreaseQuantity = () => {
-        const newQuantity = quantityDefault + 1;
-        setQuantityDefault(newQuantity);
-        setNewQuantity(newQuantity);
-        onIncreaseQuantity();
+        if (quantityDefault < sizeObject.quantity) {
+            const newQuantity = quantityDefault + 1;
+            setQuantityDefault(newQuantity);
+            setNewQuantity(newQuantity);
+            onIncreaseQuantity();
+        } else {
+            toast.warning('Đã đạt số lượng tối đa');
+        }
     };
     const handleDelete = () => {
         onDelete();
@@ -93,12 +95,9 @@ export default function CartCard({ product, onIncreaseQuantity, onDeCreaseQuanti
                     </span>
                 </div>
                 <div className="cartList-operation">
-                    <Button
-                        style={{ backgroundColor: 'transparent', color: '#000', borderColor: 'transparent' }}
-                        onClick={handleDelete}
-                    >
+                    <button style={{ backgroundColor: 'transparent', fontSize: '18px' }} onClick={handleDelete}>
                         Delete
-                    </Button>
+                    </button>
                 </div>
             </div>
         </>

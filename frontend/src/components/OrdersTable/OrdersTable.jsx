@@ -4,13 +4,10 @@ import apiGetAllOrder from '~/api/admin/apiGetAllOrder';
 import './style.scss'; // Import your CSS file
 import _debounce from 'lodash/debounce';
 import apiOrder from '~/api/admin/apiOrder';
-import { toast } from 'react-toastify';
 // ... Import các thư viện và component khác ...
 
 export default function OrdersTable() {
     const [orders, setOrders] = useState([]);
-    console.log(orders);
-    const [selectedStatus, setSelectedStatus] = useState();
     const [selectedOrderIds, setSelectedOrderIds] = useState([]);
     const [localStatus, setLocalStatus] = useState({});
 
@@ -24,7 +21,6 @@ export default function OrdersTable() {
     });
 
     const handleStatusChange = (newStatus, orderId) => {
-        setSelectedStatus(newStatus);
         handleOrderSelect(orderId, newStatus);
         handleStatusChangeDebounced();
         try {
@@ -36,23 +32,6 @@ export default function OrdersTable() {
         }
     };
 
-    // const handleSaveClick = async () => {
-    //     try {
-    //         // Gọi API putOrder cho từng đơn hàng được chọn
-    //         for (const orderId of selectedOrderIds) {
-    //             await apiOrder.putOrder(orderId, selectedStatus);
-    //         }
-
-    //         // Gọi hàm xử lý ngay khi người dùng nhấn nút "Lưu"
-    //         handleStatusChangeDebounced.flush();
-
-    //         // Làm mới dữ liệu
-    //         fetchData();
-    //     } catch (error) {
-    //         console.error('Error saving orders:', error);
-    //     }
-    // };
-    // Hàm để chọn/deselect đơn hàng
     const handleOrderSelect = (orderId, newStatus) => {
         const isSelected = selectedOrderIds.includes(orderId);
 
@@ -71,13 +50,6 @@ export default function OrdersTable() {
         );
     };
 
-    const imageUrl =
-        'https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg';
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const fetchData = useCallback(async () => {
         try {
             const response = await apiGetAllOrder.getAllOrder();
@@ -93,6 +65,10 @@ export default function OrdersTable() {
             console.log(error);
         }
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     return (
         <div>

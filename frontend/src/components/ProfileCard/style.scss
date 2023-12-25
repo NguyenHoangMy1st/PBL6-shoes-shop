@@ -1,7 +1,7 @@
 .profile {
     margin: 30px 85px;
     font: inherit;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
     background: url(../../assets/images/contain/background.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -31,6 +31,8 @@
     }
     &-info .profile-accout {
         text-align: center;
+        padding: 35px;
+        font-size: 25px;
     }
     &-detail {
         padding: 20px auto;

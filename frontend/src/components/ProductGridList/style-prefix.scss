@@ -111,7 +111,7 @@
 \*-----------------------------------*/
 .productGrid {
     font: inherit;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
 }
@@ -119,7 +119,7 @@
 .product-main {
     margin-bottom: 30px;
     font: inherit;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
 }
@@ -130,6 +130,7 @@
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     gap: 25px;
+    margin-bottom: 30px;
 }
 
 .product-grid .showcase-productGrid {

@@ -4,30 +4,22 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '~/states/Auth/Action';
+import apiLogin from '~/api/user/apiLogin';
 
 const cx = classNames.bind(styles);
-const getTokenFromLocalStorage = () => {
-    return localStorage.getItem('token');
+const getTokenFromsessionStorage = () => {
+    return sessionStorage.getItem('token');
 };
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
-    const dispatch = useDispatch();
-    const { auth } = useSelector((store) => store);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(rememberMe);
-        const storedToken = getTokenFromLocalStorage();
+        const storedToken = getTokenFromsessionStorage();
         if (storedToken) {
-            // Token exists, you can perform any additional actions if needed
-            console.log('Token exists:', storedToken);
-            // You can use the token as needed, for example, include it in your HTTP headers for API requests
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
         }
-    }, [rememberMe]);
+    }, []);
 
     const handleSignin = async () => {
         try {
@@ -35,24 +27,28 @@ export default function LoginPage() {
                 email: username,
                 password,
             };
-
-            await dispatch(login(formData));
-
-            localStorage.setItem('user', JSON.stringify(formData));
-
-            if (auth?.user?.role === 'admin') {
-                toast.success('Đang vào trang admin');
-                setTimeout(() => {
-                    navigate('/admin/dashboard');
-                }, 2000);
-            } else if (auth?.user?.role === 'user') {
-                toast.success('Đang vào trang chủ');
-                setTimeout(() => {
-                    navigate('/');
-                }, 2000);
+            const response = await apiLogin.postLogin(formData);
+            console.log(response);
+            if (response.status === 201) {
+                sessionStorage.setItem('token', response?.data?.jwt);
+                sessionStorage.setItem('user', JSON.stringify(formData));
+                sessionStorage.setItem('jwt', response?.data?.jwt);
+                if (response?.data?.role === 'admin') {
+                    toast.success('Đang vào trang admin');
+                    setTimeout(() => {
+                        navigate('/admin/dashboard');
+                        window.location.reload();
+                    }, 2000);
+                } else if (response?.data?.role === 'user') {
+                    toast.success('Đang vào trang chủ');
+                    setTimeout(() => {
+                        navigate('/');
+                        window.location.reload();
+                    }, 2000);
+                }
             }
         } catch (error) {
-            // toast.error(error?.message);
+            toast.error('Bạn nhập sai mật khẩu hoặc tài khoản', error?.message);
         }
     };
     return (
@@ -75,7 +71,7 @@ export default function LoginPage() {
                         </div>
                         <div className={cx('input-box')}>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 name="password"
                                 value={password}
@@ -83,18 +79,17 @@ export default function LoginPage() {
                                 required
                             />
                             <label>Password</label>
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ background: 'transparent' }}
+                                className={cx('toggle-password-button')}
+                            >
+                                <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} aria-hidden="true"></i>
+                            </button>
                         </div>
 
                         <div className={cx('remember-forgot')}>
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={rememberMe}
-                                    onChange={() => setRememberMe(!rememberMe)}
-                                />
-                                <label>Remember me</label>
-                            </div>
-
                             <Link to={'/forgetpassword'}>Forget Password</Link>
                         </div>
                         <button type="button" onClick={handleSignin} className={`${cx('btn')} ${cx('btn-login')}`}>
@@ -107,6 +102,14 @@ export default function LoginPage() {
                                     Register
                                 </Link>
                             </p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Link to="/">
+                                <button className="home-login" style={{ background: 'transparent' }}>
+                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    Back to home
+                                </button>
+                            </Link>
                         </div>
                     </form>
                 </div>

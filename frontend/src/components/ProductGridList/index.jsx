@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ProductGridCard from '../ProductGridCard';
 import './style-prefix.scss';
 import { useSearchParams } from 'react-router-dom';
-import apiBrand from '../../api/user/apiBrand';
-import apiFilterPrice from '../../api/user/apiFilterPrice';
-import apiProductGrid from '../../api/user/apiProductGrid';
+import apiBrand from '~/api/user/apiBrand';
+import apiFilterPrice from '~/api/user/apiFilterPrice';
+import apiProductGrid from '~/api/user/apiProductGrid';
 import ReactPaginate from 'react-paginate';
-import { toast } from 'react-toastify';
 
 export default function ProductGridList({ productSearch }) {
     const [products, setProducts] = useState([]);
+    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
     let [searchParams] = useSearchParams();
     const selectedBrand = searchParams.get('brand');
@@ -26,7 +26,7 @@ export default function ProductGridList({ productSearch }) {
                 response = await apiBrand.getProductByBrand(selectedBrand, pageNumber);
                 setProducts(response?.data?.content);
             } else {
-                if (productSearch && productSearch.length > 0) {
+                if (productSearch && productSearch?.length > 0) {
                     setProducts(productSearch);
                 } else {
                     response = await apiProductGrid.getAllProduct(pageNumber);
@@ -57,6 +57,7 @@ export default function ProductGridList({ productSearch }) {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
                     const response = await apiFilterPrice.getFilerPrice(priceSort);
                     setProducts(response.data.content);
+                    setTotalPages(response.data.totalPages);
                 } else if (criteria === 'discountPersent') {
                     const sortedProducts = [...products].sort((a, b) => {
                         if (sortOrder === 'asc') {
@@ -69,6 +70,7 @@ export default function ProductGridList({ productSearch }) {
                 } else if (criteria === 'default') {
                     const response = await apiProductGrid.getAllProduct(pageNumber);
                     setProducts(response.data.content);
+                    setTotalPages(response.data.totalPages);
                 }
             } catch (error) {
                 console.log(error);
@@ -78,6 +80,7 @@ export default function ProductGridList({ productSearch }) {
         },
         [sortCriteria, sortOrder, products, pageNumber],
     );
+
     const handlePageClick = (data) => {
         const selectedPage = data.selected;
         setPageNumber(selectedPage);
@@ -86,10 +89,12 @@ export default function ProductGridList({ productSearch }) {
 
     useEffect(() => {
         fetchData();
-    }, [fetchData, selectedBrand, pageNumber]);
+    }, [fetchData]);
+
     useEffect(() => {
         handleSort('default');
-    }, [sortCriteria]);
+    }, []);
+
     return (
         <section>
             <div className="product-main container-layout">
@@ -110,7 +115,7 @@ export default function ProductGridList({ productSearch }) {
                     {isLoading ? (
                         <div className="brandCard-loading"></div>
                     ) : (
-                        products.length > 0 &&
+                        products?.length > 0 &&
                         products.map((product) => <ProductGridCard key={product?.id} product={product} />)
                     )}
                 </div>

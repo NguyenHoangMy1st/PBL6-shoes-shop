@@ -1,14 +1,13 @@
-import Header from '~/components/Layout/Header';
+import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import apiProductDetail from '~/api/user/apiProductDetail';
-import apiAddItem from '~/api/user/apiAddItem';
-import CommentCard from '~/components/CommentCard';
-import CommentedShow from '~/components/CommentedShow';
-import { useCart } from '~/contexts/CartContext';
+import { useCart } from '~/api/user/CartContext';
 import Button from '../Button';
+import apiAddItem from '~/api/user/apiAddItem';
+import apiProductDetail from '~/api/admin/apiProductDetail';
+import CommentCard from '~/components/CommentCard';
 
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function AboutPage({ quantity = 1 }) {
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
-    const [selectedQuantity, setSelectedQuantity] = useState('');
     const [quantityDefault, setQuantityDefault] = useState(quantity);
     const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
     const { id } = useParams();
@@ -67,10 +65,8 @@ export default function AboutPage({ quantity = 1 }) {
 
                 const response = await apiProductDetail.getProductDetail(id);
                 setProductDetail(response.data);
-                console.log(response.data);
             } catch (error) {
-                // console.error('Error fetching product detail:', error);
-                // toast.error('Error fetching product detail');
+                toast.error('Sản phẩm không tồn tại', error);
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
             }
@@ -105,6 +101,10 @@ export default function AboutPage({ quantity = 1 }) {
             toast.warning(`Bạn không thể thêm nhiều hơn  ${maxQuantity} mục cho kích thước đã chọn.`);
         }
     };
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <>
             <Header cartItems={cartItems} />
@@ -228,7 +228,6 @@ export default function AboutPage({ quantity = 1 }) {
                 )}
             </div>
             <CommentCard productId={id} />
-            <CommentedShow />
         </>
     );
 }

@@ -4,9 +4,9 @@ import { useState } from 'react';
 import AddressCard from '../AddressCard';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-import apiCreateOrder from '../../api/user/apiCreateOrder.js';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/pages/Button';
+import apiCreateOrder from '~/api/user/apiCreateOrder';
 
 export default function DeliveryAddressForm() {
     const [Firstname, setFirstname] = useState('');
@@ -71,6 +71,7 @@ export default function DeliveryAddressForm() {
                                         autoComplete="given-name"
                                         value={Firstname}
                                         onChange={(event) => setFirstname(event.target.value)}
+                                        style={{ fontSize: '18px' }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>

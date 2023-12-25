@@ -1,8 +1,8 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiReviewDetail = {
     getReviewDetail(id) {
-        const url = `/reviews/product/${id?.id}`;
+        const url = `/api/reviews/product/${id?.id}`;
         return axiosClient.get(url);
     },
 };

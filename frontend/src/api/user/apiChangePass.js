@@ -1,8 +1,8 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiChangePass = {
     postChangepass(data) {
-        const url = '/users/change-password';
+        const url = '/api/users/change-password';
         return axiosClient.post(url, data);
     },
 };

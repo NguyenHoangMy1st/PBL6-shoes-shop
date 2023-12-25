@@ -71,7 +71,7 @@ ORDER BY
     hr.hour_of_day;
 
 -- ------------
--- thống kê doanh thu lợi nhuận theo các ngày trong tháng 
+-- thống kê doanh thu lợi nhuận theo các ngày trong tháng được chọn
 
 -- Tạo bảng tham chiếu cho tất cả các ngày trong tháng
 
@@ -96,7 +96,7 @@ LEFT JOIN
         FROM 
             `orders` o1
         WHERE
-            DATE_FORMAT(o1.order_date, '%m-%Y') = '12-2023'
+            DATE_FORMAT(o1.order_date, '%m/%Y') = '12/2023'
             AND o1.order_status = 'DELIVERED'
         GROUP BY
             day_of_month
@@ -112,7 +112,7 @@ LEFT JOIN
             JOIN order_item oi ON o2.id = oi.order_id
             JOIN product p ON oi.product_id = p.id
         WHERE
-            DATE_FORMAT(o2.order_date, '%m-%Y') = '12-2023'
+            DATE_FORMAT(o2.order_date, '%m/%Y') = '12/2023'
             AND o2.order_status = 'DELIVERED'
         GROUP BY
             day_of_month
@@ -129,7 +129,7 @@ SELECT DATE_FORMAT(o.`order_date`, '%d') AS selected_day,
 		SUM(o.`total_discounted_price`) AS total_revenue
 	FROM `orders` o
     WHERE
-    DATE_FORMAT(o.`order_date`, '%Y-%m-%d') = '2023-12-16'
+    DATE_FORMAT(o.`order_date`, '%Y-%m-%d') = '2023-12-17'
 	AND o.`order_status` = 'DELIVERED'
 	GROUP BY
     selected_day
@@ -137,7 +137,16 @@ SELECT DATE_FORMAT(o.`order_date`, '%d') AS selected_day,
     selected_day;
 -- -------------------------------- -- 
 -- lấy doanh thu theo  một tháng được chọn 
-
+SELECT DATE_FORMAT(o.`order_date`, '%m') AS selected_month,
+		SUM(o.`total_discounted_price`) AS total_revenue
+	FROM `orders` o
+    WHERE
+    DATE_FORMAT(o.`order_date`, '%Y-%m') = '2023-12'
+	AND o.`order_status` = 'DELIVERED'
+	GROUP BY
+    selected_month
+	ORDER BY
+    selected_month;
 
 
 -- -------------------------------- -- 
@@ -160,23 +169,89 @@ ORDER BY
 
 -- -------------------------------- -- 
 -- lấy lợi nhuận theo  một tháng được chọn
-    
+SELECT
+    DATE_FORMAT(o.`order_date`, '%m') AS selected_month,
+    SUM((p.`discounted_price` - p.`warehouse_price`) * oi.`quantity`) AS total_profit
+FROM
+    `orders` o
+    JOIN `order_item` oi ON o.`id` = oi.`order_id`
+    JOIN `product` p ON oi.`product_id` = p.`id`
+WHERE
+    DATE_FORMAT(o.`order_date`, '%Y-%m') = '2023-12'
+	AND o.order_status = 'DELIVERED'
+GROUP BY
+    selected_month
+ORDER BY
+    selected_month;
+
+
+select * from `orders`;
+-- -------------------------------- -- 
+-- lấy ra số lượng sản phẩm được đặt trong một ngày được chọn
+SELECT DATE_FORMAT(o.`order_date`, '%d') AS selected_day,
+		SUM(o.`total_item`) AS total_item
+	FROM `orders` o
+    WHERE
+    DATE_FORMAT(o.`order_date`, '%Y-%m-%d') = '2023-12-17'
+	AND o.`order_status` = 'PENDING'
+	GROUP BY
+    selected_day
+	ORDER BY
+    selected_day;
+-- -------------------------------- -- 
+-- lấy ra số lượng sản phẩm được đặt trong một tháng được chọn
+SELECT DATE_FORMAT(o.`order_date`, '%M') AS selected_month,
+		SUM(o.`total_item`) AS total_item
+	FROM `orders` o
+    WHERE
+    DATE_FORMAT(o.`order_date`, '%Y-%m') = '2023-12'
+	AND o.`order_status` = 'PENDING'
+	GROUP BY
+    selected_month
+	ORDER BY
+    selected_month;
 
 -- -------------------------------- -- 
--- lấy ra số lượng đơn hàng được đặt trong một ngày được chọn
+-- lấy ra số lượng người sử dụng trong một ngày được chọn
+
+SELECT 
+		COUNT(*) AS total_users
+FROM `user` u
+WHERE u.`role` = 'admin'
+	AND DATE_FORMAT(u.`create_at`, '%d/%m/%Y %H:%i:%s') <= CONCAT('2023-12-16', ' 23:59:59')
+
+
 
 -- -------------------------------- -- 
--- lấy ra số lượng đơn hàng được đặt trong một tháng được chọn
+-- lấy ra số lượng người sử dụng trong một tháng được chọn
+SELECT 
+	COUNT(*) AS total_users
+FROM `user` u
+WHERE u.`role` = 'admin'
+	AND DATE_FORMAT(u.`create_at`, '%d/%m') <= '2023/12'; 
 
 
--- -------------------------------- -- 
--- lấy ra số lượng đơn hàng đã giao trong một ngày được chọn
+-- lấy ra sản phẩm bán chạy nhất trong ngày hiện tại
 
--- -------------------------------- -- 
--- lấy ra số lượng đơn hàng đã giao trong một tháng được chọn
+select * from `product`;
 
-
-
-
+SELECT
+    oi.product_id,
+    p.title,
+    p.image_url,
+    p.discounted_price,
+    COUNT(*) AS appearance_count
+FROM
+    `orders` o
+    JOIN `order_item` oi ON o.id = oi.order_id
+    JOIN `product` p ON oi.product_id = p.id
+WHERE
+    DATE_FORMAT(o.order_date, '%Y-%m') = '2023-12'
+    AND o.order_status = 'DELIVERED'
+GROUP BY
+    oi.product_id
+ORDER BY
+    appearance_count DESC
+LIMIT 1;
 
 

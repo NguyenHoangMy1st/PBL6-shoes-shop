@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './RegisterPage.module.scss';
-import { getUser, register } from '~/states/Auth/Action';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import apiRegister from '~/api/user/apiRegister';
 
 const cx = classNames.bind(styles);
 const RegisterPage = () => {
@@ -14,59 +13,55 @@ const RegisterPage = () => {
     const [firstName, setFirstName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const dispatch = useDispatch();
-    // const jwt = localStorage.getItem('jwt');
-    // const { auth } = useSelector((store) => store);
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (jwt) {
-    //         dispatch(getUser(jwt));
-    //     }
-    // }, [jwt, auth.jwt, dispatch]);
-
-    // function validatePassword(password) {
-    //     // Biểu thức chính quy kiểm tra mật khẩu
-    //     // const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-
-    //     return passwordRegex.test(password);
-    // }
-    // const validateEmail = (email) => {
-    //     // Biểu thức chính quy kiểm tra định dạng email
-    //     // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     return emailRegex.test(email);
-    // };
-
+    const validatePassword = (password) => {
+        // Biểu thức chính quy kiểm tra mật khẩu
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+        return passwordRegex.test(password);
+    };
+    const validateEmail = (email) => {
+        // Biểu thức chính quy kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
     const handleSubmit = async () => {
-        // if (!password || !lastName || !firstName || !phone || !email) {
-        //     toast.error('Please fill in all required fields');
-        //     return;
-        // }
-        // // Kiểm tra định dạng email
-        // if (!validateEmail(email)) {
-        //     toast.error('Please enter a valid email address');
-        //     return;
-        // }
-        // // Kiểm tra mật khẩu
-        // if (!validatePassword(password)) {
-        //     toast.error('Password must contain at least 8 characters, one uppercase letter, and one digit');
-        //     return;
-        // }
+        if (!password || !lastName || !firstName || !phone || !email) {
+            toast.warning('Vui lòng nhập đủ thông tin yêu cầu');
+            return;
+        }
+        // Kiểm tra định dạng email
+        if (!validateEmail(email)) {
+            toast.warning('Vui lòng nhập đúng định dạng email');
+            return;
+        }
+        // Kiểm tra mật khẩu
+        if (!validatePassword(password)) {
+            toast.warning('Mật khẩu phải có 8 ký tự bao gồm 1 số, 1 chữ hoa, 1 ký tự đặc biệt');
+            return;
+        }
 
         try {
             const formData = {
                 password,
                 lastName,
                 firstName,
-                phone,
+                mobile: phone,
                 email,
                 role: 'user',
             };
-            dispatch(register(formData));
-            navigate('/login');
+            const response = await apiRegister.postRegister(formData);
+            if (response.status === 201) {
+                toast.success('Đăng ký thành công');
+                sessionStorage.setItem('user', JSON.stringify(formData));
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+            }
         } catch (error) {
-            // toast.error(error?.message);
+            toast.error(error?.message);
         }
     };
 
@@ -91,7 +86,7 @@ const RegisterPage = () => {
                         </div>
                         <div className={cx('input-register')}>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 name="password"
                                 value={password}
@@ -100,6 +95,14 @@ const RegisterPage = () => {
                                 required
                             />
                             <label>Password</label>
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ background: 'transparent' }}
+                                className={cx('toggle-password-button')}
+                            >
+                                <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} aria-hidden="true"></i>
+                            </button>
                         </div>
                         <div className={cx('input-register')}>
                             <input

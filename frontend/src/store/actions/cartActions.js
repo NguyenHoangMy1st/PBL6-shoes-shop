@@ -1,7 +1,7 @@
 // src/store/actions/cartActions.js
 
 import { toast } from 'react-toastify';
-import apiCart from '../../api/user/apiCart';
+import apiCart from '~/api/user/apiCart';
 import apiUpdateItem from '../../components/API/apiUpdateItem';
 import { ADD_TO_CART, REMOVE_FROM_CART, SET_PRODUCTS, SET_TOTAL_PRICE, UPDATE_CART_ITEM } from './actionTypes';
 

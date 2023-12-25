@@ -1,8 +1,8 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiOrderUser = {
     getOrderUser() {
-        const url = `/orders/user`;
+        const url = `/api/orders/user`;
         return axiosClient.get(url);
     },
 };

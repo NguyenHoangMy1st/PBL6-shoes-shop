@@ -2,35 +2,43 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Button from '~/pages/Button';
-import apiProfile from '../../api/user/apiProfile';
+import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
-import apiUpdateProfile from '../API/apiUpdateProfile';
-import apiChangePass from '../../api/user/apiChangePass';
+import apiUpdateProfile from '~/api/user/apiUpdateProfile';
+import apiChangePass from '~/api/user/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
-    const [streetAddress, setstreetAddress] = useState('');
     const [defaultAddress, setDefaultAddress] = useState(null);
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const response = await apiProfile.getProfile();
-                setProfiles(response.data);
-                // Check if addresses is an array and not empty
-                if (Array.isArray(response.data.addresses) && response.data.addresses.length > 0) {
-                    // Set the first address as the default address
-                    setDefaultAddress(response.data.addresses[0]);
-                }
-            } catch (error) {
-                toast.error('Bạn cần đăng nhập để xem thông tin này');
+
+    const checksessionStorage = () => {
+        if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
+            navigate('/login');
+            return false;
+        }
+        return true;
+    };
+    const fetchProfile = async () => {
+        if (!checksessionStorage()) {
+            return;
+        }
+        try {
+            const response = await apiProfile();
+            setProfiles(response.data);
+            // Check if addresses is an array and not empty
+            if (Array.isArray(response.data.addresses) && response.data.addresses.length > 0) {
+                // Set the first address as the default address
+                setDefaultAddress(response.data.addresses[0]);
             }
-        };
-        // Call the fetchProductGrid function
+        } catch (error) {
+            toast.error('Có lỗi xảy ra khi lấy thông tin cá nhân');
+        }
+    };
+    useEffect(() => {
         fetchProfile();
     }, []);
 
-    const image =
-        'https://scontent.fsgn2-10.fna.fbcdn.net/v/t39.30808-6/328039816_914151769604724_1668073028896674479_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=maXa2WXfoYcAX-oaO4T&_nc_ht=scontent.fsgn2-10.fna&oh=00_AfD5fFLg63VB9q0uJccL8LAPi9EHJyJCiG9A9NOR0UJvhw&oe=6578758B';
+    const image = 'https://i.pinimg.com/736x/eb/1b/cc/eb1bcce796b5706ec0803a9e985eb45d.jpg';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);
@@ -58,9 +66,9 @@ export default function ProfileCard() {
     };
     const handleLogout = () => {
         toast.success('Đăng xuất thành công');
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        localStorage.removeItem('jwt');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('jwt');
         setTimeout(() => {
             navigate('/login');
         }, 2000);
@@ -103,6 +111,7 @@ export default function ProfileCard() {
             const response = await apiUpdateProfile.putUpdateprofile(formdata);
             if (response.status === 200) {
                 toast.success('Cập nhật thông tin cá nhân thành công');
+                setIsEditing(false);
             } else {
                 toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
             }

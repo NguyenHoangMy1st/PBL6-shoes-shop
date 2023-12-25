@@ -1,6 +1,6 @@
 .cart {
     border-collapse: collapse;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
 }
 .cart-operation,
 .cart-operation .cart-operation-delete,
@@ -45,7 +45,7 @@
     margin: 30px auto;
     padding: 40px 50px;
     max-width: 1350px !important;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Style for the payment voucher section */

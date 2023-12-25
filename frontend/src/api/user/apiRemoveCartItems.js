@@ -1,8 +1,8 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiRemoveCartItems = {
     delRemoveCartItems(id) {
-        const url = `/cart_items/${id}`;
+        const url = `/api/cart_items/${id}`;
         return axiosClient.delete(url);
     },
 };

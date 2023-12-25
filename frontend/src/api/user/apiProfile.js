@@ -1,9 +1,7 @@
-import axiosClient from '../../components/API/axiosClient';
+import axiosClient from '../axiosClient';
 
-const apiProfile = {
-    getProfile() {
-        const url = '/users/profile';
-        return axiosClient.get(url);
-    },
+const apiProfile = () => {
+    const url = '/api/users/profile';
+    return axiosClient.get(url);
 };
 export default apiProfile;

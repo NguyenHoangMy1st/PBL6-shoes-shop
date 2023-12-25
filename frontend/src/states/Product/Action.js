@@ -14,16 +14,13 @@ import {
     FIND_PRODUCT_SUCCESS,
 } from './ActionType';
 import { toast } from 'react-toastify';
-const token = localStorage.getItem('jwt');
+const token = sessionStorage.getItem('jwt');
 export const findProducts = (reqData) => async (dispatch) => {
     dispatch({ type: FIND_PRODUCT_REQUEST });
 
     const { color, size, minPrice, maxPrice, minDiscount, brand, stock, sort, pageNumber, pageSize } = reqData;
 
     try {
-        console.log(
-            `/api/products/?color=${color}&size=${size}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&brand=${brand}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
-        );
         const { data } = await api_instance.get(
             `/api/products/?color=${color}&size=${size}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&brand=${brand}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
             {
@@ -70,7 +67,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
             },
         });
         console.log('delete product: ', data);
-        toast.success("Xóa sản phẩm thành công");
+        toast.success('Xóa sản phẩm thành công');
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: productId });
     } catch (error) {
         dispatch({ type: DELETE_PRODUCT_FAILURE, payload: error.message });

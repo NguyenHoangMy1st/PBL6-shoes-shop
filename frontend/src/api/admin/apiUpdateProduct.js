@@ -1,8 +1,8 @@
-import axiosClient from '../../states/API/axiosClient';
+import axiosClient from '../axiosClient';
 
 const apiUpdateProduct = {
     putUpdateProduct(id, data) {
-        const url = `/admin/products/${id}/update`;
+        const url = `/api/admin/products/${id}/update`;
         return axiosClient.put(url, data);
     },
 };
