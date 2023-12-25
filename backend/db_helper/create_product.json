@@ -259,5 +259,327 @@
         ],
         "quantity": 100,
         "description": "The Under Armour HOVR is a stylish and comfortable shoe."
-    }
+    },
+    # my
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/bht6092sczla4c44jn7rz/Giay_Samba_trang_IG5744_04_standard.png?rlkey=i2cu6vdnfsi39cdfuau0olh1h&dl=0",
+        "brand": {
+            "name": "Adidas",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
+        },
+        "title": "GIÀY SAMBA nữ",
+        "color": "#D6D8E1",
+        "warehousePrice": 1000000,
+        "price": 1400000,
+        "discountedPrice": 1260000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 20
+            },
+            {
+                "name": "M",
+                "quantity": 30
+            },
+            {
+                "name": "L",
+                "quantity": 50
+            }
+        ],
+        "quantity": 100,
+        "description": "Dáng regular fit Có dây giày Thân giày bằng da và da nubuck Lớp lót bằng vải dệt Đế ngoài bằng cao su tự nhiên trong mờ"
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/ozaanblnwifb5lxsey4wj/CourtJam_Control_3_W_trang_ID2457_04_standard.png?rlkey=97cq0vucj3tfwmrktly7zkkgt&dl=0",
+        "brand": {
+            "name": "Adidas",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
+        },
+        "title": "GIÀY COURTJAM CONTROL 3 W",
+        "color": "#D6D8E1",
+        "warehousePrice": 1100000,
+        "price": 1500000,
+        "discountedPrice": 1350000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 41
+            },
+            {
+                "name": "M",
+                "quantity": 87
+            },
+            {
+                "name": "L",
+                "quantity": 12
+            }
+        ],
+        "quantity": 140,
+        "description": "Dáng giày đẹp có dây giày Thân giày bằng da và da nubuck Lớp lót bằng vải dệt Đế ngoài bằng cao su tự nhiên trong mờ"
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/kuwe1xayr8af897hcsyu9/Giay_4DFWD_x_Parley_DJen_GV9056_02_standard.png?rlkey=f3o0b68hbxhslqjkfgp9aoobn&dl=0",
+        "brand": {
+            "name": "Adidas",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
+        },
+        "title": "GIÀY 4DFWD X PARLEY",
+        "color": "#000002",
+        "warehousePrice": 500000,
+        "price": 700000,
+        "discountedPrice": 595000,
+        "discountPersent": 15,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 41
+            },
+            {
+                "name": "M",
+                "quantity": 87
+            },
+            {
+                "name": "L",
+                "quantity": 12
+            }
+        ],
+        "quantity": 140,
+        "description": "Đôi giày này mang đến tư duy mới về rác thải nhựa khi biến vấn đề thành giải pháp. Mẫu giày này được mã hóa để đưa bạn chuyển động theo một hướng duy nhất: về phía trước. Đế giữa adidas 4DFWD được tinh chỉnh vị trí để định hướng cho bàn chân và giảm lực tác động cho bước chạy mượt mà, đồng thời đế ngoài Continental™ Rubber nâng đỡ từng sải bước cho độ bám vượt trội."
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/s6atepgoh6vvv47yvsvjp/Giay_4DFWD_x_Parley_trang_GX9806_04_standard.png?rlkey=6bl7vdpmlpf0nt00rrpk8woyo&dl=0",
+        "brand": {
+            "name": "Adidas",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
+        },
+        "title": "GIÀY 4DFWD X PARLEY",
+        "color": "#E8E8EA",
+        "warehousePrice": 500000,
+        "price": 700000,
+        "discountedPrice": 595000,
+        "discountPersent": 15,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 41
+            },
+            {
+                "name": "M",
+                "quantity": 87
+            },
+            {
+                "name": "L",
+                "quantity": 12
+            }
+        ],
+        "quantity": 140,
+        "description": "Đôi giày này mang đến tư duy mới về rác thải nhựa khi biến vấn đề thành giải pháp. Mẫu giày này được mã hóa để đưa bạn chuyển động theo một hướng duy nhất: về phía trước. Đế giữa adidas 4DFWD được tinh chỉnh vị trí để định hướng cho bàn chân và giảm lực tác động cho bước chạy mượt mà, đồng thời đế ngoài Continental™ Rubber nâng đỡ từng sải bước cho độ bám vượt trội."
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/eibiiftijcw9jj6eanrh1/U574SBG-7.png?rlkey=4fw9etzeks4r66pqo9az5uvj3&dl=0",
+        "brand": {
+            "name": "NewBalance",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
+        },
+        "title": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning - Đen",
+        "color": "#000002",
+        "warehousePrice": 1500000,
+        "price": 2559000,
+        "discountedPrice": 2047200,
+        "discountPersent": 20,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 12
+            },
+            {
+                "name": "M",
+                "quantity": 40
+            },
+            {
+                "name": "L",
+                "quantity": 22
+            }
+        ],
+        "quantity": 74,
+        "description": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning là phiên bản mới nhất của dòng giày huyền thoại 574 mang đến sự kết hợp hoàn hảo giữa thiết kế cổ điển và nét chấm phá hiện đại. Với thiết kế và chất liệu độc đáo, đôi giày mang đến sự thoải mái tối ưu cho đôi chân của bạn suốt cả ngày dài. Chọn New Balance 574 / Sunday Morning để trải nghiệm sự đa dạng, thoải mái và phong cách không giới hạn - đó là lựa chọn của những người đang trên đường tìm kiếm hành trang cho chính mình."
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/wchvjzjuhj489q8bzvrsj/U574SOR-7.png?rlkey=836fuxaia4qoniuwznsrby4d2&dl=0",
+        "brand": {
+            "name": "NewBalance",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
+        },
+        "title": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning - Trắng",
+        "color": "#E8E8EA",
+        "warehousePrice": 1500000,
+        "price": 2559000,
+        "discountedPrice": 2047200,
+        "discountPersent": 20,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 12
+            },
+            {
+                "name": "M",
+                "quantity": 40
+            },
+            {
+                "name": "L",
+                "quantity": 22
+            }
+        ],
+        "quantity": 74,
+        "description": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning là phiên bản mới nhất của dòng giày huyền thoại 574 mang đến sự kết hợp hoàn hảo giữa thiết kế cổ điển và nét chấm phá hiện đại. Với thiết kế và chất liệu độc đáo, đôi giày mang đến sự thoải mái tối ưu cho đôi chân của bạn suốt cả ngày dài. Chọn New Balance 574 / Sunday Morning để trải nghiệm sự đa dạng, thoải mái và phong cách không giới hạn - đó là lựa chọn của những người đang trên đường tìm kiếm hành trang cho chính mình."
+    },
+    # vinh
+     {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/884ai56kqm3kbpgq2918r/sneaker_balenciaga_triple_s_tr-ng_s-a-570x570.jpg?rlkey=6r3cndnrtwg4ysywi82dyuanr&dl=0",
+        "brand": {
+            "name": "NewBalance",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
+        },
+        "title": "BALENCIAGA TRIPLE S TRẮNG SỮA HÀNG SIÊU CẤP",
+        "color": "#FFFFFF",
+        "warehousePrice": 850000,
+        "price": 1022000,
+        "discountedPrice": 971000,
+        "discountPersent": 5,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 30
+            },
+            {
+                "name": "M",
+                "quantity": 28
+            },
+            {
+                "name": "L",
+                "quantity": 22
+            }
+        ],
+        "quantity": 80,
+        "description": "Mẫu giày Triple S nổi tiếng của hãng Balenciaga đang háo hứng cho sản phẩm sắp ra mắt dành riêng cho phái đẹp với diện mạo hoàn toàn mới cho đầu năm 2018 này. Rất nhiều mẫu giày chạy bộ được ra mắt trong mùa xuân 2018, bao gồm cả mẫu giày với phần upper và panel được nâng cấp tuyệt vời này."
+    },
+     {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/hrblvsudks18j2r9x0tdx/balenciaga_track_3.0_tr-ng_cam_rep_11-570x570.jpg?rlkey=losyah9ybd389lpf4kr9p6nwn&dl=0",
+        "brand": {
+            "name": "NewBalance",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
+        },
+        "title": "BALENCIAGA TRACK 3.0 TRẮNG CAM REP 1:1",
+        "color": "#FF0000",
+        "warehousePrice": 1370000,
+        "price": 2200000,
+        "discountedPrice": 1474000,
+        "discountPersent": 33,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 40
+            },
+            {
+                "name": "M",
+                "quantity": 55
+            },
+            {
+                "name": "L",
+                "quantity": 27
+            }
+        ],
+        "quantity": 122,
+        "description": "Nói tới Balenciaga Track người dùng sẽ dễ hình dung tới sự cao cấp, độc lạ và ấn tượng. Dòng sản phẩm này hiện đang chiếm lĩnh thị trường người dùng với thiết kế năng động, mới mẻ và hầm hồ. Đặc biệt là mẫu giày Balenciaga Track 3.0 rep màu trắng cam ấn tượng. Sản phẩm vẫn chưa hạ nhiệt và đang có dấu hiệu nổi đình đám hơn."
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/dwv31adl3xgc0ef782g1x/giay_th-_thao_balenciaga_triple_s_xanh_d-ng-570x570.jpg?rlkey=pxpjsnz2u2ccai65v7w8dn04s&dl=0",
+        "brand": {
+            "name": "NewBalance",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
+        },
+        "title": "GIÀY THỂ THAO BALENCIAGA TRIPLE S XANH DƯƠNG",
+        "color": "#0066FF",
+        "warehousePrice": 950000,
+        "price": 1275000,
+        "discountedPrice": 1020000,
+        "discountPersent": 20,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 20
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 25
+            }
+        ],
+        "quantity": 60,
+        "description": "Nằm trong những mẫu giày đình đám có sự khác biệt rõ rệt và nhanh chóng trở nên được yêu thích bởi nhiều người nổi tiếng. Ấn tượng ban đầu của nhiều người đây là một mẫu giày có vẻ ngoài “quái dị”, to khổ và khá kén người đi.Tuy nhiên, chính sự khác biệt đó lại giúp nó trở thành mẫu giày hot trên thị trường. Đôi giày nhanh chóng trở thành xu hướng và được yêu thích bởi nhiều Fashionista và người ảnh hưởng khác. "
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/gi2u2pbivtmbomxkgmcg3/giay-converse-all-star-vang3-570x570.jpg?rlkey=m9f4al27nuuddh5k188yeftv2&dl=0",
+        "brand": {
+            "name": "Converse",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
+        },,
+        "title": "GIÀY CONVERSE ALL STAR VÀNG SUNFLOWER",
+        "color": "#FFFF00",
+        "warehousePrice": 900000,
+        "price": 2000000,
+        "discountedPrice": 1000000,
+        "discountPersent": 50,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 20
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 25
+            }
+        ],
+        "quantity": 60,
+        "description": "Giày converse vàng sunflower đôi giày nhìn là thấy mùa hè với màu sắc đơn giản, đôi giày tạo nên thương hiệu đến từ Converse.Điểm khác biệt tạo nên điểm nhấn của một đôi converse sunflower chính là ở sự hài hòa giữa phong cách cổ điển và hơi hướng của sự hiện đại. Thiết kế nguyên bản của mẫu này vẫn dựa trên thiết của dòng chuck 70. Chất liệu làm thân giày đến từ chất liệu vải bạt nặng, dày mang lại cảm giác chắc chắn, chịu nhiệt tốt. "
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vgbrdf5x94l63wejqzghh/converse_1970s_tr-ng_c-_cao-570x570.jpg?rlkey=e7nee392jqzr48gm6fwqtc9z5&dl=0",
+        "brand": {
+            "name": "Converse",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
+        },,
+        "title": "CONVERSE 1970S TRẮNG CỔ CAO",
+        "color": "#FFFFFF",
+        "warehousePrice": 450000,
+        "price": 910000,
+        "discountedPrice": 592000,
+        "discountPersent": 35,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 18
+            },
+            {
+                "name": "M",
+                "quantity": 24
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 72,
+        "description": "Những đôi giày Converse chưa bao giờ là lỗi mốt. Đặc biệt là mẫu giày Converse 1970s trắng cổ cao. Mẫu giày thiết kế đơn giản nhưng tinh tế và hiện đại. Đây cũng là điểm cộng giúp sản phẩm dễ mix đồ và hợp với nhiều vóc dáng người đi. "
+    },
+    
 ]
