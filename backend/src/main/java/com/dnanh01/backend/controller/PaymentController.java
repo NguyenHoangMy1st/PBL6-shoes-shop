@@ -3,15 +3,11 @@ package com.dnanh01.backend.controller;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.math.BigDecimal;
-import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
-import javax.print.attribute.standard.JobOriginatingUserName;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,21 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.exception.UserException;
-import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.Order;
-import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.request.PaymentRequest;
-import com.dnanh01.backend.response.PaymentDeliveredResponse;
-import com.dnanh01.backend.response.PaymentResponse;
+
 import com.dnanh01.backend.response.PaymentSubmitResponse;
-import com.dnanh01.backend.service.CartServiceImplementation;
 import com.dnanh01.backend.service.OrderService;
-import com.dnanh01.backend.service.UserService;
 import com.dnanh01.backend.service.VNPayService;
 
 @RestController
@@ -50,13 +40,6 @@ public class PaymentController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private CartServiceImplementation cartServiceImplementation;
-
-    @Autowired
-    private UserService userService;
-
-    // b1
     @PostMapping("/submitOrder")
     @ResponseBody
     public ResponseEntity<PaymentSubmitResponse> submitOrder(
@@ -65,50 +48,46 @@ public class PaymentController {
             @RequestBody PaymentRequest req)
             throws UserException {
 
-        User user = userService.findUserProfileByJwt(jwt);
-        Optional<Order> opt = orderRepository.findById(req.getCurrentOrderId());
-        Order orderCreated = new Order();
+        Long currentOrderId = req.getCurrentOrderId();
+
+        Optional<Order> opt = orderRepository.findById(currentOrderId);
+
+        Integer totalDiscountedPrice = 0;
+
         if (opt.isPresent()) {
-            opt.get();
+            totalDiscountedPrice = opt.get().getTotalDiscountedPrice();
         }
 
-        Cart cart = cartServiceImplementation.findUserCart(user.getId());
-        BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
+        BigDecimal total = new BigDecimal(totalDiscountedPrice);
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String vnpayUrl = vnPayService.createOrder(total, baseUrl);
 
-        String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
+        PaymentSubmitResponse paymentSubmitResponse = new PaymentSubmitResponse(vnpayUrl, jwt, currentOrderId);
 
-        return ResponseEntity.ok(vnpayUrl);
+        return ResponseEntity.status(HttpStatus.OK).body(paymentSubmitResponse);
     }
     // sau bước 1
-    // order id hien tai
 
-    // FE (nhận về orderId, vnpayUrl)
+    // FE (vnpayUrl, jwt, currentOrderId)
 
     // /b2
     @GetMapping("/vnpay-payment")
-
     @ResponseBody
-    public ResponseEntity<PaymentDeliveredResponse> vnpayPayment(
+    public ResponseEntity<?> vnpayPayment(
             HttpServletRequest request,
-            @RequestParam("orderId") String ) {
+            @RequestHeader("Authorization") String jwt,
+            @RequestParam("orderId") Long orderId) throws OrderException {
+
         int paymentStatus = vnPayService.orderReturn(request);
 
-        // gọi orderService để deliveredOrder
-
         if (paymentStatus == 1) {
+            // update trong co so du lieu
 
-            // gọi orderService để deliveredOrder để trừ hàng trong kho\
-            // PaymentDeliveredResponse
+            orderService.deliveredOrder(orderId);
+
             return ResponseEntity.ok("success");
         } else {
-            // Payment failed, handle accordingly
             return ResponseEntity.ok("cancel");
         }
-    }
-
-    // có orderId, vnpayUrl từ b1
-    // sau bước 2 
-    // if(orderId.equ()) {
-        // 
     }
 }

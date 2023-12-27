@@ -1,9 +1,13 @@
 package com.dnanh01.backend.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.config.VNPayConfig;
+import com.dnanh01.backend.model.Order;
+import com.dnanh01.backend.model.OrderItem;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -14,11 +18,14 @@ import java.util.*;
 
 @Service
 public class VNPayService {
+    @Autowired
+    private OrderService orderService;
 
-    public String createOrder(BigDecimal total, String orderInfor, String urlReturn) {
+    public String createOrder(BigDecimal total, String urlReturn) {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
+        // String vnp_IpAddr = "0:0:0:0:0:0:0:1";
         String vnp_IpAddr = "127.0.0.1";
         String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
         String orderType = "order-type";
@@ -31,11 +38,16 @@ public class VNPayService {
         vnp_Params.put("vnp_CurrCode", "VND");
 
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", orderInfor);
+        vnp_Params.put("vnp_OrderInfo", "thanh toán shopshoes");
         vnp_Params.put("vnp_OrderType", orderType);
 
-        String locate = "vn";
-        vnp_Params.put("vnp_Locale", locate);
+        String locate = "";
+        if (locate != null && !locate.isEmpty())
+            vnp_Params.put("vnp_Locale", locate);
+        else
+            vnp_Params.put("vnp_Locale", "vn");
+        // String locate = "vn";
+        // vnp_Params.put("vnp_Locale", locate);
 
         urlReturn += VNPayConfig.vnp_Returnurl;
         vnp_Params.put("vnp_ReturnUrl", urlReturn);
