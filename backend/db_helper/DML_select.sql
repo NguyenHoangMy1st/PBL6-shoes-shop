@@ -255,3 +255,59 @@ ORDER BY
 LIMIT 1;
 
 
+-- product trending
+
+SELECT *
+FROM product
+WHERE create_at = (
+    SELECT MAX(create_at)
+    FROM product
+    WHERE quantity > 0
+)
+LIMIT 1; 
+
+-- best rating 
+select * 
+from `product` p 
+join `review` r 
+on p.id = r.product_id;
+
+select *
+from `review` r;
+
+
+select r.`product_id` as product_id ,sum(r.`rating`) as total_rating
+from `review` r
+group by r.`product_id`;
+
+
+select r.`product_id` as product_id ,sum(r.`rating`) as total_rating
+from `review` r
+group by r.`product_id`;
+
+SELECT r.product_id, SUM(r.rating) AS total_rating
+FROM review r
+GROUP BY r.product_id
+ORDER BY total_rating DESC
+LIMIT 1;
+
+
+select *
+from `product` p
+where p.id = (select r.product_id, SUM(r.rating) AS total_rating
+				from `review` r
+                group by r.product_id
+				order by total_rating DESC
+				limit 1);
+
+SELECT p.* , total_rating
+FROM product p
+JOIN (
+    SELECT r.product_id, SUM(r.rating) AS total_rating
+    FROM review r
+    GROUP BY r.product_id
+    ORDER BY total_rating DESC
+    LIMIT 1
+) max_rating ON p.id = max_rating.product_id;
+
+

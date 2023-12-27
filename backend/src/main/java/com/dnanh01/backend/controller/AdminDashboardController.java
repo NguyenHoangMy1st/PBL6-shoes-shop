@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
 import com.dnanh01.backend.exception.OrderException;
-import com.dnanh01.backend.request.SelectedTimeRequest;
-import com.dnanh01.backend.response.BestSellingProductTodayResponse;
+import com.dnanh01.backend.response.BestSellingProductResponse;
 import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 import com.dnanh01.backend.service.OrderService;
 
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
@@ -61,11 +59,20 @@ public class AdminDashboardController {
         return ResponseEntity.status(HttpStatus.OK).body(statisticsForSelectedMonth);
     }
 
-    @GetMapping("/best-selling-today")
-    public ResponseEntity<BestSellingProductTodayResponse> getSellingProductToday(
-            @RequestHeader("Authorization") String jwt) throws OrderException {
-        BestSellingProductTodayResponse bestSellingProductTodayResponse = orderService.getSellingProductToday();
+    @GetMapping("/best-selling-selected-day")
+    public ResponseEntity<BestSellingProductResponse> getSellingProductToday(
+            @RequestHeader("Authorization") String jwt,
+            @RequestParam String selectedDay) throws OrderException {
+        BestSellingProductResponse bestSellingProductTodayResponse = orderService.getSellingProductToday(selectedDay);
         return ResponseEntity.status(HttpStatus.OK).body(bestSellingProductTodayResponse);
+    }
+
+    @GetMapping("/best-selling-selected-month")
+    public ResponseEntity<BestSellingProductResponse> getSellingProductMonth(
+            @RequestHeader("Authorization") String jwt,
+            @RequestParam String selectedMonth) throws OrderException {
+        BestSellingProductResponse bestSellingProductMonthResponse = orderService.getSellingProductMonth(selectedMonth);
+        return ResponseEntity.status(HttpStatus.OK).body(bestSellingProductMonthResponse);
     }
 
 }

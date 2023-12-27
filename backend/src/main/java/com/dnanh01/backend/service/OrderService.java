@@ -6,9 +6,9 @@ import com.dnanh01.backend.dto.RevenueOrProfitStatsDto;
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
-import com.dnanh01.backend.request.SelectedTimeRequest;
+
 import com.dnanh01.backend.request.ShippingAddressRequest;
-import com.dnanh01.backend.response.BestSellingProductTodayResponse;
+import com.dnanh01.backend.response.BestSellingProductResponse;
 import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 
 public interface OrderService {
@@ -46,6 +46,8 @@ public interface OrderService {
 	public StatisticsByDateOrMonthResponse getStatisticsByMonth(String selectedMonth)
 			throws OrderException;
 
-	public BestSellingProductTodayResponse getSellingProductToday() throws OrderException;
+	public BestSellingProductResponse getSellingProductToday(String selectedDay) throws OrderException;
+
+	public BestSellingProductResponse getSellingProductMonth(String selectedMonth) throws OrderException;
 
 }

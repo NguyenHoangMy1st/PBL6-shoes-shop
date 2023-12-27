@@ -24,4 +24,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                         @Param("minDiscount") Integer minDiscount,
                         @Param("sort") String sort);
 
+        // --------------------DASHBOARD ADMIN--------------------
+
+        // New Product
+        @Query("SELECT p FROM Product p " +
+                        "WHERE p.createAt = (SELECT MAX(p2.createAt) FROM Product p2 WHERE p2.quantity > 0) " +
+                        "AND p.quantity > 0")
+        Product findLatestProduct();
+        // Top Rate
+
 }

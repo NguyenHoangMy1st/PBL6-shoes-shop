@@ -1,6 +1,6 @@
 package com.dnanh01.backend.response;
 
-public class BestSellingProductTodayResponse {
+public class BestSellingProductResponse {
     /**
      * 1,product_id,pbl6_shoes_shop,order_item,BIGINT,binary,20,1,0
      * 2,title,pbl6_shoes_shop,product,VARCHAR,utf8mb4,255,16,0
@@ -15,10 +15,10 @@ public class BestSellingProductTodayResponse {
     private Integer discountedPrice;
     private Long appearanceCount;
 
-    public BestSellingProductTodayResponse() {
+    public BestSellingProductResponse() {
     }
 
-    public BestSellingProductTodayResponse(Long productId, String title, String imageUrl, Integer discountedPrice,
+    public BestSellingProductResponse(Long productId, String title, String imageUrl, Integer discountedPrice,
             Long appearanceCount) {
         this.productId = productId;
         this.title = title;

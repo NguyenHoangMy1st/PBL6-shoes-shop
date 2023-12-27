@@ -25,9 +25,8 @@ import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
-import com.dnanh01.backend.request.SelectedTimeRequest;
 import com.dnanh01.backend.request.ShippingAddressRequest;
-import com.dnanh01.backend.response.BestSellingProductTodayResponse;
+import com.dnanh01.backend.response.BestSellingProductResponse;
 import com.dnanh01.backend.response.StatisticsByDateOrMonthResponse;
 
 @Service
@@ -384,24 +383,40 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
-	public BestSellingProductTodayResponse getSellingProductToday() throws OrderException {
-		List<Object[]> listBestSellingProduct = orderRepository.getBestSellingProductToday();
+	public BestSellingProductResponse getSellingProductToday(String selectedDay) throws OrderException {
+		List<Object[]> listBestSellingProduct = orderRepository.getBestSellingProductToday(selectedDay);
 
 		if (listBestSellingProduct.isEmpty()) {
-			throw new OrderException("Best-selling product of the day not found.");
+			return createEmptyBestSellingProductResponse(); // Return empty response with null values
 		}
 
 		Object[] firstRow = listBestSellingProduct.get(0);
 		return mapToBestSellingProductResponse(firstRow);
 	}
 
-	private BestSellingProductTodayResponse mapToBestSellingProductResponse(Object[] row) {
+	@Override
+	public BestSellingProductResponse getSellingProductMonth(String selectedMonth) throws OrderException {
+		List<Object[]> listBestSellingProduct = orderRepository.getBestSellingProductMonth(selectedMonth);
+
+		if (listBestSellingProduct.isEmpty()) {
+			return createEmptyBestSellingProductResponse(); // Return empty response with null values
+		}
+
+		Object[] firstRow = listBestSellingProduct.get(0);
+		return mapToBestSellingProductResponse(firstRow);
+	}
+
+	private BestSellingProductResponse createEmptyBestSellingProductResponse() {
+		return new BestSellingProductResponse(null, null, null, null, null);
+	}
+
+	private BestSellingProductResponse mapToBestSellingProductResponse(Object[] row) {
 		Long productId = (Long) row[0];
 		String title = (String) row[1];
 		String imageUrl = (String) row[2];
 		Integer discountedPrice = (Integer) row[3];
 		Long appearanceCount = (Long) row[4];
 
-		return new BestSellingProductTodayResponse(productId, title, imageUrl, discountedPrice, appearanceCount);
+		return new BestSellingProductResponse(productId, title, imageUrl, discountedPrice, appearanceCount);
 	}
 }

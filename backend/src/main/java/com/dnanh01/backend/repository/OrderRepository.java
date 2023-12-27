@@ -263,7 +263,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
         public List<Object[]> getUserCountBySelectedMonth(@Param("selectedMonth") String selectedMonth);
 
-        // lấy ra sản phẩm bán chạy nhất trong ngày hiện tại
+        // lấy ra sản phẩm bán chạy nhất trong ngày được chọn
 
         @Query(value = "SELECT " +
                         "    oi.product_id, " +
@@ -276,7 +276,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `order_item` oi ON o.id = oi.order_id " +
                         "    JOIN `product` p ON oi.product_id = p.id " +
                         "WHERE " +
-                        "    DATE_FORMAT(o.order_date, '%Y-%m-%d') = '2023-12-16' " +
+                        "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedDay " +
                         "    AND o.order_status = 'DELIVERED' " +
                         "GROUP BY " +
                         "    oi.product_id " +
@@ -284,6 +284,29 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    appearance_count DESC " +
                         "LIMIT 1;", nativeQuery = true)
         @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
-        public List<Object[]> getBestSellingProductToday();
+        public List<Object[]> getBestSellingProductToday(@Param("selectedDay") String selectedDay);
+
+        // lấy ra sản phẩm bán chạy nhất trong tháng được chọn
+
+        @Query(value = "SELECT " +
+                        "    oi.product_id, " +
+                        "    p.title, " +
+                        "    p.image_url, " +
+                        "    p.discounted_price, " +
+                        "    COUNT(*) AS appearance_count " +
+                        "FROM " +
+                        "    `orders` o " +
+                        "    JOIN `order_item` oi ON o.id = oi.order_id " +
+                        "    JOIN `product` p ON oi.product_id = p.id " +
+                        "WHERE " +
+                        "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedMonth " +
+                        "    AND o.order_status = 'DELIVERED' " +
+                        "GROUP BY " +
+                        "    oi.product_id " +
+                        "ORDER BY " +
+                        "    appearance_count DESC " +
+                        "LIMIT 1;", nativeQuery = true)
+        @QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true") })
+        public List<Object[]> getBestSellingProductMonth(@Param("selectedMonth") String selectedMonth);
 
 }

@@ -17,6 +17,14 @@ const apiAdminDashboard = {
         const url = `/api/admin/dashboard/line-chart/selected-month?selectedMonth=${selectedMonth}`;
         return axiosClient.get(url);
     },
+    getBestSellingProductBySelectedDay(selectedDay) {
+        const url = `/api/admin/dashboard/best-selling-selected-day?selectedDay=${selectedDay}`;
+        return axiosClient.get(url);
+    },
+    getBestSellingProductBySelectedMonth(selectedMonth) {
+        const url = `/api/admin/dashboard//best-selling-selected-month?selectedMonth=${selectedMonth}`;
+        return axiosClient.get(url);
+    },
 };
 
 export default apiAdminDashboard;

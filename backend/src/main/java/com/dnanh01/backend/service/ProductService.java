@@ -23,4 +23,7 @@ public interface ProductService {
 
     public Page<Product> getAllProduct(String brand, List<String> colors, List<String> sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize);
+
+    // public Product findLatestProduct() throws ProductException;
+
 }
