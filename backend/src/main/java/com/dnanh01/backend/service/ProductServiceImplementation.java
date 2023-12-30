@@ -1,6 +1,9 @@
 package com.dnanh01.backend.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.dnanh01.backend.dto.TopProductsDto;
 import com.dnanh01.backend.exception.ProductException;
 import com.dnanh01.backend.model.Brand;
 import com.dnanh01.backend.model.Product;
@@ -139,4 +143,90 @@ public class ProductServiceImplementation implements ProductService {
         return filteredProducts;
     }
 
+    @Override
+    public List<TopProductsDto> getTopNewProducts() {
+
+        List<Object[]> rawResults = productRepository.getTopNewProducts();
+        List<TopProductsDto> results = new ArrayList<>();
+
+        if (rawResults != null && !rawResults.isEmpty()) {
+            for (Object[] row : rawResults) {
+                TopProductsDto dto = TopProductsDto.builder()
+                        .productId((Long) row[0])
+                        .productColor((String) row[1])
+                        .productCreateAt((Date) row[2])
+                        .productDescription((String) row[3])
+                        .productDiscountPercent((Integer) row[4])
+                        .productDiscountedPrice((Integer) row[5])
+                        .productImageUrl((String) row[6])
+                        .productPrice((Integer) row[7])
+                        .productQuantity((Integer) row[8])
+                        .productName((String) row[9])
+                        .brandId((Long) row[10])
+                        .brandImageUrl((String) row[11])
+                        .brandName((String) row[12])
+                        .build();
+                results.add(dto);
+            }
+        }
+        return results;
+    }
+
+    @Override
+    public List<TopProductsDto> getTopSellingProducts() {
+        List<Object[]> rawResults = productRepository.getTopSellingProducts();
+        List<TopProductsDto> results = new ArrayList<>();
+
+        if (rawResults != null && !rawResults.isEmpty()) {
+            for (Object[] row : rawResults) {
+                TopProductsDto dto = TopProductsDto.builder()
+                        .productId((Long) row[0])
+                        .productColor((String) row[1])
+                        .productCreateAt((Date) row[2])
+                        .productDescription((String) row[3])
+                        .productDiscountPercent((Integer) row[4])
+                        .productDiscountedPrice((Integer) row[5])
+                        .productImageUrl((String) row[6])
+                        .productPrice((Integer) row[7])
+                        .productQuantity((Integer) row[8])
+                        .productName((String) row[9])
+                        .brandId((Long) row[10])
+                        .brandImageUrl((String) row[11])
+                        .brandName((String) row[12])
+                        .totalProductsSold((BigDecimal) row[13])
+                        .build();
+                results.add(dto);
+            }
+        }
+        return results;
+    }
+
+    @Override
+    public List<TopProductsDto> getTopRatingProducts() {
+        List<Object[]> rawResults = productRepository.getTopRatingProducts();
+        List<TopProductsDto> results = new ArrayList<>();
+
+        if (rawResults != null && !rawResults.isEmpty()) {
+            for (Object[] row : rawResults) {
+                TopProductsDto dto = TopProductsDto.builder()
+                        .productId((Long) row[0])
+                        .productColor((String) row[1])
+                        .productCreateAt((Date) row[2])
+                        .productDescription((String) row[3])
+                        .productDiscountPercent((Integer) row[4])
+                        .productDiscountedPrice((Integer) row[5])
+                        .productImageUrl((String) row[6])
+                        .productPrice((Integer) row[7])
+                        .productQuantity((Integer) row[8])
+                        .productName((String) row[9])
+                        .brandId((Long) row[10])
+                        .brandImageUrl((String) row[11])
+                        .brandName((String) row[12])
+                        .avgRatingProduct((BigDecimal) row[13])
+                        .build();
+                results.add(dto);
+            }
+        }
+        return results;
+    }
 }

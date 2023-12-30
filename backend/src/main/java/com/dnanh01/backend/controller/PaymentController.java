@@ -75,15 +75,18 @@ public class PaymentController {
     @ResponseBody
     public ResponseEntity<?> vnpayPayment(
             HttpServletRequest request,
-            @RequestHeader("Authorization") String jwt,
-            @RequestParam("orderId") Long orderId) throws OrderException {
+            @RequestHeader("Authorization") String jwt/**
+                                                       * ,
+                                                       * @RequestParam("orderId") Long orderId
+                                                       */
+    ) throws OrderException {
 
         int paymentStatus = vnPayService.orderReturn(request);
 
         if (paymentStatus == 1) {
             // update trong co so du lieu
 
-            orderService.deliveredOrder(orderId);
+            // orderService.deliveredOrder(orderId);
 
             return ResponseEntity.ok("success");
         } else {

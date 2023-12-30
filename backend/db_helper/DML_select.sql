@@ -1,3 +1,6 @@
+create database pbl6_shoes_shop;
+drop database pbl6_shoes_shop;
+
 use pbl6_shoes_shop;
 
 select * from `user`;
@@ -254,60 +257,112 @@ ORDER BY
     appearance_count DESC
 LIMIT 1;
 
-
--- product trending
-
-SELECT *
-FROM product
-WHERE create_at = (
-    SELECT MAX(create_at)
-    FROM product
-    WHERE quantity > 0
-)
-LIMIT 1; 
-
--- best rating 
-select * 
-from `product` p 
-join `review` r 
-on p.id = r.product_id;
-
-select *
-from `review` r;
-
-
-select r.`product_id` as product_id ,sum(r.`rating`) as total_rating
-from `review` r
-group by r.`product_id`;
-
-
-select r.`product_id` as product_id ,sum(r.`rating`) as total_rating
-from `review` r
-group by r.`product_id`;
-
-SELECT r.product_id, SUM(r.rating) AS total_rating
-FROM review r
-GROUP BY r.product_id
-ORDER BY total_rating DESC
-LIMIT 1;
-
-
-select *
+-- ------------------------ top 3 -- ------------------------
+-- top 3 new products
+select p.`id` as p_id, 
+	p.`color` as p_color, 
+    p.`create_at` as p_create_at,
+    p.`description` as p_description,
+    p.`discount_persent` as p_discount_persent,
+    p.`discounted_price` as p_discounted_price, 
+	p.`image_url` as p_image_url,
+    p.`price` as p_price,
+    p.`quantity` as p_quantity,
+	p.`title` as p_name, 
+	b.`id` as b_id,
+    b.`image_url` as b_image_url,
+	b.`name` as b_name
 from `product` p
-where p.id = (select r.product_id, SUM(r.rating) AS total_rating
-				from `review` r
-                group by r.product_id
-				order by total_rating DESC
-				limit 1);
-
-SELECT p.* , total_rating
-FROM product p
-JOIN (
-    SELECT r.product_id, SUM(r.rating) AS total_rating
-    FROM review r
-    GROUP BY r.product_id
-    ORDER BY total_rating DESC
-    LIMIT 1
-) max_rating ON p.id = max_rating.product_id;
+join `brand` b
+on p.`brand` = b.`id`
+where p.`quantity` > 0
+group by p.`id`
+order by p.`create_at` desc
+limit 3;
 
 
+-- top 3 best selling products
+
+with `order_details_information` as (
+select 	
+		oi.`quantity` as oi_quantity,
+        oi.`product_id` as oi_product_id
+	from `orders` o
+	join `order_item` oi
+	on o.`id` = oi.`order_id`
+	where o.`order_status` = 'DELIVERED'
+	group by oi.`id`
+),
+`top_3_best_selling_products` as (
+	select odi.`oi_product_id` as product_id, sum(odi.`oi_quantity`) as total_quantity
+    from `order_details_information` odi
+    group by odi.`oi_product_id`
+    order by total_quantity desc
+	limit 0, 3
+)
+select p.`id` as p_id, 
+	p.`color` as p_color, 
+    p.`create_at` as p_create_at,
+    p.`description` as p_description,
+    p.`discount_persent` as p_discount_persent,
+    p.`discounted_price` as p_discounted_price, 
+	p.`image_url` as p_image_url,
+    p.`price` as p_price,
+    p.`quantity` as p_quantity,
+	p.`title` as p_name,
+	b.`id` as b_id,
+    b.`image_url` as b_image_url,
+	b.`name` as b_name,
+	t3bsp.`total_quantity` as total_products_sold
+from `product` p
+join `brand` b
+on p.`brand` = b.`id`
+JOIN `top_3_best_selling_products` t3bsp ON p.`id` = t3bsp.`product_id`
+where p.`id` in (
+	select t3bsp.`product_id` from `top_3_best_selling_products` as t3bsp
+)
+group by p.`id`;
+
+-- top 3 best rating products
+
+
+with `detailed_product_star_rating` as (
+	select
+		r.`product_id` as product_id,
+		avg(r.`rating`) as r_avg_rating 
+	from `product` p
+	join `review` r
+	on p.`id` = r.`product_id`
+	where p.`quantity` > 0
+	group by r.`product_id`
+),
+`top_3_best_rating_products` as (
+	select
+		dpsr.product_id,
+		dpsr.r_avg_rating 
+	from `detailed_product_star_rating` dpsr
+    order by dpsr.r_avg_rating desc
+    limit 0,3
+)
+select p.`id` as p_id, 
+	p.`color` as p_color, 
+    p.`create_at` as p_create_at,
+    p.`description` as p_description,
+    p.`discount_persent` as p_discount_persent,
+    p.`discounted_price` as p_discounted_price, 
+	p.`image_url` as p_image_url,
+    p.`price` as p_price,
+    p.`quantity` as p_quantity,
+	p.`title` as p_name,
+	b.`id` as b_id,
+    b.`image_url` as b_image_url,
+	b.`name` as b_name,
+	t3brp.r_avg_rating as avg_rating_product
+from `product` p
+join `brand` b
+on p.`brand` = b.`id`
+JOIN `top_3_best_rating_products` t3brp ON p.`id` = t3brp.`product_id`
+where p.`id` in (
+	select t3brp.`product_id` from `top_3_best_rating_products` as t3brp
+)
+group by p.`id`;

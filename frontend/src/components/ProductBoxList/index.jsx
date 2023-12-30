@@ -1,44 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductBoxCard from '../ProductBoxCard';
 
-import images from '~/assets/images';
+import apiTopProducts from '~/api/user/apiTopProducts';
 
 export default function ProductBoxList() {
+    const [topNewProductsData, setTopNewProductsData] = useState([]);
+    const [topSellingProductsData, setTopSellingProductsData] = useState([]);
+    const [topRatingProductsData, setTopRatingProductsData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let resTopNewProducts = await apiTopProducts.getTopNewProducts();
+                let resTopSellingProducts = await apiTopProducts.getTopSellingProducts();
+                let resTopRatingProducts = await apiTopProducts.getTopRatingProducts();
+
+                setTopNewProductsData(resTopNewProducts.data);
+                setTopSellingProductsData(resTopSellingProducts.data);
+                setTopRatingProductsData(resTopRatingProducts.data);
+            } catch (error) {
+                console.log({ error });
+            }
+        };
+
+        fetchData();
+    }, []);
+    const productData = [
+        {
+            title: 'Top 3 New Products',
+            products: [...topNewProductsData],
+        },
+        {
+            title: 'Top 3 Selling Products',
+            products: [...topSellingProductsData],
+        },
+        {
+            title: 'Top 3 Rating Products',
+            products: [...topRatingProductsData],
+        },
+    ];
+    console.log({ productData });
+
     return (
         <section>
             <div className="product-box container-layout">
-                <ProductBoxCard
-                    image={images.shoes1}
-                    title="Best Seller"
-                    name="Giày Jordan Cổ Thấp"
-                    brand="Adidas"
-                    price={4.99}
-                    salePrice={5.99}
-                />
-                <ProductBoxCard
-                    image={images.shoes2}
-                    title="Trending"
-                    name="Giày Jordan Cổ Thấp"
-                    brand="Nike"
-                    price={4.99}
-                    salePrice={5.99}
-                />
-                <ProductBoxCard
-                    image={images.shoes3}
-                    title="New Arrivals"
-                    name="Giày Jordan Cổ Thấp"
-                    brand="Gucci"
-                    price={5.99}
-                    salePrice={6.99}
-                />
-                <ProductBoxCard
-                    image={images.shoes4}
-                    title="Top Rate"
-                    name="Giày Jordan Cổ Thấp"
-                    brand="Adidas"
-                    price={4.99}
-                    salePrice={5.5}
-                />
+                {productData.map((category) => (
+                    <div key={category.title}>
+                        <h2 className="product-minimal-title">{category.title}</h2>
+                        <div className="category-products">
+                            {category.products.slice(0, 3).map((product, index) => (
+                                <ProductBoxCard
+                                    key={index}
+                                    image={product?.productImageUrl}
+                                    title={product?.productName}
+                                    brand={product?.brandName}
+                                    price={product?.productDiscountedPrice}
+                                    discountedPrice={product?.productPrice}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     );

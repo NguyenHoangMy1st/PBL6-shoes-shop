@@ -169,7 +169,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `product` p ON oi.`product_id` = p.`id` " +
                         "WHERE " +
                         "    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = :selectedDay " +
-                        "    AND o.order_status = 'DELIVERED' " +
+                        "    AND o.`order_status` = 'DELIVERED' " +
                         "GROUP BY " +
                         "    selected_day " +
                         "ORDER BY " +

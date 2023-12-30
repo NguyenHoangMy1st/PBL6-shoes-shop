@@ -27,19 +27,16 @@ public class AppConfig {
                 http.sessionManagement(management -> management
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .authorizeHttpRequests(Authorize -> Authorize
-                                                .requestMatchers("/api/guest/products/**").permitAll() // Permit access
-                                                                                                       // to
-                                                                                                       // without
-                                                // authentication
-                                                .requestMatchers("/api/**").authenticated() // Require authentication
-                                                                                            // for other authorized
-                                                                                            // requests
-                                                .anyRequest().permitAll()) // Permit all other requests without
-                                                                           // authentication
+                                                .requestMatchers("/api/guest/products/**").permitAll()
+                                                .requestMatchers("/api/products/get-top-new-products").permitAll()
+                                                .requestMatchers("/api/products/get-top-selling-products").permitAll()
+                                                .requestMatchers("/api/products/get-top-rating-products").permitAll()
+                                                .requestMatchers("/api/**").authenticated()
+                                                .anyRequest().permitAll())
+
                                 .addFilterBefore(
-                                                new JwtValidator(), BasicAuthenticationFilter.class // Add JwtValidator
-                                                                                                    // before
-                                // BasicAuthenticationFilter
+                                                new JwtValidator(), BasicAuthenticationFilter.class
+
                                 ).csrf(csrf -> csrf // Disable Cross-Site Request Forgery (CSRF) protection
                                                 .disable())
                                 .cors(cors -> cors // Enable Cross-Origin Resource Sharing (CORS)
@@ -69,13 +66,12 @@ public class AppConfig {
 
                                                                 }))
                                 .httpBasic(withDefaults())
-                                .formLogin(withDefaults()); // Enable form-based authentication
-                return http.build(); // Build and return the configured HttpSecurity object
+                                .formLogin(withDefaults());
+                return http.build();
         }
 
-        // Bean definition for PasswordEncoder
         @Bean
         public PasswordEncoder passwordEncoder() {
-                return new BCryptPasswordEncoder(); // Use BCryptPasswordEncoder for password encoding
+                return new BCryptPasswordEncoder();
         }
 }
