@@ -2,7 +2,7 @@ import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '~/api/user/CartContext';
 import Button from '../Button';
 import apiAddItem from '~/api/user/apiAddItem';
@@ -12,7 +12,6 @@ import CommentCard from '~/components/CommentCard';
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
     const [productDetail, setProductDetail] = useState([]);
-    console.log(productDetail);
     const { cartItems } = useCart();
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');
@@ -46,9 +45,6 @@ export default function AboutPage({ quantity = 1 }) {
             const response = await apiAddItem.putAddItem(formData);
             toast.success('Thêm sản phẩm vào giỏ thành công');
             updateCartItems();
-            // setTimeout(() => {
-            //   navigate("/cart");
-            // }, 2000);
             console.log(response);
         } catch (error) {
             console.error('Add to Cart Error:', error);
@@ -79,10 +75,9 @@ export default function AboutPage({ quantity = 1 }) {
         toast.success('Thêm sản phẩm vào giỏ thành công');
         setTimeout(() => {
             navigate(`/pay?step=1`);
-        }, 2000);
+        }, 500);
     };
     useEffect(() => {
-        // Update maxQuantity based on the selectedSize
         if (selectedSize) {
             const selectedSizeInfo = productDetail.sizes.find((size) => size.name === selectedSize);
             setMaxQuantity(selectedSizeInfo ? selectedSizeInfo.quantity : 1);
@@ -126,11 +121,9 @@ export default function AboutPage({ quantity = 1 }) {
                             <div className="about-information">
                                 <h1 className="about-title">{productDetail.title}</h1>
                                 <div className="about-rating">
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                                    <Link to={`/product?brand=${productDetail?.brand?.name}`} className="about-brand">
+                                        {productDetail?.brand?.name}
+                                    </Link>
                                 </div>
                                 <div className="about-description">
                                     <p>{productDetail.description}</p>
@@ -141,21 +134,6 @@ export default function AboutPage({ quantity = 1 }) {
                                     <span className="about-table-price-old">${productDetail.price}</span>
                                     <span className="about-table-price-current">${productDetail.discountedPrice}</span>
                                 </div>
-                                {/* <div className="about-table-size">
-                                    <span className="about-size-name">Size:</span>
-                                    <select
-                                        className="about-size-font"
-                                        value={selectedSize}
-                                        onChange={(e) => setSelectedSize(e.target.value)}
-                                    >
-                                        <option value="1" defaultCheckedy>
-                                            Choose an option
-                                        </option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                    </select>
-                                </div> */}
                                 <div className="about-table-size">
                                     <span className="about-size-name">Size:</span>
                                     <div className="about-size-buttons">

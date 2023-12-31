@@ -3,9 +3,8 @@ import classNames from 'classnames/bind';
 import styles from './AdminDashboard.module.scss';
 import Icon from '../Icons/Icon';
 import Card from '~/components/Card';
-
-import SummaryStatistics from '../SummaryStatistics';
 import LineChart from '../LineChart';
+import SummaryStatistics from '../SummaryStatistics';
 import { LineChartData } from '~/components/LineChart/LineChartData';
 import BestSellingProduct from '../BestSellingProduct';
 

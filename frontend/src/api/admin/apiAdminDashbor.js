@@ -1,5 +1,4 @@
 import axiosClient from '../axiosClient';
-
 const apiAdminDashboard = {
     getSummaryStatisticsForSelectedDay(selectedDay) {
         const url = `/api/admin/dashboard/stats/selected-day?selectedDay=${selectedDay}`;

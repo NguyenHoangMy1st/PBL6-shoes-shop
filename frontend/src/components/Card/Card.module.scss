@@ -7,15 +7,14 @@
     .headline {
         font-size: 1rem;
         font-weight: 600;
-        line-height: 1rem;
         color: var(--main-text);
+        line-height: 1rem;
         user-select: none;
         background-image: var(--primary);
         color: transparent;
         -webkit-background-clip: text;
         background-clip: text;
     }
-
     .calendar-box {
         background: var(--white);
         border: 3px solid var(--main-text);

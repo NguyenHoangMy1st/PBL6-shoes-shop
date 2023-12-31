@@ -4,14 +4,17 @@ import { useCart } from '~/api/user/CartContext';
 import { useEffect, useState } from 'react';
 import apiProductGrid from '~/api/user/apiProductGrid';
 import ProductGridList from '~/components/ProductGridList';
+import Footer from '~/layouts/UserDefaultLayout/Footer';
 
 export default function ProductPage() {
     const { cartItems } = useCart();
     const [valueSearch, setValueSearch] = useState('');
     const [products, setProducts] = useState();
     const [productSearch, setProductSearch] = useState();
+    const [pageNumber] = useState('0');
+    const pageSize = 100;
     const fetchData = async () => {
-        const response = await apiProductGrid.getAllProduct();
+        const response = await apiProductGrid.getAllProduct(pageNumber, pageSize);
         setProducts(response?.data?.content);
     };
     const handleSearchChange = (e) => {
@@ -50,6 +53,7 @@ export default function ProductPage() {
             </div>
             <BrandList />
             <ProductGridList productSearch={productSearch} />
+            <Footer />
         </>
     );
 }

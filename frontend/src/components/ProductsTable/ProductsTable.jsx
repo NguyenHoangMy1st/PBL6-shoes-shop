@@ -7,6 +7,7 @@ import styles from './ProductsTable.module.scss';
 
 import { deleteProduct, findProducts } from '~/states/Product/Action';
 import Button from '../Button';
+import { ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 const ProductsTable = ({ handleProductUpdate }) => {
@@ -48,6 +49,7 @@ const ProductsTable = ({ handleProductUpdate }) => {
     };
     return (
         <div>
+            <ToastContainer />
             <TableContainer component={Paper} variant="outlined">
                 <Table aria-label="demo table">
                     <TableHead className={cx('table-head')}>
@@ -81,7 +83,12 @@ const ProductsTable = ({ handleProductUpdate }) => {
                                             ? `${item?.description?.substring(0, 50)}...`
                                             : item?.description}
                                     </TableCell>
-                                    <TableCell className={cx('price')}>{item?.price} VND</TableCell>
+                                    <TableCell className={cx('price')}>
+                                        {item?.price.toLocaleString('it-IT', {
+                                            style: 'currency',
+                                            currency: 'VND',
+                                        })}
+                                    </TableCell>
                                     <TableCell className={cx('quantity')}>{item?.quantity}</TableCell>
                                     <TableCell className={cx('action')}>
                                         <Button

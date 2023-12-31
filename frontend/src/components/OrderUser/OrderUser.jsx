@@ -1,7 +1,8 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import chroma from 'chroma-js';
+
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import apiOrderUser from '~/api/user/apiOrderUser';
 import './style.scss';
 
@@ -10,12 +11,10 @@ export default function OrderUser() {
     const [userOrders, setUserOrders] = useState([]);
     const [orderDetail, setOrderDetail] = useState([]);
 
-    const fetchData = async () => {
+    const getOrderHistory = async () => {
         try {
-            // Assuming apiOrderByID.getOrderByID(id) returns a promise
             const response = await apiOrderUser.getOrderUser();
 
-            // Assuming the response.data contains the relevant order information
             setUserOrders(response.data);
         } catch (error) {
             console.error('Error fetching order data:', error);
@@ -24,11 +23,7 @@ export default function OrderUser() {
     };
 
     useEffect(() => {
-        console.log('order detail:', orderDetail);
-    }, [orderDetail]);
-
-    useEffect(() => {
-        fetchData();
+        getOrderHistory();
     }, []);
     return (
         <div>
@@ -36,9 +31,6 @@ export default function OrderUser() {
                 <Table aria-label="demo table" className="custom-table">
                     <TableHead>
                         <TableRow className="custom-header">
-                            {/* <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
-                                Image
-                            </TableCell> */}
                             <TableCell className="custom-header-order-user" style={{ textAlign: 'center' }}>
                                 Email
                             </TableCell>
@@ -153,15 +145,21 @@ export default function OrderUser() {
                                                 scope="row"
                                                 className="custom-cell-order-user-title"
                                             >
-                                                <img
-                                                    src={order.product.imageUrl}
-                                                    alt=""
-                                                    style={{ width: '70px', height: '70px' }}
-                                                />
+                                                <Link to={`/product/${order.product.id}`}>
+                                                    <img
+                                                        src={order.product.imageUrl}
+                                                        alt=""
+                                                        style={{ width: '70px', height: '70px' }}
+                                                    />
+                                                </Link>
                                             </TableCell>
 
                                             <TableCell align="left" className="custom-cell-order-user">
-                                                <span className="custom-cell-order-title">{order.product.title}</span>
+                                                <Link to={`/product/${order.product.id}`}>
+                                                    <span className="custom-cell-order-title">
+                                                        {order.product.title}
+                                                    </span>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="left" className="custom-cell-order-user">
                                                 <span className="custom-cell-order-title">

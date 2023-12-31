@@ -4,16 +4,21 @@ import Button from '~/pages/Button';
 import CartCardHistory from '../CartCardHistory';
 import apiBuyNow from '~/api/user/apiBuyNow';
 import apiCart from '~/api/user/apiCart';
+// import axiosClient from '~/api/axiosClient';
 
 export default function CartHistory() {
     const [products, setProducts] = useState([]);
     const handleBuyNow = async () => {
+        const currentOrderId = sessionStorage.getItem('currentOrderId');
+        const formData = {
+            currentOrderId: currentOrderId,
+        };
+
         try {
-            const response = await apiBuyNow.postBuyNow();
-            console.log(response.data);
+            const response = await apiBuyNow.postBuyNow(formData);
+            console.log(response);
             if (response) {
-                console.log('Đang chuyển sang trang thanh toán');
-                const externalURL = response.data; // Đảm bảo response.data chứa URL đầy đủ
+                const externalURL = response.data.vnpayUrl;
                 window.location.href = externalURL;
             } else {
                 console.error('Có lỗi khi thêm thanh toán ');
@@ -30,11 +35,10 @@ export default function CartHistory() {
             console.error(error?.message);
         }
     };
-    // API cart
     useEffect(() => {
-        // Gọi hàm fetchCarts
         fetchCarts();
     }, []);
+
     return (
         <div>
             <div className="cart container-layout">
@@ -55,7 +59,7 @@ export default function CartHistory() {
             <div className="payment">
                 <span>Tổng số tiền cần thanh toán là: {products?.totalDiscountedPrice}</span>
                 <div className="payment-btn">
-                    <Button text="Buy Now" onClick={handleBuyNow} className={'payment-btn-buy'}></Button>
+                    <Button text="Pay" onClick={handleBuyNow} className={'payment-btn-buy'}></Button>
                 </div>
             </div>
         </div>

@@ -3,25 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import CartCard from '../CartCard';
 import './style.scss';
 import { toast, ToastContainer } from 'react-toastify';
-import { useDispatch } from 'react-redux';
 import Button from '~/pages/Button';
 import apiCart from '~/api/user/apiCart';
 import apiUpdateCartItems from '~/api/user/apiUPdateCartItems';
 import apiRemoveCartItems from '~/api/user/apiRemoveCartItems';
 
 export default function CartList() {
-    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const checksessionStorage = () => {
-        if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
+        if (!sessionStorage.getItem('jwt')) {
             navigate('/login');
 
             return false;
         }
         return true;
     };
-    // console.log(products);
     const fetchCarts = async () => {
         if (!checksessionStorage()) {
             return;
@@ -34,21 +31,14 @@ export default function CartList() {
         }
     };
 
-    // API cart
-    useEffect(() => {
-        // Gọi hàm fetchCarts
-        fetchCarts();
-    }, []);
-
     const handleQuantityChange = async (productId, newQuantity) => {
-        console.log(newQuantity);
         const formData = {
             quantity: newQuantity,
         };
         try {
             const response = await apiUpdateCartItems.putUpdateCartItems(productId, formData);
             if (response) {
-                console.log('Bạn tăng số lượng sản phẩm lên 1');
+                fetchCarts();
             } else {
                 // toast.error('Update quantity failed');
             }
@@ -63,7 +53,6 @@ export default function CartList() {
         const currentQuantity = product ? product.quantity : 0;
         const newQuantity = currentQuantity + 1;
         handleQuantityChange(productId, newQuantity);
-        fetchCarts();
     };
 
     const handleDecreaseQuantity = (productId) => {
@@ -71,7 +60,6 @@ export default function CartList() {
         const currentQuantity = product ? product.quantity : 0;
         const newQuantity = currentQuantity - 1;
         handleQuantityChange(productId, newQuantity);
-        fetchCarts();
     };
 
     const handleDeleteProduct = async (productId) => {
@@ -81,7 +69,6 @@ export default function CartList() {
                 fetchCarts();
                 toast.success('Xóa sản phẩm thành công');
             } else {
-                // toast.error('Xóa sản phẩm thất bại');
             }
         } catch (error) {
             toast.error(error.message);
@@ -90,19 +77,29 @@ export default function CartList() {
 
     const handleDeleteAllProducts = async () => {
         try {
-            // Iterate through all cart items and delete them one by one
             for (const product of products.cartItems) {
                 await apiRemoveCartItems.delRemoveCartItems(product.id);
             }
-
-            // After all items are deleted, update the state
-            dispatch(setProducts({ ...products, cartItems: [] }));
+            fetchCarts();
             window.location.reload();
             toast.success('Xóa tất cả sản phẩm thành công');
         } catch (error) {
             toast.error('Đã xóa tất cả sản phẩm');
         }
     };
+    const handleBuyNow = () => {
+        if (products.cartItems.length === 0) {
+            toast.warning('Không có sản phẩm trong giỏ hàng. Vui lòng thêm sản phẩm trước khi thanh toán.');
+        } else {
+            // Chuyển đến trang thanh toán
+            navigate('/pay?step=1');
+        }
+    };
+    // API cart
+    useEffect(() => {
+        // Gọi hàm fetchCarts
+        fetchCarts();
+    }, []);
 
     return (
         <>
@@ -114,27 +111,29 @@ export default function CartList() {
                     </Link>
                 </div>
                 <div className="cartRow">
-                    <div className="cartRow-product font-15">Product</div>
-                    <div className="cartRow-price font-15">Unit price</div>
-                    <div className="cartRow-priceSale font-15">Sale price</div>
-                    <div className="cartRow-quantity font-15">Quantity</div>
-                    <div className="cartRow-money font-15">Total</div>
-                    <div className="cartRow-operation font-15">Operation</div>
+                    <div className="cartRow-product">Product</div>
+                    <div className="cartRow-price">Unit price</div>
+                    <div className="cartRow-priceSale">Sale price</div>
+                    <div className="cartRow-quantity">Quantity</div>
+                    <div className="cartRow-money">Total</div>
+                    <div className="cartRow-operation">Operation</div>
                 </div>
 
                 {/* Danh sách sản phẩm  */}
                 {products?.cartItems?.length > 0 &&
-                    products?.cartItems?.map((product) => {
-                        return (
-                            <CartCard
-                                key={product?.id}
-                                product={product}
-                                onDelete={() => handleDeleteProduct(product.id)}
-                                onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
-                                onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
-                            />
-                        );
-                    })}
+                    products?.cartItems
+                        .sort((a, b) => b.timestamp - a.timestamp)
+                        ?.map((product) => {
+                            return (
+                                <CartCard
+                                    key={product?.id}
+                                    product={product}
+                                    onDelete={() => handleDeleteProduct(product.id)}
+                                    onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
+                                    onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
+                                />
+                            );
+                        })}
             </div>
             <div className="payment">
                 <div className="payment-voucher">
@@ -153,7 +152,7 @@ export default function CartList() {
                     </div>
                 </div>
                 <div className="payment-btn">
-                    <Button text="Buy Now" to="/pay?step=1" className={'payment-btn-buy'}>
+                    <Button text="Buy Now" onClick={handleBuyNow} className={'payment-btn-buy'}>
                         Buy Now
                     </Button>
                 </div>

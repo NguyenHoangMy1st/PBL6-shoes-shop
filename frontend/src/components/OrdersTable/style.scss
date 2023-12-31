@@ -1,8 +1,12 @@
-.custom-table-container {
+.ant-btn {
+    font-size: 14px;
+    height: 32px;
+    padding: 4px 15px;
+    border-radius: 6px;
 }
-
-.custom-table {
-    /* CSS for the Table */
+.custom-table-container {
+    margin: 30px auto;
+    padding: 0px !important;
 }
 
 .custom-header {
@@ -16,10 +20,9 @@
     font-weight: 500 !important;
     font-family: Poppins, sans-serif !important;
     color: var(--white) !important;
+    text-align: center !important;
 }
 
-.custom-cell {
-}
 .custom-cell-order {
     font-size: 1.7rem !important;
 

@@ -12,6 +12,7 @@ import OrderSummary from './OrderSummary';
 import Payment from './Payment';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-bootstrap';
+import Complete from './Complete';
 
 const steps = ['Add Delevery Address', 'Order Summary', 'Payment', 'Compelete'];
 
@@ -23,12 +24,6 @@ export default function PayCard() {
 
     const step = parseInt(querySearch.get('step'));
 
-    const handleNext = () => {
-        const nextStep = Math.min(step + 1, steps.length);
-        setActiveStep(nextStep);
-        navigate(`/pay?step=${nextStep}`);
-    };
-
     const handleBack = () => {
         const prevStep = Math.max(step - 1, 1);
         setActiveStep(prevStep);
@@ -38,7 +33,7 @@ export default function PayCard() {
         toast.success('Giao dịch đã hoàn thành!');
         setTimeout(() => {
             navigate('/');
-        }, 2000); // 1000 milliseconds = 1 second
+        }, 500); // 1000 milliseconds = 1 second
     };
 
     return (
@@ -74,15 +69,9 @@ export default function PayCard() {
                                 onClick={handleBack}
                                 sx={{ mr: 1 }}
                                 style={{ fontSize: '14px' }}
-                            >
-                                Back
-                            </Button>
+                            ></Button>
 
                             <Box sx={{ flex: '1 1 auto' }} />
-
-                            <Button onClick={handleNext} style={{ fontSize: '14px' }}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
                         </Box>
                         <div className="mt-30">
                             {step === 1 ? (
@@ -92,7 +81,7 @@ export default function PayCard() {
                             ) : step === 3 ? (
                                 <Payment />
                             ) : (
-                                <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you are finished</Typography>
+                                <Complete />
                             )}
                         </div>
                     </React.Fragment>

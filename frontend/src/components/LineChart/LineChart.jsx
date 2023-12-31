@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Line, getElementAtEvent } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend } from 'chart.js';
-import { useRef } from 'react';
+
 import classNames from 'classnames/bind';
 import styles from './LineChart.module.scss';
-import apiAdminDashboard from '~/api/admin/apiAdminDashboard';
+import apiAdminDashboard from '~/api/admin/apiAdminDashbor';
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 const cx = classNames.bind(styles);
@@ -86,7 +86,6 @@ const LineChart = ({ selectedTime, setIsLoading }) => {
                 callbacks: {
                     label: function (context) {
                         let label = context.dataset.label || '';
-
                         if (label) {
                             label += ': ';
                         }
@@ -102,7 +101,6 @@ const LineChart = ({ selectedTime, setIsLoading }) => {
             },
         },
     };
-
     // const chartRef = useRef();
     // const onClick = (event) => {
     //     if (getElementAtEvent(chartRef.current, event).length > 0) {

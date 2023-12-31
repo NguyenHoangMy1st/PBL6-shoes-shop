@@ -42,7 +42,15 @@ const RegisterPage = () => {
             toast.warning('Mật khẩu phải có 8 ký tự bao gồm 1 số, 1 chữ hoa, 1 ký tự đặc biệt');
             return;
         }
-
+        if (phone.length !== 10) {
+            toast.warning('Số điện thoại không hợp lệ');
+            return;
+        }
+        const nameRegex = /^[a-zA-ZÀ-Ỹà-ỹ ]+$/;
+        if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+            toast.warning('Họ và Tên chỉ được chứa chữ cái và không có số hoặc ký tự đặc biệt');
+            return;
+        }
         try {
             const formData = {
                 password,
@@ -53,15 +61,15 @@ const RegisterPage = () => {
                 role: 'user',
             };
             const response = await apiRegister.postRegister(formData);
+            console.log(response);
             if (response.status === 201) {
                 toast.success('Đăng ký thành công');
-                sessionStorage.setItem('user', JSON.stringify(formData));
                 setTimeout(() => {
                     navigate('/login');
-                }, 2000);
+                }, 1000);
             }
         } catch (error) {
-            toast.error(error?.message);
+            toast.error('Account already exists!');
         }
     };
 

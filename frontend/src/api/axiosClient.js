@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:5454',
+    baseURL: 'https://pbl6-shoes-shop-production-0f38.up.railway.app',
 });
 
 // Add a request interceptor

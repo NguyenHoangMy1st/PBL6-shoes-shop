@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './SummaryStatistics.module.scss';
 
 import Stats from '../Stats';
-import apiAdminDashboard from '~/api/admin/apiAdminDashboard';
+import apiAdminDashboard from '~/api/admin/apiAdminDashbor';
 
 const cx = classNames.bind(styles);
 const SummaryStatistics = ({ selectedTime, setIsLoading }) => {

@@ -19,10 +19,9 @@ const UpdateProduct = ({ onClose, product }) => {
         };
         try {
             const response = await apiUpdateProduct.putUpdateProduct(product?.id, formData);
-            // Handle the success response, you might want to show a success message
             console.log('Product updated successfully:', response.data);
             toast.success('Product updated successfully');
-            onClose(); // Close the modal or navigate away
+            onClose();
         } catch (error) {
             console.log(error);
         }
