@@ -1,4 +1,5 @@
-[
+[   1
+    
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/0bsy1tin277f2qu84j2gm/shoes3.png?rlkey=idjr9q2otcovji65rsm2tp8vx&dl=0",
         "brand": {
@@ -14,20 +15,25 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "Love the classic 80s basketball look."
     },
+
+
+    2
+
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/hg4g0nckvqzq1dn1k7d4r/shoes1.png?rlkey=0g7eiloof3dbzp5kealds6ngz&dl=0&fbclid=IwAR2my2NJrwlTdRm5L4S1CdEXq-7WXtJ8HRmPvjPny5_i7v294308VLRmLoM",
         "brand": {
@@ -43,20 +49,23 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity":200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Nike Air Max is a stylish and comfortable shoe."
     },
+
+    3
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/s4gtldvcycux8ew8ai7oi/shoes2.png?rlkey=7qx67asf6o6pjn12ez7h8kq5b&dl=0",
         "brand": {
@@ -72,20 +81,23 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Adidas Originals is a stylish and comfortable shoe."
     },
+
+4
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/0bsy1tin277f2qu84j2gm/shoes3.png?rlkey=idjr9q2otcovji65rsm2tp8vx&dl=0",
         "brand": {
@@ -101,20 +113,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Puma Ignite is a stylish and comfortable shoe."
     },
+
+
+5
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/h7tyuis2kv5ilvrt4kd9u/shoes4.png?rlkey=mqdjce3l2aao0beb0g6ly7ig8&dl=0",
         "brand": {
@@ -130,20 +146,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Reebok Nano is a stylish and comfortable shoe."
     },
+
+
+6
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/0v5p7wmc7grdwooso36kc/shoes5.png?rlkey=q53yx0ul4qe6kjlxe7lbh0rqp&dl=0",
         "brand": {
@@ -159,20 +179,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The New Balance Fresh Foam is a stylish and comfortable shoe."
     },
+
+
+7
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/lo9ufamiqemo01vakrbxl/shoes6.png?rlkey=x2b9ag7h0aculxqygamyo6hyt&dl=0",
         "brand": {
@@ -188,20 +212,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Converse Chuck Taylor is a stylish and comfortable shoe."
     },
+
+
+7
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/h2s8lsscd59by5ml1wkek/shoes7.png?rlkey=kiz7gcs4tb7recfvwchv2iti9&dl=0",
         "brand": {
@@ -217,20 +245,23 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Vans Old Skool is a stylish and comfortable shoe."
     },
+
+8
+
     {
         "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/dq4u2on2xbhdq557tzu99/shoes8.png?rlkey=r54nllj6ff44e1wws2xerbmc4&dl=0",
         "brand": {
@@ -246,21 +277,25 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "The Under Armour HOVR is a stylish and comfortable shoe."
     },
-    # my
+
+
+9
+
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/bht6092sczla4c44jn7rz/Giay_Samba_trang_IG5744_04_standard.png?rlkey=i2cu6vdnfsi39cdfuau0olh1h&dl=0",
         "brand": {
@@ -276,20 +311,26 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "L",
-                "quantity": 50
+                "quantity": 500
             }
         ],
-        "quantity": 100,
+        "quantity": 1000,
         "description": "Regular fit Laces Leather and nubuck upper Textile lining Translucent natural rubber outsole."
     },
+
+
+10
+
+
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/ozaanblnwifb5lxsey4wj/CourtJam_Control_3_W_trang_ID2457_04_standard.png?rlkey=97cq0vucj3tfwmrktly7zkkgt&dl=0",
         "brand": {
@@ -305,20 +346,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 41
+                "quantity": 410
             },
             {
                 "name": "M",
-                "quantity": 87
+                "quantity": 870
             },
             {
                 "name": "L",
-                "quantity": 12
+                "quantity": 120
             }
         ],
-        "quantity": 140,
+        "quantity": 1400,
         "description": "Sleek silhouette with laces Leather and nubuck upper Textile lining Translucent natural rubber outsole."
     },
+
+
+11
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/kuwe1xayr8af897hcsyu9/Giay_4DFWD_x_Parley_DJen_GV9056_02_standard.png?rlkey=f3o0b68hbxhslqjkfgp9aoobn&dl=0",
         "brand": {
@@ -334,20 +379,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 41
+                "quantity": 410
             },
             {
                 "name": "M",
-                "quantity": 87
+                "quantity": 870
             },
             {
                 "name": "L",
-                "quantity": 12
+                "quantity": 120
             }
         ],
-        "quantity": 140,
+        "quantity": 1400,
         "description": "These shoes bring new thinking about plastic waste by turning problems into solutions."
     },
+
+
+12
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/eibiiftijcw9jj6eanrh1/U574SBG-7.png?rlkey=4fw9etzeks4r66pqo9az5uvj3&dl=0",
         "brand": {
@@ -363,20 +412,26 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 12
+                "quantity": 120
             },
             {
                 "name": "M",
-                "quantity": 40
+                "quantity": 400
             },
             {
                 "name": "L",
-                "quantity": 22
+                "quantity": 220
             }
         ],
-        "quantity": 74,
+        "quantity": 740,
         "description": "New Balance 574 / Sunday Morning Unisex Fashion Shoes are the latest version of the legendary 574 shoe line, bringing the perfect combination of classic design and modern touches."
     },
+
+
+13
+
+
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/wchvjzjuhj489q8bzvrsj/U574SOR-7.png?rlkey=836fuxaia4qoniuwznsrby4d2&dl=0",
         "brand": {
@@ -392,21 +447,23 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 12
+                "quantity": 120
             },
             {
                 "name": "M",
-                "quantity": 40
+                "quantity": 400
             },
             {
                 "name": "L",
-                "quantity": 22
+                "quantity": 225
             }
         ],
-        "quantity": 74,
+        "quantity": 745,
         "description": "New Balance 574 / Sunday Morning Unisex Fashion Shoes are the latest version of the legendary 574 shoe line, bringing the perfect combination of classic design and modern touches."
     },
-    # vinh
+
+14
+
      {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/884ai56kqm3kbpgq2918r/sneaker_balenciaga_triple_s_tr-ng_s-a-570x570.jpg?rlkey=6r3cndnrtwg4ysywi82dyuanr&dl=0",
         "brand": {
@@ -422,20 +479,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 30
+                "quantity": 300
             },
             {
                 "name": "M",
-                "quantity": 28
+                "quantity": 280
             },
             {
                 "name": "L",
-                "quantity": 22
+                "quantity": 225
             }
         ],
-        "quantity": 80,
+        "quantity": 805,
         "description": "Balenciaga's famous Triple S shoe model is excited for an upcoming product specifically for women with a completely new look for early 2018."
     },
+
+
+15
+
      {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/hrblvsudks18j2r9x0tdx/balenciaga_track_3.0_tr-ng_cam_rep_11-570x570.jpg?rlkey=losyah9ybd389lpf4kr9p6nwn&dl=0",
         "brand": {
@@ -451,20 +512,23 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 40
+                "quantity": 400
             },
             {
                 "name": "M",
-                "quantity": 55
+                "quantity": 550
             },
             {
                 "name": "L",
-                "quantity": 27
+                "quantity": 275
             }
         ],
-        "quantity": 122,
+        "quantity": 1225,
         "description": "When talking about Balenciaga Track, users will easily imagine luxury, uniqueness and impressiveness. This product line is currently dominating the user market with its dynamic, new and bold design."
     },
+
+16
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/dwv31adl3xgc0ef782g1x/giay_th-_thao_balenciaga_triple_s_xanh_d-ng-570x570.jpg?rlkey=pxpjsnz2u2ccai65v7w8dn04s&dl=0",
         "brand": {
@@ -480,20 +544,24 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 15
+                "quantity": 150
             },
             {
                 "name": "L",
-                "quantity": 25
+                "quantity": 250
             }
         ],
-        "quantity": 60,
+        "quantity": 600,
         "description": "When talking about Balenciaga Track, users will easily imagine luxury, uniqueness and impressiveness. This product line is currently dominating the user market with its dynamic, new and bold design."
     },
+
+
+17
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/gi2u2pbivtmbomxkgmcg3/giay-converse-all-star-vang3-570x570.jpg?rlkey=m9f4al27nuuddh5k188yeftv2&dl=0",
         "brand": {
@@ -509,20 +577,25 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 20
+                "quantity": 200
             },
             {
                 "name": "M",
-                "quantity": 15
+                "quantity": 150
             },
             {
                 "name": "L",
-                "quantity": 25
+                "quantity": 250
             }
         ],
-        "quantity": 60,
+        "quantity": 600,
         "description": "Converse Sunflower Shoes are summer looking shoes with simple colors, the shoes that create the brand come from Converse."
     },
+
+
+18
+
+
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vgbrdf5x94l63wejqzghh/converse_1970s_tr-ng_c-_cao-570x570.jpg?rlkey=e7nee392jqzr48gm6fwqtc9z5&dl=0",
         "brand": {
@@ -538,18 +611,18 @@
         "size": [
             {
                 "name": "S",
-                "quantity": 18
+                "quantity": 180
             },
             {
                 "name": "M",
-                "quantity": 24
+                "quantity": 240
             },
             {
                 "name": "L",
-                "quantity": 30
+                "quantity": 305
             }
         ],
-        "quantity": 72,
+        "quantity": 725,
         "description": "Converse shoes are never out of fashion. Especially the high-top white Converse 1970s shoes. The shoe design is simple but sophisticated and modern. This is also a plus point that makes the product easy to mix and match with many body shapes. "
     },
     
