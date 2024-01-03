@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import classNames from 'classnames/bind';
 import styles from './Card.module.scss';
 import Icon from '../Icons/Icon';
@@ -71,5 +70,4 @@ const Card = ({ headline, children, setSelectedTime, isLoading, setIsLoading }) 
         </div>
     );
 };
-
 export default Card;

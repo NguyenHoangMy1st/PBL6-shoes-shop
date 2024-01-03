@@ -7,7 +7,6 @@ export default function Header({ cartItems = [] }) {
     const cartItemCount = cartItems?.length || 0;
     const dropdownRef = useRef(null);
     const [active, setActive] = useState(false);
-    const user = JSON.parse(sessionStorage.getItem('user'));
     const onMenuAccount = (e) => {
         e.preventDefault();
         setActive(true);
@@ -22,10 +21,8 @@ export default function Header({ cartItems = [] }) {
             }
         };
 
-        // Add click event listener
         document.addEventListener('click', handleClickOutside);
 
-        // Remove click event listener on component unmount
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
@@ -38,15 +35,36 @@ export default function Header({ cartItems = [] }) {
                     <Link to="/" className="header-logo">
                         <img className="img-logo" src={images.logo} alt="Anon's logo" width="120" height="50" />
                     </Link>
-                    <Link to="/profile" className="hello-auth">
-                        Hello, Welcome Back {user?.email}!!!
-                    </Link>
+
+                    <nav className="desktop-navigation-menu">
+                        <div className="container">
+                            <ul className="desktop-menu-category-list">
+                                <li className="menu-category">
+                                    <Link to="/" className="menu-title">
+                                        Home
+                                    </Link>
+                                </li>
+                                <li className="menu-category">
+                                    <Link to="/product" className="menu-title">
+                                        Product
+                                    </Link>
+                                </li>
+                                <li className="menu-category">
+                                    <Link to="/hot" className="menu-title">
+                                        Hot Trend
+                                    </Link>
+                                </li>
+                                <li className="menu-category">
+                                    <Link to="/service" className="menu-title">
+                                        Service
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                     <div className="header-user-actions">
                         <Link to="/profile" className="action-btn">
                             <i className="fa fa-id-card" aria-hidden="true"></i>
-                        </Link>
-                        <Link to="/login" className="action-btn">
-                            <i className="fa fa-user-o" aria-hidden="true"></i>
                         </Link>
                         <Link to="/cart" className="action-btn">
                             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -58,32 +76,7 @@ export default function Header({ cartItems = [] }) {
                     </div>
                 </div>
             </div>
-            <nav className="desktop-navigation-menu">
-                <div className="container">
-                    <ul className="desktop-menu-category-list">
-                        <li className="menu-category">
-                            <Link to="/" className="menu-title">
-                                Home
-                            </Link>
-                        </li>
-                        <li className="menu-category">
-                            <Link to="/product" className="menu-title">
-                                Product
-                            </Link>
-                        </li>
-                        <li className="menu-category">
-                            <Link to="/hot" className="menu-title">
-                                Hot Trend
-                            </Link>
-                        </li>
-                        <li className="menu-category">
-                            <Link to="/service" className="menu-title">
-                                Service
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <div></div>
             <div ref={dropdownRef}>
                 <div className="mobile-bottom-navigation">
                     <button className="action-btn" onClick={(e) => onMenuAccount(e)} data-mobile-menu-open-btn>

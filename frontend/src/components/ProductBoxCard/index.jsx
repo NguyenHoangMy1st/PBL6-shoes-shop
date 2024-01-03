@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
+<<<<<<< HEAD
 
 export default function ProductBoxCard({ id, image, title, brandId, brandName, price, discountedPrice }) {
+=======
+export default function ProductBoxCard({ id, image, title, brand, price, discountedPrice }) {
+>>>>>>> 8fa5cad29f257abb86a5b24b39e68f7e7a127e9b
     return (
         <div>
             <div className="product-minimal">

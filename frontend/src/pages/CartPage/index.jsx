@@ -10,13 +10,10 @@ export default function CartPage() {
     useEffect(() => {
         const checkAuthentication = () => {
             // Kiểm tra nếu có token, user, jwt
-            const token = sessionStorage.getItem('jwt');
-            const user = sessionStorage.getItem('user');
             const jwt = sessionStorage.getItem('jwt');
 
-            if (!token || !user || !jwt) {
-                // Hiển thị toast.error và chuyển hướng đến trang đăng nhập
-                toast.error('Bạn cần đăng nhập để xem giỏ hàng');
+            if (!jwt) {
+                toast.error('You need to log in to view your shopping cart');
             }
         };
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ProductBoxCard from '../ProductBoxCard';
-
 import apiTopProducts from '~/api/user/apiTopProducts';
 
 export default function ProductBoxList() {
@@ -39,13 +38,11 @@ export default function ProductBoxList() {
             products: [...topRatingProductsData],
         },
     ];
-    console.log({ productData });
-
     return (
         <section>
             <div className="product-box container-layout">
                 {productData.map((category) => (
-                    <div key={category.title}>
+                    <div key={category.title} className="product-box-content">
                         <h2 className="product-minimal-title">{category.title}</h2>
                         <div className="category-products">
                             {category.products.slice(0, 3).map((product, index) => (

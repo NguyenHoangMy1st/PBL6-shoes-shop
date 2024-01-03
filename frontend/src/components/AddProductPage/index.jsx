@@ -39,7 +39,11 @@ export default function AddProductPage() {
 
     const handleQuantityChange = (event, sizeName) => {
         const value = event.target.value;
-        console.log(value);
+        if (!/^\d+$/.test(value) || parseInt(value, 10) < 0) {
+            // Display a warning or handle the invalid input case
+            toast.warning('Please re-enter the quantity value of the size');
+            return;
+        }
         setArrSize((prevArrSize) =>
             prevArrSize.map((item) =>
                 item.name === sizeName ? { ...item, quantity: value === '' ? null : parseInt(value, 10) } : item,
@@ -68,6 +72,19 @@ export default function AddProductPage() {
         return arrSize.reduce((total, size) => total + (size.quantity || 0), 0);
     };
     const handleSubmit = async () => {
+        if (
+            nameProduct.trim() === '' ||
+            descriptionProduct.trim() === '' ||
+            priceProduct.trim() === '' ||
+            warehousePriceProduct.trim() === '' ||
+            discountedPriceProduct.trim() === '' ||
+            discountPersentProduct.trim() === '' ||
+            imageProduct.trim() === ''
+        ) {
+            toast.warning('Please enter complete information');
+            return;
+        }
+
         const totalQuantity = calculateTotalQuantity();
 
         // Check if totalQuantity is greater than 0 before submitting
@@ -91,25 +108,22 @@ export default function AddProductPage() {
                 };
                 try {
                     const response = await apiAddProduct.postAddProduct(formData);
-                    // console.log('response:', response.data);
+                    console.log('response:', response);
                     if (response) {
-                        toast.success('Thêm sản phẩm mới thành công');
+                        toast.success('Added new products successfully');
                         setTimeout(() => {
                             navigate('/admin/products');
-                        }, 2000);
+                        }, 500);
                     } else {
-                        toast.error('Có lỗi khi thêm sản phẩm');
+                        toast.error('There was an error adding a product');
                     }
-                } catch (error) {
-                    // toast.error('Lỗi khi thực hiện yêu cầu API:', error);
-                    // toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
-                }
+                } catch (error) {}
             } else {
-                toast.error('Giá của sản phẩm bạn đã nhập sai');
+                toast.error('The price of the product you entered is incorrect');
             }
         } else {
             // Display a message or handle the case where totalQuantity is not greater than 0
-            toast.error('Số lượng sản phẩm cần lớn hơn 0 để thêm vào kho');
+            toast.error('Product quantity needs to be greater than 0 to add to inventory');
         }
     };
 
@@ -165,15 +179,6 @@ export default function AddProductPage() {
                             className="add-discountedPrice-input"
                             value={discountedPriceProduct}
                             onChange={(event) => setDiscountedPriceProduct(event.target.value)}
-                        />
-                    </div>
-                    <div className="add-discountPersent">
-                        <label className="add-label">Discount Persent:</label>
-                        <input
-                            type="number"
-                            className="add-discountPersent-input"
-                            value={discountPersentProduct}
-                            onChange={(event) => setDiscountPersentProduct(event.target.value)}
                         />
                     </div>
 

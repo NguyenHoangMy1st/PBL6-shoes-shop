@@ -2,7 +2,7 @@ import Header from '../../layouts/UserDefaultLayout/Header';
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '~/api/user/CartContext';
 import Button from '../Button';
 import apiAddItem from '~/api/user/apiAddItem';
@@ -12,13 +12,12 @@ import CommentCard from '~/components/CommentCard';
 export default function AboutPage({ quantity = 1 }) {
     const navigate = useNavigate();
     const [productDetail, setProductDetail] = useState([]);
-    console.log(productDetail);
     const { cartItems } = useCart();
     const { updateCartItems } = useCart();
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [quantityDefault, setQuantityDefault] = useState(quantity);
-    const [isLoading, setIsLoading] = useState(true); // Thêm isLoading vào đây
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
     const [selectedSizeQuantity, setSelectedSizeQuantity] = useState(null);
     const [maxQuantity, setMaxQuantity] = useState(1);
@@ -31,7 +30,7 @@ export default function AboutPage({ quantity = 1 }) {
 
     const handleAddToCart = async (productId) => {
         if (!selectedSize || !selectedColor) {
-            toast.warning('Vui lòng chọn size và màu sắc trước khi thêm vào giỏ hàng');
+            toast.warning('Please select size and color before adding to cart');
             return;
         }
         const formData = {
@@ -41,32 +40,29 @@ export default function AboutPage({ quantity = 1 }) {
             color: selectedColor,
         };
         try {
-            setIsLoading(true); // Bắt đầu loading
+            setIsLoading(true);
 
             const response = await apiAddItem.putAddItem(formData);
-            toast.success('Thêm sản phẩm vào giỏ thành công');
+            toast.success('Added product to cart successfully');
             updateCartItems();
-            // setTimeout(() => {
-            //   navigate("/cart");
-            // }, 2000);
             console.log(response);
         } catch (error) {
             console.error('Add to Cart Error:', error);
-            toast.error('Bạn cần đăng nhập mới được sử dụng chức năng này');
+            toast.error('You need to log in to use this function');
         } finally {
-            setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
+            setIsLoading(false);
         }
     };
 
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                setIsLoading(true); // Bắt đầu loading
+                setIsLoading(true);
 
                 const response = await apiProductDetail.getProductDetail(id);
                 setProductDetail(response.data);
             } catch (error) {
-                toast.error('Sản phẩm không tồn tại', error);
+                toast.error('Product does not exist', error);
             } finally {
                 setIsLoading(false); // Kết thúc loading, không phụ thuộc vào thành công hay thất bại
             }
@@ -76,13 +72,12 @@ export default function AboutPage({ quantity = 1 }) {
     }, [id]);
 
     const handleBuyNow = () => {
-        toast.success('Thêm sản phẩm vào giỏ thành công');
+        toast.success('Added product to cart successfully');
         setTimeout(() => {
             navigate(`/pay?step=1`);
-        }, 2000);
+        }, 500);
     };
     useEffect(() => {
-        // Update maxQuantity based on the selectedSize
         if (selectedSize) {
             const selectedSizeInfo = productDetail.sizes.find((size) => size.name === selectedSize);
             setMaxQuantity(selectedSizeInfo ? selectedSizeInfo.quantity : 1);
@@ -98,7 +93,7 @@ export default function AboutPage({ quantity = 1 }) {
         if (quantityDefault < maxQuantity) {
             setQuantityDefault(quantityDefault + 1);
         } else {
-            toast.warning(`Bạn không thể thêm nhiều hơn  ${maxQuantity} mục cho kích thước đã chọn.`);
+            toast.warning(`You cannot add more than ${maxQuantity} entries for the selected dimension.`);
         }
     };
     useEffect(() => {
@@ -126,11 +121,9 @@ export default function AboutPage({ quantity = 1 }) {
                             <div className="about-information">
                                 <h1 className="about-title">{productDetail.title}</h1>
                                 <div className="about-rating">
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
-                                    <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                                    <Link to={`/product?brand=${productDetail?.brand?.name}`} className="about-brand">
+                                        {productDetail?.brand?.name}
+                                    </Link>
                                 </div>
                                 <div className="about-description">
                                     <p>{productDetail.description}</p>
@@ -141,21 +134,6 @@ export default function AboutPage({ quantity = 1 }) {
                                     <span className="about-table-price-old">${productDetail.price}</span>
                                     <span className="about-table-price-current">${productDetail.discountedPrice}</span>
                                 </div>
-                                {/* <div className="about-table-size">
-                                    <span className="about-size-name">Size:</span>
-                                    <select
-                                        className="about-size-font"
-                                        value={selectedSize}
-                                        onChange={(e) => setSelectedSize(e.target.value)}
-                                    >
-                                        <option value="1" defaultCheckedy>
-                                            Choose an option
-                                        </option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                    </select>
-                                </div> */}
                                 <div className="about-table-size">
                                     <span className="about-size-name">Size:</span>
                                     <div className="about-size-buttons">

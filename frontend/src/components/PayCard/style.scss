@@ -41,4 +41,57 @@
 
 .mt-30 {
     margin-top: 30px;
+    margin-bottom: 50px;
+}
+.button-payment {
+    background: linear-gradient(90deg, #008eff, #fa5c5c);
+    border: 0;
+    border-radius: 5px;
+    color: #fff !important;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    padding: 10px 20px;
+}
+.button-payment:hover {
+    background: linear-gradient(to right, #4caeff, #03f2ff);
+}
+.div-payment {
+    display: flex;
+    gap: 0 30px;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.complete-title {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: table-header-group;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt ra khỏi khung chứa */
+    animation: marquee 8s linear infinite; /* Tốc độ chạy và lặp vô hạn */
+    transition: background-color 0.3s ease;
+    background: linear-gradient(to left, #008eff, #f60000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.complete-title:hover {
+    background: linear-gradient(to right, #4caeff, #03f2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.complete-content {
+    margin: 30px auto;
+    width: 400px;
+    height: 400px;
+}
+.complete-content img {
+    width: 100%;
+    height: 100%;
 }

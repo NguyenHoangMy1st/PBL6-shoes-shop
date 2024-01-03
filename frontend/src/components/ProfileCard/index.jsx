@@ -6,13 +6,14 @@ import apiProfile from '~/api/user/apiProfile';
 import './style.scss';
 import apiUpdateProfile from '~/api/user/apiUpdateProfile';
 import apiChangePass from '~/api/user/apiChangePass';
-
+import img from '../../assets/images/index.js';
+import { VscAccount } from 'react-icons/vsc';
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
     const [defaultAddress, setDefaultAddress] = useState(null);
 
     const checksessionStorage = () => {
-        if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user') || !sessionStorage.getItem('jwt')) {
+        if (!sessionStorage.getItem('jwt')) {
             navigate('/login');
             return false;
         }
@@ -31,14 +32,12 @@ export default function ProfileCard() {
                 setDefaultAddress(response.data.addresses[0]);
             }
         } catch (error) {
-            toast.error('Có lỗi xảy ra khi lấy thông tin cá nhân');
+            toast.error(' An error occurred while retrieving personal information');
         }
     };
     useEffect(() => {
         fetchProfile();
     }, []);
-
-    const image = 'https://i.pinimg.com/736x/eb/1b/cc/eb1bcce796b5706ec0803a9e985eb45d.jpg';
 
     // personal
     const [isEditing, setIsEditing] = useState(false);
@@ -65,13 +64,11 @@ export default function ProfileCard() {
         setShowChangePassword(true);
     };
     const handleLogout = () => {
-        toast.success('Đăng xuất thành công');
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('jwt');
+        toast.success('Signed out successfully');
+        sessionStorage.clear();
         setTimeout(() => {
             navigate('/login');
-        }, 2000);
+        }, 500);
     };
 
     const handleEdit = () => {
@@ -89,15 +86,14 @@ export default function ProfileCard() {
                 };
                 const response = await apiChangePass.postChangepass(formdata);
                 if (response.status === 200) {
-                    toast.success('Thay đổi mật khẩu thành công');
-                } else {
-                    toast.error('Đã có lỗi xảy ra khi thay đổi mật khẩu');
+                    toast.success('Password changed successfully');
+                    handleCancel();
                 }
             } catch (error) {
-                toast.error('Error changing password:', error);
+                toast.error('An error occurred while changing the password', error);
             }
         } else {
-            toast.error('Mật khẩu không khớp');
+            toast.warning('password incorrect');
         }
     };
     const handleUpdateProfile = async () => {
@@ -110,13 +106,14 @@ export default function ProfileCard() {
             console.log(formdata);
             const response = await apiUpdateProfile.putUpdateprofile(formdata);
             if (response.status === 200) {
-                toast.success('Cập nhật thông tin cá nhân thành công');
+                fetchProfile();
+                toast.success('Successfully updated personal information');
                 setIsEditing(false);
             } else {
-                toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
+                toast.error('An error occurred while updating personal information');
             }
         } catch (error) {
-            toast.error('Đã có lỗi xảy ra khi cập nhật thông tin cá nhân');
+            toast.error('An error occurred while updating personal information');
         }
     };
     const handleCancel = () => {
@@ -131,7 +128,7 @@ export default function ProfileCard() {
                 <h1 className="profile-title">Profile information</h1>
                 <div className="profile-content">
                     <div className="profile-info">
-                        <img src={image} alt="" className="profile-img"></img>
+                        <VscAccount style={{ width: 250, height: 250, fontWeight: '300' }} />
                         <div className="profile-accout">
                             <span>{`${profiles.lastName} ${profiles.firstName}`}</span>
                         </div>

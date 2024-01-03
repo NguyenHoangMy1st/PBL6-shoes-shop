@@ -5,10 +5,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
 import apiLogin from '~/api/user/apiLogin';
+import { parseJSON } from 'date-fns';
 
 const cx = classNames.bind(styles);
 const getTokenFromsessionStorage = () => {
-    return sessionStorage.getItem('token');
+    return sessionStorage.getItem('jwt');
 };
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -28,27 +29,24 @@ export default function LoginPage() {
                 password,
             };
             const response = await apiLogin.postLogin(formData);
-            console.log(response);
             if (response.status === 201) {
-                sessionStorage.setItem('token', response?.data?.jwt);
-                sessionStorage.setItem('user', JSON.stringify(formData));
                 sessionStorage.setItem('jwt', response?.data?.jwt);
                 if (response?.data?.role === 'admin') {
-                    toast.success('Đang vào trang admin');
+                    toast.success('Entering the admin page');
                     setTimeout(() => {
                         navigate('/admin/dashboard');
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 } else if (response?.data?.role === 'user') {
-                    toast.success('Đang vào trang chủ');
+                    toast.success('Going to the home page');
                     setTimeout(() => {
                         navigate('/');
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 }
             }
         } catch (error) {
-            toast.error('Bạn nhập sai mật khẩu hoặc tài khoản', error?.message);
+            toast.error('You entered the wrong password or account', error?.message);
         }
     };
     return (
