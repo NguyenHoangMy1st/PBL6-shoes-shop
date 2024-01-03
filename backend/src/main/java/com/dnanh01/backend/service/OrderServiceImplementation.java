@@ -182,9 +182,9 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
-	public Order confirmedOrder(Long orderId) throws OrderException {
+	public Order deliveredOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
-		order.setOrderStatus("CONFIRMED");
+		order.setOrderStatus("DELIVERED");
 		return orderRepository.save(order);
 	}
 
@@ -210,7 +210,7 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
-	public Order deliveredOrder(Long orderId) throws OrderException {
+	public Order confirmedOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
 		List<OrderItem> orderItems = order.getOrderItems();
 
@@ -241,7 +241,7 @@ public class OrderServiceImplementation implements OrderService {
 			});
 		}
 
-		order.setOrderStatus("DELIVERED");
+		order.setOrderStatus("CONFIRMED");
 
 		return orderRepository.save(order);
 	}

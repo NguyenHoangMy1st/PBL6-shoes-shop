@@ -60,7 +60,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "            orders o1 " +
                         "        WHERE " +
                         "            DATE_FORMAT(o1.order_date, '%d/%m/%Y') = :selectedDay " +
-                        "            AND o1.order_status = 'DELIVERED' " +
+                        "            AND o1.order_status = 'CONFIRMED' " +
                         "    ) revenue_subquery ON hr.hour_of_day = revenue_subquery.hour_of_day " +
                         "LEFT JOIN " +
                         "    ( " +
@@ -73,7 +73,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "            JOIN product p ON oi.product_id = p.id " +
                         "        WHERE " +
                         "            DATE_FORMAT(o2.order_date, '%d/%m/%Y') = :selectedDay " +
-                        "            AND o2.order_status = 'DELIVERED' " +
+                        "            AND o2.order_status = 'CONFIRMED' " +
                         "        GROUP BY " +
                         "            hour_of_day " +
                         "    ) profit_subquery ON hr.hour_of_day = profit_subquery.hour_of_day " +
@@ -110,7 +110,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "            `orders` o1 " +
                         "        WHERE " +
                         "            DATE_FORMAT(o1.order_date, '%m/%Y') = :selectedMonth " +
-                        "            AND o1.order_status = 'DELIVERED' " +
+                        "            AND o1.order_status = 'CONFIRMED' " +
                         "        GROUP BY " +
                         "            day_of_month " +
                         "    ) revenue_subquery " +
@@ -126,7 +126,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "            JOIN product p ON oi.product_id = p.id " +
                         "        WHERE " +
                         "            DATE_FORMAT(o2.order_date, '%m/%Y') = :selectedMonth " +
-                        "            AND o2.order_status = 'DELIVERED' " +
+                        "            AND o2.order_status = 'CONFIRMED' " +
                         "        GROUP BY " +
                         "            day_of_month " +
                         "    ) profit_subquery " +
@@ -169,7 +169,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `product` p ON oi.`product_id` = p.`id` " +
                         "WHERE " +
                         "    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = :selectedDay " +
-                        "    AND o.`order_status` = 'DELIVERED' " +
+                        "    AND o.`order_status` = 'CONFIRMED' " +
                         "GROUP BY " +
                         "    selected_day " +
                         "ORDER BY " +
@@ -210,7 +210,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    FROM `orders` o " +
                         "    WHERE " +
                         "    DATE_FORMAT(o.`order_date`, '%m/%Y') = :selectedMonth " +
-                        "    AND o.`order_status` = 'DELIVERED' " +
+                        "    AND o.`order_status` = 'CONFIRMED' " +
                         "    GROUP BY " +
                         "    selected_month " +
                         "    ORDER BY " +
@@ -231,7 +231,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `product` p ON oi.`product_id` = p.`id` " +
                         "WHERE " +
                         "    DATE_FORMAT(o.`order_date`, '%m/%Y') = :selectedMonth " +
-                        "    AND o.order_status = 'DELIVERED' " +
+                        "    AND o.order_status = 'CONFIRMED' " +
                         "GROUP BY " +
                         "    selected_month " +
                         "ORDER BY " +
@@ -277,7 +277,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `product` p ON oi.product_id = p.id " +
                         "WHERE " +
                         "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedDay " +
-                        "    AND o.order_status = 'DELIVERED' " +
+                        "    AND o.order_status = 'CONFIRMED' " +
                         "GROUP BY " +
                         "    oi.product_id " +
                         "ORDER BY " +
@@ -300,7 +300,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
                         "    JOIN `product` p ON oi.product_id = p.id " +
                         "WHERE " +
                         "    DATE_FORMAT(o.order_date, '%d/%m/%Y') = :selectedMonth " +
-                        "    AND o.order_status = 'DELIVERED' " +
+                        "    AND o.order_status = 'CONFIRMED' " +
                         "GROUP BY " +
                         "    oi.product_id " +
                         "ORDER BY " +
