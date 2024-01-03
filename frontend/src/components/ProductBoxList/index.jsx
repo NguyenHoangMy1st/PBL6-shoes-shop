@@ -51,9 +51,11 @@ export default function ProductBoxList() {
                             {category.products.slice(0, 3).map((product, index) => (
                                 <ProductBoxCard
                                     key={index}
+                                    id={product?.productId}
                                     image={product?.productImageUrl}
                                     title={product?.productName}
-                                    brand={product?.brandName}
+                                    brandId={product?.brandId}
+                                    brandName={product?.brandName}
                                     price={product?.productDiscountedPrice}
                                     discountedPrice={product?.productPrice}
                                 />
