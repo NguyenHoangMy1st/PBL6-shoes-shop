@@ -349,41 +349,12 @@
         "description": "These shoes bring new thinking about plastic waste by turning problems into solutions."
     },
     {
-        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/s6atepgoh6vvv47yvsvjp/Giay_4DFWD_x_Parley_trang_GX9806_04_standard.png?rlkey=6bl7vdpmlpf0nt00rrpk8woyo&dl=0",
-        "brand": {
-            "name": "Adidas",
-            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
-        },
-        "title": "GIÀY 4DFWD X PARLEY",
-        "color": "#E8E8EA",
-        "warehousePrice": 500000,
-        "price": 700000,
-        "discountedPrice": 595000,
-        "discountPersent": 15,
-        "size": [
-            {
-                "name": "S",
-                "quantity": 41
-            },
-            {
-                "name": "M",
-                "quantity": 87
-            },
-            {
-                "name": "L",
-                "quantity": 12
-            }
-        ],
-        "quantity": 140,
-        "description": "Đôi giày này mang đến tư duy mới về rác thải nhựa khi biến vấn đề thành giải pháp. Mẫu giày này được mã hóa để đưa bạn chuyển động theo một hướng duy nhất: về phía trước. Đế giữa adidas 4DFWD được tinh chỉnh vị trí để định hướng cho bàn chân và giảm lực tác động cho bước chạy mượt mà, đồng thời đế ngoài Continental™ Rubber nâng đỡ từng sải bước cho độ bám vượt trội."
-    },
-    {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/eibiiftijcw9jj6eanrh1/U574SBG-7.png?rlkey=4fw9etzeks4r66pqo9az5uvj3&dl=0",
         "brand": {
             "name": "NewBalance",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
         },
-        "title": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning - Đen",
+        "title": "Unisex New Balance 574 - Black",
         "color": "#000002",
         "warehousePrice": 1500000,
         "price": 2559000,
@@ -404,7 +375,7 @@
             }
         ],
         "quantity": 74,
-        "description": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning là phiên bản mới nhất của dòng giày huyền thoại 574 mang đến sự kết hợp hoàn hảo giữa thiết kế cổ điển và nét chấm phá hiện đại. Với thiết kế và chất liệu độc đáo, đôi giày mang đến sự thoải mái tối ưu cho đôi chân của bạn suốt cả ngày dài. Chọn New Balance 574 / Sunday Morning để trải nghiệm sự đa dạng, thoải mái và phong cách không giới hạn - đó là lựa chọn của những người đang trên đường tìm kiếm hành trang cho chính mình."
+        "description": "New Balance 574 / Sunday Morning Unisex Fashion Shoes are the latest version of the legendary 574 shoe line, bringing the perfect combination of classic design and modern touches."
     },
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/wchvjzjuhj489q8bzvrsj/U574SOR-7.png?rlkey=836fuxaia4qoniuwznsrby4d2&dl=0",
@@ -412,7 +383,7 @@
             "name": "NewBalance",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
         },
-        "title": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning - Trắng",
+        "title": "Unisex New Balance 574 - White",
         "color": "#E8E8EA",
         "warehousePrice": 1500000,
         "price": 2559000,
@@ -433,7 +404,7 @@
             }
         ],
         "quantity": 74,
-        "description": "Giày Thời Trang Unisex New Balance 574 / Sunday Morning là phiên bản mới nhất của dòng giày huyền thoại 574 mang đến sự kết hợp hoàn hảo giữa thiết kế cổ điển và nét chấm phá hiện đại. Với thiết kế và chất liệu độc đáo, đôi giày mang đến sự thoải mái tối ưu cho đôi chân của bạn suốt cả ngày dài. Chọn New Balance 574 / Sunday Morning để trải nghiệm sự đa dạng, thoải mái và phong cách không giới hạn - đó là lựa chọn của những người đang trên đường tìm kiếm hành trang cho chính mình."
+        "description": "New Balance 574 / Sunday Morning Unisex Fashion Shoes are the latest version of the legendary 574 shoe line, bringing the perfect combination of classic design and modern touches."
     },
     # vinh
      {
@@ -442,7 +413,7 @@
             "name": "NewBalance",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
         },
-        "title": "BALENCIAGA TRIPLE S TRẮNG SỮA HÀNG SIÊU CẤP",
+        "title": "Balenciana Triple S",
         "color": "#FFFFFF",
         "warehousePrice": 850000,
         "price": 1022000,
@@ -463,7 +434,7 @@
             }
         ],
         "quantity": 80,
-        "description": "Mẫu giày Triple S nổi tiếng của hãng Balenciaga đang háo hứng cho sản phẩm sắp ra mắt dành riêng cho phái đẹp với diện mạo hoàn toàn mới cho đầu năm 2018 này. Rất nhiều mẫu giày chạy bộ được ra mắt trong mùa xuân 2018, bao gồm cả mẫu giày với phần upper và panel được nâng cấp tuyệt vời này."
+        "description": "Balenciaga's famous Triple S shoe model is excited for an upcoming product specifically for women with a completely new look for early 2018."
     },
      {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/hrblvsudks18j2r9x0tdx/balenciaga_track_3.0_tr-ng_cam_rep_11-570x570.jpg?rlkey=losyah9ybd389lpf4kr9p6nwn&dl=0",
@@ -471,7 +442,7 @@
             "name": "NewBalance",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
         },
-        "title": "BALENCIAGA TRACK 3.0 TRẮNG CAM REP 1:1",
+        "title": "BALENCIAGA TRACK 3.0 - White",
         "color": "#FF0000",
         "warehousePrice": 1370000,
         "price": 2200000,
@@ -492,7 +463,7 @@
             }
         ],
         "quantity": 122,
-        "description": "Nói tới Balenciaga Track người dùng sẽ dễ hình dung tới sự cao cấp, độc lạ và ấn tượng. Dòng sản phẩm này hiện đang chiếm lĩnh thị trường người dùng với thiết kế năng động, mới mẻ và hầm hồ. Đặc biệt là mẫu giày Balenciaga Track 3.0 rep màu trắng cam ấn tượng. Sản phẩm vẫn chưa hạ nhiệt và đang có dấu hiệu nổi đình đám hơn."
+        "description": "When talking about Balenciaga Track, users will easily imagine luxury, uniqueness and impressiveness. This product line is currently dominating the user market with its dynamic, new and bold design."
     },
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/dwv31adl3xgc0ef782g1x/giay_th-_thao_balenciaga_triple_s_xanh_d-ng-570x570.jpg?rlkey=pxpjsnz2u2ccai65v7w8dn04s&dl=0",
@@ -500,7 +471,7 @@
             "name": "NewBalance",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/fmnm2cuh27j0q1fg22197/logoNewBalance.png?rlkey=snx5ofx6l8zpxkrybve0g4hu4&dl=0"
         },
-        "title": "GIÀY THỂ THAO BALENCIAGA TRIPLE S XANH DƯƠNG",
+        "title": "BALENCIAGA TRIPLE S - Blue",
         "color": "#0066FF",
         "warehousePrice": 950000,
         "price": 1275000,
@@ -521,7 +492,7 @@
             }
         ],
         "quantity": 60,
-        "description": "Nằm trong những mẫu giày đình đám có sự khác biệt rõ rệt và nhanh chóng trở nên được yêu thích bởi nhiều người nổi tiếng. Ấn tượng ban đầu của nhiều người đây là một mẫu giày có vẻ ngoài “quái dị”, to khổ và khá kén người đi.Tuy nhiên, chính sự khác biệt đó lại giúp nó trở thành mẫu giày hot trên thị trường. Đôi giày nhanh chóng trở thành xu hướng và được yêu thích bởi nhiều Fashionista và người ảnh hưởng khác. "
+        "description": "When talking about Balenciaga Track, users will easily imagine luxury, uniqueness and impressiveness. This product line is currently dominating the user market with its dynamic, new and bold design."
     },
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/gi2u2pbivtmbomxkgmcg3/giay-converse-all-star-vang3-570x570.jpg?rlkey=m9f4al27nuuddh5k188yeftv2&dl=0",
@@ -529,7 +500,7 @@
             "name": "Converse",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
         },,
-        "title": "GIÀY CONVERSE ALL STAR VÀNG SUNFLOWER",
+        "title": "Connverse All Star",
         "color": "#FFFF00",
         "warehousePrice": 900000,
         "price": 2000000,
@@ -550,7 +521,7 @@
             }
         ],
         "quantity": 60,
-        "description": "Giày converse vàng sunflower đôi giày nhìn là thấy mùa hè với màu sắc đơn giản, đôi giày tạo nên thương hiệu đến từ Converse.Điểm khác biệt tạo nên điểm nhấn của một đôi converse sunflower chính là ở sự hài hòa giữa phong cách cổ điển và hơi hướng của sự hiện đại. Thiết kế nguyên bản của mẫu này vẫn dựa trên thiết của dòng chuck 70. Chất liệu làm thân giày đến từ chất liệu vải bạt nặng, dày mang lại cảm giác chắc chắn, chịu nhiệt tốt. "
+        "description": "Converse Sunflower Shoes are summer looking shoes with simple colors, the shoes that create the brand come from Converse."
     },
     {
         "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vgbrdf5x94l63wejqzghh/converse_1970s_tr-ng_c-_cao-570x570.jpg?rlkey=e7nee392jqzr48gm6fwqtc9z5&dl=0",
@@ -558,7 +529,7 @@
             "name": "Converse",
             "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
         },,
-        "title": "CONVERSE 1970S TRẮNG CỔ CAO",
+        "title": "CONVERSE 1970S",
         "color": "#FFFFFF",
         "warehousePrice": 450000,
         "price": 910000,
@@ -579,7 +550,7 @@
             }
         ],
         "quantity": 72,
-        "description": "Những đôi giày Converse chưa bao giờ là lỗi mốt. Đặc biệt là mẫu giày Converse 1970s trắng cổ cao. Mẫu giày thiết kế đơn giản nhưng tinh tế và hiện đại. Đây cũng là điểm cộng giúp sản phẩm dễ mix đồ và hợp với nhiều vóc dáng người đi. "
+        "description": "Converse shoes are never out of fashion. Especially the high-top white Converse 1970s shoes. The shoe design is simple but sophisticated and modern. This is also a plus point that makes the product easy to mix and match with many body shapes. "
     },
     
 ]
