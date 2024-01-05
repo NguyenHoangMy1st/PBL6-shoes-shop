@@ -238,24 +238,41 @@ WHERE u.`role` = 'admin'
 
 select * from `product`;
 
-SELECT
-    oi.product_id,
-    p.title,
-    p.image_url,
-    p.discounted_price,
-    COUNT(*) AS appearance_count
+
+with `oi_info` as (select	
+		oi.id as order_item_id,
+        oi.quantity as number_of_products_in_each_order_item,
+        p.id as product_id
+
 FROM
     `orders` o
     JOIN `order_item` oi ON o.id = oi.order_id
     JOIN `product` p ON oi.product_id = p.id
 WHERE
-    DATE_FORMAT(o.order_date, '%Y-%m') = '2023-12'
-    AND o.order_status = 'DELIVERED'
+    DATE_FORMAT(o.`order_date`, '%d/%m/%Y') = '16/12/2023'
+	AND o.`order_status` = 'CONFIRMED' 
 GROUP BY
-    oi.product_id
-ORDER BY
-    appearance_count DESC
-LIMIT 1;
+    oi.id
+), `best_selling_product_info` as ( select sum(number_of_products_in_each_order_item) as `total_quantity_sold_of_each_product`, product_id 
+					from `oi_info`
+                    group by product_id
+                    order by sum(number_of_products_in_each_order_item) desc
+                    limit 1)
+select	bspi.*,
+		p.id,
+		p.title,
+		p.image_url,
+        p.discounted_price,
+        bspi.total_quantity_sold_of_each_product as appearance_count
+from best_selling_product_info bspi 
+join `product` p
+on bspi.product_id = p.id;
+		
+
+
+
+
+
 
 -- ------------------------ top 3 -- ------------------------
 -- top 3 new products

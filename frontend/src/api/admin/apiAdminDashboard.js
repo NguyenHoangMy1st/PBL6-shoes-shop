@@ -21,7 +21,7 @@ const apiAdminDashboard = {
         return axiosClient.get(url);
     },
     getBestSellingProductBySelectedMonth(selectedMonth) {
-        const url = `/api/admin/dashboard//best-selling-selected-month?selectedMonth=${selectedMonth}`;
+        const url = `/api/admin/dashboard/best-selling-selected-month?selectedMonth=${selectedMonth}`;
         return axiosClient.get(url);
     },
 };
