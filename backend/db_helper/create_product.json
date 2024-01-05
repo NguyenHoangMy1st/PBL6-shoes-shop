@@ -725,5 +725,36 @@
         "quantity": 75,
         "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
     },
+
+    // cam
+    {
+        "imageUrl": "https://dl.dropboxusercontent.com/scl/fi/lo9ufamiqemo01vakrbxl/shoes6.png?rlkey=x2b9ag7h0aculxqygamyo6hyt&dl=0",
+        "brand": {
+            "name": "Nike",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6hc2nrgrat3e2wnbe13td/logoConverse.png?rlkey=2jpecnzdwmgkr3kxobvgzizgr&dl=0"
+        },
+        "title": "Nike Air Jordan 1 LV8D Elevated",
+        "color": "#FFA500", 
+        "warehousePrice": 150000,
+        "price": 200000,
+        "discountedPrice": 180000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 74
+            },
+            {
+                "name": "M",
+                "quantity": 45
+            },
+            {
+                "name": "L",
+                "quantity": 37
+            }
+        ],
+        "quantity": 156,
+        "description": "The Nike Air Jordan 1 LV8D Elevated is a stylish and comfortable shoe."
+    }
     
 ]
