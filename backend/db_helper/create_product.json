@@ -579,4 +579,151 @@
         "quantity": 72,
         "description": "Những đôi giày Converse chưa bao giờ là lỗi mốt. Đặc biệt là mẫu giày Converse 1970s trắng cổ cao. Mẫu giày thiết kế đơn giản nhưng tinh tế và hiện đại. Đây cũng là điểm cộng giúp sản phẩm dễ mix đồ và hợp với nhiều vóc dáng người đi. "
     }
+    them
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/zmun7c1dtl0i6xppi0goe/20231012_cSgFv532b0.jpg?rlkey=9pbayfsljcjtwdcdhe0uve970&dl=0",
+         "brand": {
+            "name": "Alex",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vr7j7r7cjvcapjnz76bmd/logoAlex.png?rlkey=otc1j3ese5j07842hgv9l6o2x&dl=0"
+        },
+        "title": "Alex BTV XACE",
+        "color": "#54504D",
+        "warehousePrice": 280000,
+        "price": 420000,
+        "discountedPrice": 315000,
+        "discountPersent": 25,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 18
+            },
+            {
+                "name": "M",
+                "quantity": 24
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 72,
+        "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
+    },
+        {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/m2tom5w49jf6h6b2yoj43/20231127_3FNbdxr9ul.jpg?rlkey=zaa37ud03zn24oozuct3s5y5y&dl=0",
+         "brand": {
+            "name": "Alex",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vr7j7r7cjvcapjnz76bmd/logoAlex.png?rlkey=otc1j3ese5j07842hgv9l6o2x&dl=0"
+        },
+        "title": "Alex Sneaker GUO CHAO",
+        "color": "#0000FF",
+        "warehousePrice": 550000,
+        "price": 680000,
+        "discountedPrice": 612000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 20
+            },
+            {
+                "name": "M",
+                "quantity": 24
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 74,
+        "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
+    },
+    {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/1t6rjs7i0al6zzzoksykp/20231109_ADY1HGJ5Wl.jpg?rlkey=iq3ln0qt5jhxuyctcm2aq27wg&dl=0",
+         "brand": {
+            "name": "Alex",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/vr7j7r7cjvcapjnz76bmd/logoAlex.png?rlkey=otc1j3ese5j07842hgv9l6o2x&dl=0"
+        },
+        "title": "Alex Sneaker BTV SCGNAL",
+        "color": "#808080",
+        "warehousePrice": 250000,
+        "price": 350000,
+        "discountedPrice": 315000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 15
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 60,
+        "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
+    },
+        {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/6fm7hht3mpepdr05457pj/20231212_ZAHMmDEUTA.jpg?rlkey=xgh7mae9abpl45ght6g2ion9s&dl=0",
+         "brand": {
+            "name": "Puma",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/7h7zl5cmpimaq9x8buodr/logoPuma.jpg?rlkey=oalnmzal0xcqloch993in6db3&dl=0"
+        },
+        "title": "Alex Sneaker BTV SCGNAL",
+        "color": "#000000",
+        "warehousePrice": 250000,
+        "price": 350000,
+        "discountedPrice": 315000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 15
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 60,
+        "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
+    },
+     {
+        "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/48jmjwynyi4bf0jnjzhg1/20231127_9u5o0RS4iK.jpg?rlkey=547mcy6jrb3dxc2iet2jdduoj&dl=0",
+         "brand": {
+            "name": "Puma",
+            "imageUrl": "https://www.dl.dropboxusercontent.com/scl/fi/7h7zl5cmpimaq9x8buodr/logoPuma.jpg?rlkey=oalnmzal0xcqloch993in6db3&dl=0"
+        },
+        "title": " Puma Sneaker Longmin",
+        "color": "#808080",
+        "warehousePrice": 600000,
+        "price": 820000,
+        "discountedPrice": 738000,
+        "discountPersent": 10,
+        "size": [
+            {
+                "name": "S",
+                "quantity": 30
+            },
+            {
+                "name": "M",
+                "quantity": 15
+            },
+            {
+                "name": "L",
+                "quantity": 30
+            }
+        ],
+        "quantity": 75,
+        "description": "This is a very hot product on the market. Extremely youthful and energetic, very suitable for genz people "
+    },
+    
 ]
